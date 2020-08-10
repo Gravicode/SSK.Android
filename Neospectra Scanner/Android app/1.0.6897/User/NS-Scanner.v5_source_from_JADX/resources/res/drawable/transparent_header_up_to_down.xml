@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:topLeftRadius="0dp" android:topRightRadius="0dp" android:bottomLeftRadius="0dp" android:bottomRightRadius="0dp"/>
+            <gradient android:startColor="@color/full_transparent" android:endColor="@color/black_dark_transparent" android:angle="90" android:type="linear" android:centerColor="@color/center_dark_transparent"/>
+            <size android:height="100dp" android:width="100dp"/>
+        </shape>
+    </item>
+</layer-list>

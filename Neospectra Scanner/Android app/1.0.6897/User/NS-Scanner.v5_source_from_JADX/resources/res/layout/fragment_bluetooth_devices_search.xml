@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:gravity="center" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <ProgressBar android:id="@+id/pb_bluetooth_scanning" android:visibility="invisible" android:layout_width="0dp" android:layout_height="0dp" android:max="100" android:progress="65"/>
+    <android.support.p004v7.widget.RecyclerView android:id="@+id/rv_bluetooth_devices" android:padding="5dp" android:visibility="invisible" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_weight="4"/>
+    <TextView android:textColor="@color/white" android:gravity="center" android:id="@+id/tv_status" android:background="@color/gray" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/ready" style="@style/Base.TextAppearance.AppCompat.Medium"/>
+</LinearLayout>

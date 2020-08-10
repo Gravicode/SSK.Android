@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <android.support.p004v7.widget.Toolbar android:id="@+id/toolbar" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    <TextView android:textColor="?android:attr/colorActivatedHighlight" android:id="@+id/tv_module_title" android:background="#dadddd" android:padding="5dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/action_settings" style="@style/Base.TextAppearance.Widget.AppCompat.Toolbar.Title"/>
+    <include android:id="@+id/board_bluetooth" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="3" layout="@layout/fragment_bluetooth_devices_search"/>
+</LinearLayout>

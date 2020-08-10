@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <PreferenceCategory android:title="Measurement Parameters" android:key="category_measurement_parameters">
+        <ListPreference android:entries="@array/optical_gain_settings" android:title="Optical Gain Settings" android:key="optical_gain_settings" android:summary="Select gain settings most suitable to your measurement" android:entryValues="@array/optical_gain_settings"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Data Display" android:key="category_data_display">
+        <android.support.p004v7.preference.SwitchPreferenceCompat android:title="Enable Linear Interpolation" android:key="linear_interpolation_switch" android:summary="If disabled, you will get the raw data from the connected NeoSpectra. If enabled, you can ensure that all neoSpectra units provide the same wavelength vector."/>
+        <ListPreference android:entries="@array/data_points" android:title="Number of data points" android:key="data_points" android:dependency="linear_interpolation_switch" android:entryValues="@array/data_points_spinner_content"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="FFT Settings" android:key="category_fft_settings">
+        <android.support.p004v7.preference.SwitchPreferenceCompat android:title="Show FFT Settings" android:key="fft_settings_switch" android:summary="Select settings for processing Fourier Transform"/>
+        <ListPreference android:entries="@array/apodization_function" android:title="Apodization Function" android:key="apodization_function" android:dependency="fft_settings_switch" android:entryValues="@array/apodization_spinner_content"/>
+        <ListPreference android:entries="@array/fft_points" android:title="Number of FFT Points" android:key="fft_points" android:dependency="fft_settings_switch" android:entryValues="@array/zero_padding_spinner_content"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Advanced Settings" android:key="category_advanced_settings">
+        <android.support.p004v7.preference.SwitchPreferenceCompat android:title="Show Advanced Settings" android:key="advanced_settings_switch"/>
+        <EditTextPreference android:singleLine="true" android:selectAllOnFocus="true" android:title="Add New Optical Gain Settings" android:key="add_new_optical_gain_settings" android:summary="Automatically create new optical gain settings that suit the setup used for the environment" android:dependency="advanced_settings_switch"/>
+        <Preference android:title="Clear Optical Gain Settings" android:key="clear_optical_gain_settings" android:dependency="advanced_settings_switch"/>
+        <Preference android:title="Wavelength Correction" android:key="wavelength_correction" android:dependency="advanced_settings_switch"/>
+        <Preference android:title="Storing All Settings" android:key="store_all_Settings" android:dependency="advanced_settings_switch"/>
+        <Preference android:title="Restore Default Settings" android:key="restore_default" android:dependency="advanced_settings_switch"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Save/Restore Preferences" android:key="category_save_restore">
+        <Preference android:title="Scan Time" android:key="scanTime_preferences"/>
+        <Preference android:title="Save Scanner Preferences" android:key="save_preferences"/>
+        <Preference android:title="Restore Scanner Preferences" android:key="load_preferences"/>
+    </PreferenceCategory>
+</PreferenceScreen>

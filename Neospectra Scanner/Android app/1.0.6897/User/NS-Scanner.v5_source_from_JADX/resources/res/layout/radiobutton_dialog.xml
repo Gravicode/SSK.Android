@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+    <RadioGroup android:layout_gravity="right" android:id="@+id/radio_group" android:padding="5dp" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignParentLeft="true">
+        <RadioButton android:id="@+id/rb_ask" android:padding="8dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="10dp" android:button="@null" android:text="@string/ask_every_time" android:onClick="captureState" android:drawableEnd="@drawable/radio_selector"/>
+        <RadioButton android:id="@+id/rb_take_image" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" android:button="@null" android:text="@string/take_image" android:drawableRight="@drawable/radio_selector" android:onClick="captureState"/>
+        <RadioButton android:id="@+id/rb_dont_take_image" android:padding="10dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_margin="8dp" android:button="@null" android:text="@string/dont_take" android:drawableRight="@drawable/radio_selector" android:onClick="captureState"/>
+    </RadioGroup>
+</LinearLayout>

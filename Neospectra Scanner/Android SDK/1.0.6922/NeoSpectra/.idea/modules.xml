@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/NeoSpectra.iml" filepath="$PROJECT_DIR$/NeoSpectra.iml" group="NeoSpectra" />
+      <module fileurl="file://$PROJECT_DIR$/androidlibsvm-release/androidlibsvm-release.iml" filepath="$PROJECT_DIR$/androidlibsvm-release/androidlibsvm-release.iml" group="NeoSpectra/androidlibsvm-release" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="NeoSpectra/app" />
+      <module fileurl="file://$PROJECT_DIR$/neospectralib/neospectralib.iml" filepath="$PROJECT_DIR$/neospectralib/neospectralib.iml" group="NeoSpectra/neospectralib" />
+    </modules>
+  </component>
+</project>
