@@ -856,9 +856,9 @@ public class ScanPageFragment extends Fragment {
                         yValsnew[k] = newxVlas;
                     }
 
-                    Log.e("value float", Arrays.toString(yValsnew));
-                    String s = "{\"Reflectance\":" + Arrays.toString(yValsnew) + "}";
-                    getset.setReflectance(s);
+//                    Log.e("value float", Arrays.toString(yValsnew));
+//                    String s = "{\"Reflectance\":" + Arrays.toString(yValsnew) + "}";
+//                    getset.setReflectance(s);
 
                     for (int j = xVals.length - 1; j >= 0; --j) {
                         dataPoints.add(new DataPoint(1e7 / xVals[j], yVals[j] * 100));
@@ -923,63 +923,63 @@ public class ScanPageFragment extends Fragment {
     }
 
     public void send() {
-        Log.e("pesan", getset.getReflectance());
-        Toast.makeText(mContext, getset.getReflectance(), Toast.LENGTH_SHORT).show();
+        final String reflect = String.valueOf(getReflectance());
+        Log.e("reflectance : ", reflect);
+        String URL = "https://sskapi.azurewebsites.net/api/Inference/ProcessData";
 
-//        Wave rotatingCircle = new Wave();
-//        progressBar.setVisibility(View.VISIBLE);
-//        progressBar.setIndeterminateDrawable(rotatingCircle);
-//        lUtama.setVisibility(View.GONE);
-//        lProgress.setVisibility(View.VISIBLE);
-//        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-//                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//
-//        final String reflect = getset.getReflectance();
-//        String URL = "https://sskapi.azurewebsites.net/api/Inference/ProcessData";
-//        queue = Volley.newRequestQueue(getActivity());
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            Toast.makeText(getActivity(), "RESPONSE:" + jsonObject, Toast.LENGTH_LONG).show();
-//                            Log.e("response:", response);
-//                            lUtama.setVisibility(View.VISIBLE);
-//                            lProgress.setVisibility(View.GONE);
-//                            progressBar.setVisibility(View.GONE);
-//                            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//                lUtama.setVisibility(View.VISIBLE);
-//                lProgress.setVisibility(View.GONE);
-//                progressBar.setVisibility(View.GONE);
-//                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-//                Toast.makeText(mContext, "Periksa jaringan dan ulang proses", Toast.LENGTH_SHORT).show();
-//            }
-//        }) {
-//            @Override
-//            public String getBodyContentType() {
-//                return "application/json; charset=utf-8";
-//            }
-//
-//            @Override
-//            public byte[] getBody() throws AuthFailureError {
-//                try {
-//                    return reflect == null ? null : reflect.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    return null;
-//                }
-//            }
-//        };
-//        queue.add(stringRequest);
+//        Toast.makeText(mContext, getset.getReflectance(), Toast.LENGTH_SHORT).show();
 
+        Wave rotatingCircle = new Wave();
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminateDrawable(rotatingCircle);
+        lUtama.setVisibility(View.GONE);
+        lProgress.setVisibility(View.VISIBLE);
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        queue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            Toast.makeText(getActivity(), "RESPONSE:" + jsonObject, Toast.LENGTH_LONG).show();
+                            Log.e("response:", response);
+                            lUtama.setVisibility(View.VISIBLE);
+                            lProgress.setVisibility(View.GONE);
+                            progressBar.setVisibility(View.GONE);
+                            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                lUtama.setVisibility(View.VISIBLE);
+                lProgress.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                Toast.makeText(mContext, "Periksa jaringan dan ulang proses", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return reflect == null ? null : reflect.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    return null;
+                }
+            }
+        };
+        queue.add(stringRequest);
     }
 
     public static String[] getStrings(double[] a) {
