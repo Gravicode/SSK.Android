@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.Interfaces.ExportPage.ExportPageFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:titleTextColor="@color/black"
+            android:background="@color/white" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/dateFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Date From"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtDate"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@id/dateFrom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_textbox"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#000000" />
+            <!--    327dp-->
+
+            <TextView
+                android:id="@+id/untilFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/edtDate"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Date Until"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/edtTanggal"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_below="@+id/untilFrom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/layout_textbox"
+                android:clickable="true"
+                android:editable="false"
+                android:focusable="false"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="#000000" />
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/headTable"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_below="@+id/edtTanggal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:animateLayoutChanges="true"
+                android:autofillHints="Search.."
+                android:background="@drawable/layout_border"
+                android:layoutDirection="rtl"
+                app:defaultQueryHint="Search.."
+                app:iconifiedByDefault="true"
+                app:queryHint="Search.."
+                app:searchIcon="@drawable/search" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/headTable">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
+
+                    <include layout="@layout/layout_table" />
+                </LinearLayout>
+            </ScrollView>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:src="@android:drawable/ic_dialog_email" />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>
