@@ -124,15 +124,15 @@ public class ExportPageFragment extends Fragment {
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
 
-//        Toolbar toolbar = view.findViewById(R.id.titlebar);
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        Toolbar toolbar = view.findViewById(R.id.titlebar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Export Data");
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.icons_menu_dot);
 //        toolbar.setOverflowIcon(drawable);
-//        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         sharedPreferences = getActivity().getSharedPreferences("date", MODE_PRIVATE);
 //        toolbar
@@ -371,9 +371,17 @@ public class ExportPageFragment extends Fragment {
         loadRecords(currentOrderByStatus); // refresh record list
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        MenuItem shareitem = menu.add(Menu.NONE, 101, 0, "Options");
+//        shareitem.setIcon(R.drawable.icons_menu_dot);
+//        shareitem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
         inflater.inflate(R.menu.menu_main, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
