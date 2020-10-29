@@ -139,9 +139,9 @@ public class ScanPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        if (bluetoothAPI == null) {
-            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-        }
+//        if (bluetoothAPI == null) {
+//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+//        }
         mContext = getActivity();
 
         scanPresenter = new ScanPresenter();
@@ -468,12 +468,12 @@ public class ScanPageFragment extends Fragment {
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver,
                 new IntentFilter(GlobalVariables.INTENT_ACTION));
 
-        if (bluetoothAPI != null) {
-            if (!bluetoothAPI.isDeviceConnected()) {
-                endActivity();
-                return;
-            }
-        }
+//        if (bluetoothAPI != null) {
+//            if (!bluetoothAPI.isDeviceConnected()) {
+//                endActivity();
+//                return;
+//            }
+//        }
     }
 
 
@@ -774,16 +774,16 @@ public class ScanPageFragment extends Fragment {
             scanPresenter = new ScanPresenter();
         }
         // Don't complete the process if the device not connected
-        if (bluetoothAPI == null || !bluetoothAPI.isDeviceConnected()) {
-            showAlertMessage(getActivity(),
-                    "Device not connected",
-                    "Please! Ensure that you have a connected device firstly");
-
-            Intent iMain = new Intent(mContext, ConnectActivity.class);
-            iMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(iMain);
-            return;
-        }
+//        if (bluetoothAPI == null || !bluetoothAPI.isDeviceConnected()) {
+//            showAlertMessage(getActivity(),
+//                    "Device not connected",
+//                    "Please! Ensure that you have a connected device firstly");
+//
+//            Intent iMain = new Intent(mContext, ConnectActivity.class);
+//            iMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(iMain);
+//            return;
+//        }
         System.out.println("error_sensor_reading= " + error_sensor_reading);
 
         if (error_sensor_reading == true) {
@@ -801,15 +801,15 @@ public class ScanPageFragment extends Fragment {
             scanPresenter = new ScanPresenter();
         }
         // Don't complete the process if the device not connected
-        if (bluetoothAPI == null || !bluetoothAPI.isDeviceConnected()) {
-            showAlertMessage(getActivity(),
-                    "Device not connected",
-                    "Please! Ensure that you have a connected device firstly");
-            Intent iMain = new Intent(mContext, ConnectActivity.class);
-            iMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(iMain);
-            return;
-        }
+//        if (bluetoothAPI == null || !bluetoothAPI.isDeviceConnected()) {
+//            showAlertMessage(getActivity(),
+//                    "Device not connected",
+//                    "Please! Ensure that you have a connected device firstly");
+//            Intent iMain = new Intent(mContext, ConnectActivity.class);
+//            iMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(iMain);
+//            return;
+//        }
         System.out.println("error_sensor_reading= " + error_sensor_reading);
         if (error_sensor_reading == true) {
             System.out.println("error_sensor_reading==true");

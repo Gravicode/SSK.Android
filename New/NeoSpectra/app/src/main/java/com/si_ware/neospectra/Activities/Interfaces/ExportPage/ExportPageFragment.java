@@ -1,29 +1,25 @@
 package com.si_ware.neospectra.Activities.Interfaces.ExportPage;
 
 import android.Manifest;
-import android.app.ActionBar;
+//import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -37,23 +33,15 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si_ware.neospectra.Activities.IntroActivity;
-import com.si_ware.neospectra.Activities.SettingsActivity;
-import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.R;
 import com.si_ware.neospectra.dbtable.AdapterRecord;
 import com.si_ware.neospectra.dbtable.Constants;
-import com.si_ware.neospectra.dbtable.DBAdapter;
-import com.si_ware.neospectra.dbtable.DbHelper;
+import com.si_ware.neospectra.dbtable.DBHelper;
 import com.si_ware.neospectra.dbtable.ModelRecord;
-import com.si_ware.neospectra.dbtable.Spacecraft;
-import com.si_ware.neospectra.dbtable.TableHelper;
 import com.si_ware.neospectra.dbtable.addUpdateRecord;
 
 import java.io.File;
@@ -62,12 +50,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
-
-import de.codecrafters.tableview.TableView;
-import de.codecrafters.tableview.listeners.TableDataClickListener;
-import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
-import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
-import de.codecrafters.tableview.toolkit.TableDataRowBackgroundProviders;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
@@ -90,9 +72,9 @@ public class ExportPageFragment extends Fragment {
     private RecyclerView recordsRv;
 
     //DB helper
-    private DbHelper dbHelper;
+    private DBHelper dbHelper;
 
-    //action bar
+//    action bar
     ActionBar actionBar;
 
     TextView dateFrom;
@@ -135,22 +117,22 @@ public class ExportPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (bluetoothAPI == null) {
-            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-        }
+//        if (bluetoothAPI == null) {
+//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+//        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
 
-        Toolbar toolbar = view.findViewById(R.id.titlebar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Export Data");
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.icons_menu_dot);
-        toolbar.setOverflowIcon(drawable);
-        super.onCreate(savedInstanceState);
+//        Toolbar toolbar = view.findViewById(R.id.titlebar);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Export Data");
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.icons_menu_dot);
+//        toolbar.setOverflowIcon(drawable);
+//        super.onCreate(savedInstanceState);
 
         sharedPreferences = getActivity().getSharedPreferences("date", MODE_PRIVATE);
 //        toolbar
@@ -174,13 +156,14 @@ public class ExportPageFragment extends Fragment {
         addRecordBtn = view.findViewById(R.id.addRecordBtn);
         recordsRv = view.findViewById(R.id.recordsRV);
 
+
 //        actionBar = getSupportActionBar();
 //        actionBar.setTitle("ALL Records");
 
         storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         //init db helper class
-        dbHelper = new DbHelper(getActivity());
+        dbHelper = new DBHelper(getActivity());
 
 
         //load records
@@ -237,33 +220,6 @@ public class ExportPageFragment extends Fragment {
         });
 
 
-//        edtDate.setOnSearchClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                new DatePickerDialog(MainActivity.this, date, myCalendar.get(YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH))
-//                        .show();
-//            }
-//        });
-
-//        edtDate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//                //search when search button on keyboard clicked
-//                searchRecord(query);
-//                return false;
-//            }
-//
-//
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                //search as you type
-//
-//                searchRecord(newText);
-//                return false;
-//            }
-//        });
 
         edtDate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -398,7 +354,7 @@ public class ExportPageFragment extends Fragment {
         recordsRv.setAdapter(adapterRecord);
 
         //set num of record
-        actionBar.setSubtitle("Total: " + dbHelper.getRecordsCount());
+//        actionBar.setSubtitle("Total: " + dbHelper.getRecordsCount());
     }
 
     private void searchRecord(String query, String query2) {
@@ -415,13 +371,7 @@ public class ExportPageFragment extends Fragment {
         loadRecords(currentOrderByStatus); // refresh record list
     }
 
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//
-//
-//        return super.onCreateOptionsMenu(menu);
-//    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_main, menu);
@@ -432,32 +382,7 @@ public class ExportPageFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         int id = item.getItemId();
-        if (item.getItemId() == R.id.action_share) {
-            try {
-                String filelocation = Environment.getExternalStorageDirectory().getPath() + "/Neospectra/NEO.csv";
-//                Intent intent = new Intent(Intent.ACTION_SEND);
-//                intent.setType("text/plain");
-//                String message = "File to be shared is .";
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "Students REPORT");
-//                intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filelocation));
-//                intent.putExtra(Intent.EXTRA_TEXT, message);
-//                intent.setData(Uri.parse("shitanadia@gmail.com"));   //insert your email address("mailto:csent.company@gmail.com")
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                startActivity(intent);
 
-                Intent sharingIntent = new Intent();
-                sharingIntent.setAction(Intent.ACTION_SEND);
-                sharingIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(filelocation));
-                sharingIntent.setType("text/csv");
-                startActivity(Intent.createChooser(sharingIntent, "share file with"));
-
-//                Toast.makeText(MainActivity.this, "Berhasil", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                System.out.println("is exception raises during sending mail" + e);
-                Log.e("Erorr : ", String.valueOf(e));
-                Toast.makeText(getActivity(), "Error : " + String.valueOf(e), Toast.LENGTH_SHORT).show();
-            }
-        }
         if (id == R.id.action_export) {
             //sql to csv file
             if (checkStoragePermission()) {
@@ -468,7 +393,8 @@ public class ExportPageFragment extends Fragment {
             }
         } else if (id == R.id.action_sort) {
             //show sort options (show in dialog)
-            sortOptionDialog();
+//            sortOptionDialog();
+            loadRecords(orderByOldest);
         }
         if (item.getItemId() == android.R.id.home) {
 //            AlertDialog.Builder myAlert = new AlertDialog.Builder(mContext);
@@ -569,7 +495,7 @@ public class ExportPageFragment extends Fragment {
         try {
             //write csv file
             FileWriter fw = new FileWriter(filePathAndName);
-            fw.append("Id,Bray,Ca,CLAY,C_N,Time");
+            fw.append("Id,Bray,Ca,CLAY,C_N,HCL25_K2O,HCL25_P2O5,Jumlah,K,KB_ADJUSTED,Kjeldahl_N,KTK,Mg,Morgan,Na,Olsen_P2O5,PH_H2O,PH_KCL,RetensiP,Sand,Silt,WBC,Time");
             fw.append("\n");
             for (int i = 0; i < recordsList.size(); i++) {
                 fw.append("" + recordsList.get(i).getId()); //id
@@ -582,8 +508,43 @@ public class ExportPageFragment extends Fragment {
                 fw.append(",");
                 fw.append("" + recordsList.get(i).getCn()); //cn
                 fw.append(",");
+                fw.append("" + recordsList.get(i).getHclk2o()); //kclk2o
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getHclp2o5()); //hclp2o5
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getJumlah()); //jumlah
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getK()); //k
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getKbadj()); //kbabj
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getKjeldahl()); //kjeldahl
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getKtk()); //ktk
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getMg()); //mg
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getMorgan()); //morgan
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getNa()); //na
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getOlsen()); //olsen
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getPhh2o()); //phh2o
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getPhkcl()); //phkcl
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getRetensip()); //retensip
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getSand()); //sand
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getSilt()); //silt
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getWbc()); //wbc
+                fw.append(",");
                 fw.append("" + recordsList.get(i).getAddedTime()); //addtime
                 fw.append("\n");
+
 
             }
             fw.flush();
