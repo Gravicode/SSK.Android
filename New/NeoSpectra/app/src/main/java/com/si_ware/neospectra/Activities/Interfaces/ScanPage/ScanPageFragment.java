@@ -139,9 +139,9 @@ public class ScanPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+        }
         mContext = getActivity();
 
         scanPresenter = new ScanPresenter();
