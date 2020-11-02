@@ -75,25 +75,25 @@ public class MainPage extends AppCompatActivity implements BottomNavigationView.
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
 //         Create new instance from bluetoothApi if it null
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(this, mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(this, mContext);
+        }
 
         mContext = this;
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
 //        // Get all needed configuration settings
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-//        gRunMode = preferences.getString("run_mode", GlobalVariables.runMode.Single_Mode.toString());
-//        gIsInterpolationEnabled = preferences.getBoolean("linear_interpolation_switch", false);
-//        gInterpolationPoints = preferences.getString("data_points", GlobalVariables.pointsCount.points_257.toString());
-//        gIsFftEnabled = preferences.getBoolean("fft_settings_switch", false);
-//        gApodizationFunction = preferences.getString("apodization_function", GlobalVariables.apodization.Boxcar.toString());
-//        gFftPoints = preferences.getString("fft_points", GlobalVariables.zeroPadding.points_8k.toString());
-//        gOpticalGainSettings = preferences.getString("optical_gain_settings", "Default");
-//        gOpticalGainValue = preferences.getInt(gOpticalGainSettings, 0);
-//        gCorrectionMode = preferences.getString("wavelength_correction", GlobalVariables.wavelengthCorrection.Self_Calibration.toString());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        gRunMode = preferences.getString("run_mode", GlobalVariables.runMode.Single_Mode.toString());
+        gIsInterpolationEnabled = preferences.getBoolean("linear_interpolation_switch", false);
+        gInterpolationPoints = preferences.getString("data_points", GlobalVariables.pointsCount.points_257.toString());
+        gIsFftEnabled = preferences.getBoolean("fft_settings_switch", false);
+        gApodizationFunction = preferences.getString("apodization_function", GlobalVariables.apodization.Boxcar.toString());
+        gFftPoints = preferences.getString("fft_points", GlobalVariables.zeroPadding.points_8k.toString());
+        gOpticalGainSettings = preferences.getString("optical_gain_settings", "Default");
+        gOpticalGainValue = preferences.getInt(gOpticalGainSettings, 0);
+        gCorrectionMode = preferences.getString("wavelength_correction", GlobalVariables.wavelengthCorrection.Self_Calibration.toString());
 
 
 //        ArrayAdapter<CharSequence> bluetoothSpinnerAdapter = ArrayAdapter.createFromResource(mContext,
