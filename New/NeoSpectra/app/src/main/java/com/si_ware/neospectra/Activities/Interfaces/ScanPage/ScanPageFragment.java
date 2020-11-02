@@ -1011,7 +1011,7 @@ public class ScanPageFragment extends Fragment {
                             Gson gson = new Gson();
                             OutputData outputData = gson.fromJson(jsonObject.toString(), OutputData.class);
                             // set static DataElements
-//                            setDataElement(outputData.data);
+                            setDataElement(outputData.data);
 
                             Toast.makeText(getActivity(), "RESPONSE:" + jsonObject, Toast.LENGTH_LONG).show();
                             Log.e("response:", response);
@@ -1111,6 +1111,4 @@ public class ScanPageFragment extends Fragment {
         }
         return null;
     }
-
-
 }
