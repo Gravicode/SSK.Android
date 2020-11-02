@@ -19,12 +19,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.Activities.SettingsActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
+import com.si_ware.neospectra.DataElements;
 import com.si_ware.neospectra.R;
+
+import corelibrary.model.ModelOutput;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -33,6 +37,8 @@ public class DataPageFragment extends Fragment {
     Button btnOk, btnClose;
     CheckBox checkall, chck1, chck2, chck3, chck4, chck5, chck6, chck7, chck8, chck9, chck10, chck11, chck12, chck13, chck14, chck15, chck16;
     LinearLayout Lay1, Lay2, Lay3, Lay4, Lay5, Lay6, Lay7, Lay8, Lay9, Lay10, Lay11, Lay12, Lay13, Lay14, Lay15, Lay16;
+    /* Variable for textview */
+    TextView txtPhh20, txtPhkcl, txtCorg, txtNtotal, txtp20sHcl, txtk20Hcl, txtp20sBray, txtP20Olsen, txtCa, txtMg, txtK, txtNa, txtKb, txtPasir, txtDebu, txtLiat;
 
     @Nullable
     @Override
@@ -57,6 +63,24 @@ public class DataPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        /* Variable for textview*/
+        txtPhh20 = view.findViewById(R.id.txtPhh20);
+        txtPhkcl = view.findViewById(R.id.txtPhkcl);
+        txtCorg = view.findViewById(R.id.txtCorg);
+        txtNtotal = view.findViewById(R.id.txtNtotal);
+        txtp20sHcl = view.findViewById(R.id.txtp20sHcl);
+        txtk20Hcl = view.findViewById(R.id.txtk20Hcl);
+        txtp20sBray = view.findViewById(R.id.txtp20sBray);
+        txtP20Olsen = view.findViewById(R.id.txtP20Olsen);
+        txtCa = view.findViewById(R.id.txtCa);
+        txtMg = view.findViewById(R.id.txtMg);
+        txtK = view.findViewById(R.id.txtK);
+        txtNa = view.findViewById(R.id.txtNa);
+        txtKb = view.findViewById(R.id.txtKb);
+        txtPasir = view.findViewById(R.id.txtPasir);
+        txtDebu = view.findViewById(R.id.txtDebu);
+        txtLiat = view.findViewById(R.id.txtLiat);
 
         Lay1 = view.findViewById(R.id.Lay1);
         Lay2 = view.findViewById(R.id.Lay2);
@@ -360,5 +384,26 @@ public class DataPageFragment extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    public void setTextView()
+    {
+        /* set value textview */
+        txtPhh20.setText(Float.toString(DataElements.getPhH2o()));
+        txtPhkcl.setText(Float.toString(DataElements.getPhKcl()));
+        txtCorg.setText(Float.toString(DataElements.getCN()));
+        txtNtotal.setText(Float.toString(DataElements.getKjeldahlN()));
+        txtp20sHcl.setText(Float.toString(DataElements.getHCl25P2O5()));
+        txtk20Hcl.setText(Float.toString(DataElements.getHCl25K2O()));
+        txtp20sBray.setText(Float.toString(DataElements.getBray1P2O5()));
+        txtP20Olsen.setText(Float.toString(DataElements.getOlsenP2O5()));
+        txtCa.setText(Float.toString(DataElements.getCa()));
+        txtMg.setText(Float.toString(DataElements.getMg()));
+        txtK.setText(Float.toString(DataElements.getK()));
+        txtNa.setText(Float.toString(DataElements.getNa()));
+        txtKb.setText(Float.toString(DataElements.getKBAdjusted()));
+        txtPasir.setText(Float.toString(DataElements.getSAND()));
+        txtDebu.setText(Float.toString(DataElements.getSILT()));
+        txtLiat.setText(Float.toString(DataElements.getCLAY()));
     }
 }
