@@ -35,10 +35,10 @@ import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 public class DataPageFragment extends Fragment {
     private Context mContext;
     Button btnOk, btnClose;
-    CheckBox checkall, chck1, chck2, chck3, chck4, chck5, chck6, chck7, chck8, chck9, chck10, chck11, chck12, chck13, chck14, chck15, chck16;
-    LinearLayout Lay1, Lay2, Lay3, Lay4, Lay5, Lay6, Lay7, Lay8, Lay9, Lay10, Lay11, Lay12, Lay13, Lay14, Lay15, Lay16;
+    CheckBox checkall, chck1, chck2, chck3, chck4, chck5, chck6, chck7, chck8, chck9, chck10, chck11, chck12, chck13, chck14, chck15, chck16, chck17;
+    LinearLayout Lay1, Lay2, Lay3, Lay4, Lay5, Lay6, Lay7, Lay8, Lay9, Lay10, Lay11, Lay12, Lay13, Lay14, Lay15, Lay16, Lay17;
     /* Variable for textview */
-    TextView txtPhh20, txtPhkcl, txtCorg, txtNtotal, txtp20sHcl, txtk20Hcl, txtp20sBray, txtP20Olsen, txtCa, txtMg, txtK, txtNa, txtKb, txtPasir, txtDebu, txtLiat;
+    TextView txtPhh20, txtPhkcl, txtCorg, txtNtotal, txtp20sHcl, txtk20Hcl, txtp20sBray, txtP20Olsen, txtCa, txtMg, txtK, txtNa, txtKb, txtPasir, txtDebu, txtLiat, txtKTK;
 
     @Nullable
     @Override
@@ -78,6 +78,7 @@ public class DataPageFragment extends Fragment {
         txtK = view.findViewById(R.id.txtK);
         txtNa = view.findViewById(R.id.txtNa);
         txtKb = view.findViewById(R.id.txtKb);
+        txtKTK = view.findViewById(R.id.txtKTK);
         txtPasir = view.findViewById(R.id.txtPasir);
         txtDebu = view.findViewById(R.id.txtDebu);
         txtLiat = view.findViewById(R.id.txtLiat);
@@ -95,6 +96,7 @@ public class DataPageFragment extends Fragment {
         Lay11 = view.findViewById(R.id.Lay11);
         Lay12 = view.findViewById(R.id.Lay12);
         Lay13 = view.findViewById(R.id.Lay13);
+        Lay17 = view.findViewById(R.id.Lay17);
         Lay14 = view.findViewById(R.id.Lay14);
         Lay15 = view.findViewById(R.id.Lay15);
         Lay16 = view.findViewById(R.id.Lay16);
@@ -112,6 +114,7 @@ public class DataPageFragment extends Fragment {
         chck11 = (CheckBox) view.findViewById(R.id.chck11);
         chck12 = (CheckBox) view.findViewById(R.id.chck12);
         chck13 = (CheckBox) view.findViewById(R.id.chck13);
+        chck17 = (CheckBox) view.findViewById(R.id.chck17);
         chck14 = (CheckBox) view.findViewById(R.id.chck14);
         chck15 = (CheckBox) view.findViewById(R.id.chck15);
         chck16 = (CheckBox) view.findViewById(R.id.chck16);
@@ -178,6 +181,7 @@ public class DataPageFragment extends Fragment {
                 chck11 = (CheckBox) d.findViewById(R.id.chck11);
                 chck12 = (CheckBox) d.findViewById(R.id.chck12);
                 chck13 = (CheckBox) d.findViewById(R.id.chck13);
+                chck17 = (CheckBox) d.findViewById(R.id.chck17);
                 chck14 = (CheckBox) d.findViewById(R.id.chck14);
                 chck15 = (CheckBox) d.findViewById(R.id.chck15);
                 chck16 = (CheckBox) d.findViewById(R.id.chck16);
@@ -204,6 +208,7 @@ public class DataPageFragment extends Fragment {
                             chck11.setChecked(false);
                             chck12.setChecked(false);
                             chck13.setChecked(false);
+                            chck17.setChecked(false);
                             chck14.setChecked(false);
                             chck15.setChecked(false);
                             chck16.setChecked(false);
@@ -223,6 +228,7 @@ public class DataPageFragment extends Fragment {
                             chck11.setChecked(true);
                             chck12.setChecked(true);
                             chck13.setChecked(true);
+                            chck17.setChecked(true);
                             chck14.setChecked(true);
                             chck15.setChecked(true);
                             chck16.setChecked(true);
@@ -256,6 +262,7 @@ public class DataPageFragment extends Fragment {
                                 !chck11.isChecked() ||
                                 !chck12.isChecked() ||
                                 !chck13.isChecked() ||
+                                !chck17.isChecked() ||
                                 !chck14.isChecked() ||
                                 !chck15.isChecked() ||
                                 !chck16.isChecked()) {
@@ -274,6 +281,7 @@ public class DataPageFragment extends Fragment {
                                 chck11.isChecked() ||
                                 chck12.isChecked() ||
                                 chck13.isChecked() ||
+                                chck17.isChecked() ||
                                 chck14.isChecked() ||
                                 chck15.isChecked() ||
                                 chck16.isChecked()) {
@@ -355,6 +363,12 @@ public class DataPageFragment extends Fragment {
                             } else
                                 Lay13.setVisibility(View.GONE);
 
+                            // check box 17
+                            if (chck17.isChecked()) {
+                                Lay17.setVisibility(View.VISIBLE);
+                            } else
+                                Lay17.setVisibility(View.GONE);
+
                             // check box 14
                             if (chck14.isChecked()) {
                                 Lay14.setVisibility(View.VISIBLE);
@@ -404,6 +418,7 @@ public class DataPageFragment extends Fragment {
         txtK.setText(Float.toString(DataElements.getK()));
         txtNa.setText(Float.toString(DataElements.getNa()));
         txtKb.setText(Float.toString(DataElements.getKBAdjusted()));
+        txtKTK.setText(Float.toString(DataElements.getKTK()));
         txtPasir.setText(Float.toString(DataElements.getSAND()));
         txtDebu.setText(Float.toString(DataElements.getSILT()));
         txtLiat.setText(Float.toString(DataElements.getCLAY()));

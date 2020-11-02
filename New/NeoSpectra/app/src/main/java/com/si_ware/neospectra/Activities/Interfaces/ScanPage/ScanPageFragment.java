@@ -1054,12 +1054,96 @@ public class ScanPageFragment extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void setDataElement(ResultPrediction[] datas) {
-        for (int i = 0; i < datas.length; i++) {
+    public void setDataElement(ResultPrediction[] datas)
+    {
+        for (int i = 0; i < datas.length; i++)
+        {
             ResultPrediction rp = datas[i];
-            if (rp.elementName.equals("Bray1_P2O5")) {
+            if (rp.elementName.equals("PH_H2O"))
+            {
+                DataElements.setPhH2o(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("PH_KCL"))
+            {
+                DataElements.setPhKcl(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("C_N"))
+            {
+                DataElements.setCN(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("KJELDAHL_N"))
+            {
+                DataElements.setKjeldahlN(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("HCl25_P2O5"))
+            {
+                DataElements.setHCl25P2O5(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("HCl25_K2O"))
+            {
+                DataElements.setHCl25K2O(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("Bray1_P2O5"))
+            {
                 DataElements.setBray1P2O5(rp.elementValue);
             }
+            //
+            if (rp.elementName.equals("Olsen_P2O5"))
+            {
+                DataElements.setOlsenP2O5(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("Ca"))
+            {
+                DataElements.setCa(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("Mg"))
+            {
+                DataElements.setMg(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("K"))
+            {
+                DataElements.setK(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("Na"))
+            {
+                DataElements.setNa(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("KB_adjusted"))
+            {
+                DataElements.setKBAdjusted(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("KTK"))
+            {
+                DataElements.setKTK(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("SAND"))
+            {
+                DataElements.setSAND(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("SILT"))
+            {
+                DataElements.setSILT(rp.elementValue);
+            }
+            //
+            if (rp.elementName.equals("CLAY"))
+            {
+                DataElements.setCLAY(rp.elementValue);
+            }
+            //
         }
     }
 
