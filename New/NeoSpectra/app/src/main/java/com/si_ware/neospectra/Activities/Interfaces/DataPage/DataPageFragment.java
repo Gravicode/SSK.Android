@@ -396,6 +396,7 @@ public class DataPageFragment extends Fragment {
         txtNtotal.setText(Float.toString(DataElements.getKjeldahlN()));
         txtp20sHcl.setText(Float.toString(DataElements.getHCl25P2O5()));
         txtk20Hcl.setText(Float.toString(DataElements.getHCl25K2O()));
+        String data1 = Float.toString(DataElements.getBray1P2O5());
         txtp20sBray.setText(Float.toString(DataElements.getBray1P2O5()));
         txtP20Olsen.setText(Float.toString(DataElements.getOlsenP2O5()));
         txtCa.setText(Float.toString(DataElements.getCa()));

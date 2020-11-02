@@ -1023,6 +1023,14 @@ public class ScanPageFragment extends Fragment {
 
     public void setDataElement(ResultPrediction[] datas)
     {
+        for (int i = 0; i < datas.length; i++)
+        {
+            ResultPrediction rp = datas[i];
+            if (rp.elementName.equals("Bray1_P2O5"))
+            {
+                DataElements.setBray1P2O5(rp.elementValue);
+            }
+        }
     }
 
     public static String[] getStrings(double[] a) {
