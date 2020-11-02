@@ -70,12 +70,15 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.IOException;
 import java.net.URI;
+import java.util.TimeZone;
 
 import com.google.gson.Gson;
+import com.si_ware.neospectra.dbtable.DBHelper;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.MAX_SCANNER_MEMORY;
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
@@ -120,6 +123,9 @@ public class ScanPageFragment extends Fragment {
     private double[] ySend;
     private Objects getset = new Objects();
     private float[] yValsnew;
+    private DBHelper dbHelper;
+    private String bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjelhal, ktk, mg, morgan, na, olsen, phh2o, phkcl, retensip,
+            sand, silt, wbc;
 
     String[] Resolution =
             {
@@ -981,6 +987,9 @@ public class ScanPageFragment extends Fragment {
                             // set static DataElements
                             setDataElement(outputData.data);
 
+                            inputData();
+
+
                             Toast.makeText(getActivity(), "RESPONSE:" + jsonObject, Toast.LENGTH_LONG).show();
                             Log.e("response:", response);
                             lUtama.setVisibility(View.VISIBLE);
@@ -1019,6 +1028,75 @@ public class ScanPageFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
+    }
+
+    private void inputData() {
+
+
+
+        // get data
+        bray = "" + (Float.toString(DataElements.getBray1P2O5()));
+        ca = "" + (Float.toString(DataElements.getCa()));
+        clay = "" + (Float.toString(DataElements.getCLAY()));
+        cn = "" +(Float.toString(DataElements.getCN()));
+        hclk2o = "" + (Float.toString(DataElements.getHCl25K2O()));
+        hclp2o5 = "" + (Float.toString(DataElements.getHCl25P2O5()));
+        jumlah = "" + (Float.toString(DataElements.getJumlah()));
+        k = "" + (Float.toString(DataElements.getK()));
+        kbadj = "" + (Float.toString(DataElements.getKBAdjusted()));
+        kjelhal = "" + (Float.toString(DataElements.getKjeldahlN()));
+        ktk = "" + (Float.toString(DataElements.getKTK()));
+        mg = "" + (Float.toString(DataElements.getMg()));
+        morgan = "" + (Float.toString(DataElements.getMorganK2O()));
+        na = "" + (Float.toString(DataElements.getNa()));
+        olsen = "" + (Float.toString(DataElements.getOlsenP2O5()));
+        phh2o = "" + (Float.toString(DataElements.getPhH2o()));
+        phkcl = "" + (Float.toString(DataElements.getPhKcl()));
+        retensip = "" + (Float.toString(DataElements.getRetensiP()));
+        sand = "" + (Float.toString(DataElements.getSAND()));
+        silt = "" +(Float.toString(DataElements.getSILT()));
+        wbc = "" + (Float.toString(DataElements.getWBC()));
+
+
+
+
+
+        //save to db
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int tahun = calendar.get(Calendar.YEAR);
+        int bulan = calendar.get(Calendar.MONTH) + 1;
+        int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
+        String timestamp = "" + tahun + "-" + bulan + "-" + tanggal;
+
+
+        long id = dbHelper.insertRecord(
+                "" + bray,
+                "" + ca,
+                "" + clay,
+                "" + cn,
+                "" + hclk2o,
+                "" + hclp2o5,
+                "" + jumlah,
+                "" + k,
+                "" + kbadj,
+                "" + kjelhal,
+                "" + ktk,
+                "" + mg,
+                "" + morgan,
+                "" + na,
+                "" + olsen,
+                "" + phh2o,
+                "" + cn,
+                "" + phkcl,
+                "" + sand,
+                "" + silt,
+                "" + wbc,
+
+                "" + timestamp
+
+
+        );
+
     }
 
     public void setDataElement(ResultPrediction[] datas)
