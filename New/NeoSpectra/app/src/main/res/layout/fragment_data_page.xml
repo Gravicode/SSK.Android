@@ -218,7 +218,7 @@
                         android:paddingBottom="10dp">
 
                         <TextView
-                            android:id="@+id/txtp20sHcl"
+                            android:id="@+id/textView5A"
                             android:layout_width="372dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
@@ -230,7 +230,7 @@
                             android:textSize="20sp" />
 
                         <TextView
-                            android:id="@+id/textView5B"
+                            android:id="@+id/txtp20sHcl"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginLeft="10dp"

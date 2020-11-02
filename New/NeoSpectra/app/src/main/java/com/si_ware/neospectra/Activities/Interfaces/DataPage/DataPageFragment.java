@@ -116,6 +116,7 @@ public class DataPageFragment extends Fragment {
         chck15 = (CheckBox) view.findViewById(R.id.chck15);
         chck16 = (CheckBox) view.findViewById(R.id.chck16);
 
+        setTextView();
     }
 
     @Override
