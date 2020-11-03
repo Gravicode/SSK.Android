@@ -74,7 +74,7 @@
         <com.jjoe64.graphview.GraphView
             android:id="@+id/graph"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="450dp"
             android:layout_below="@id/titlebar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="0dp" />
