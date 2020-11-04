@@ -14,12 +14,14 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -225,7 +228,7 @@ public class ExportPageFragment extends Fragment {
         edtDate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                SimpleDateFormat minDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat minDate = new SimpleDateFormat("yyyy-MM-d", Locale.US);
                 query = minDate.format(myCalendar.getTime());
                 tanggal1 = query;
                 if (tanggal1 != null && tanggal2 != null) {
@@ -242,7 +245,7 @@ public class ExportPageFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //search as you type
-                SimpleDateFormat minDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat minDate = new SimpleDateFormat("yyyy-MM-d", Locale.US);
                 newText = minDate.format(myCalendar.getTime());
                 tanggal1 = newText;
                 if (tanggal1 != null && tanggal2 != null) {
@@ -264,7 +267,7 @@ public class ExportPageFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //                    SimpleDateFormat maxDate = new SimpleDateFormat("d-M-yyyy", Locale.US).parse(query);
-                SimpleDateFormat maxDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat maxDate = new SimpleDateFormat("yyyy-MM-d", Locale.US);
                 query = maxDate.format(myCalendar2.getTime());
                 tanggal2 = query;
                 if (tanggal1 != null && tanggal2 != null) {
@@ -283,7 +286,7 @@ public class ExportPageFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //search as you type
-                SimpleDateFormat maxDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+                SimpleDateFormat maxDate = new SimpleDateFormat("yyyy-MM-d", Locale.US);
                 newText = maxDate.format(myCalendar2.getTime());
                 tanggal2 = newText;
 
@@ -316,7 +319,7 @@ public class ExportPageFragment extends Fragment {
 
     private void updateLabel() {
 
-        String myFormat = "yyyy-MM-dd";
+        String myFormat = "yyyy-MM-d";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         String date = sdf.format(myCalendar.getTime());
@@ -327,7 +330,7 @@ public class ExportPageFragment extends Fragment {
 
 
     private void updateLabel2() {
-        String myFormat = "yyyy-MM-dd";
+        String myFormat = "yyyy-MM-d";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 //        edtTanggal.setText(sdf.format(myCalendar2.getTime()));
         String tanggal = sdf.format(myCalendar2.getTime());
@@ -393,13 +396,42 @@ public class ExportPageFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.action_export) {
-            //sql to csv file
-            if (checkStoragePermission()) {
-                //permission allowed
-                exportCSV();
-            } else {
-                requestStoragePermissionExport();
-            }
+
+            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+            bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
+
+            bottomSheetDialog.setCanceledOnTouchOutside(false);
+
+            LinearLayout bottom_sheet_refresh = bottomSheetDialog.findViewById(R.id.bottom_sheet_refresh);
+            CardView btn_yes = bottomSheetDialog.findViewById(R.id.btn_yes);
+            CardView btn_cancel = bottomSheetDialog.findViewById(R.id.btn_cancel);
+            bottom_sheet_refresh.setVisibility(View.VISIBLE);
+
+            btn_yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                        fungsi yes pada bottom sheet
+                    //sql to csv file
+                    if (checkStoragePermission()) {
+                        //permission allowed
+                        exportCSV();
+                        bottomSheetDialog.hide();
+                    } else {
+                        requestStoragePermissionExport();
+                    }
+                }
+            });
+
+            btn_cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                        fungsi cancel bottom sheet
+                    bottomSheetDialog.hide();
+                }
+            });
+            bottomSheetDialog.show();
+
+
         } else if (id == R.id.action_sort) {
             //show sort options (show in dialog)
 //            sortOptionDialog();

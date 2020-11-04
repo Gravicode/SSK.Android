@@ -125,7 +125,7 @@
             android:textSize="16sp" />
         <TextView
             android:id="@+id/txtKbAdj"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="KB_ADJUSTED"
@@ -134,7 +134,7 @@
             android:textSize="16sp" />
         <TextView
             android:id="@+id/txtKjeldahl"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="Kjeldahl_N"

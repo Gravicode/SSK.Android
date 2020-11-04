@@ -140,7 +140,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#A9D2F3"
+                    android:background="#74A7FF"
                     android:orientation="horizontal">
 
                     <TextView
@@ -253,7 +253,7 @@
 
                     <TextView
                         android:id="@+id/txtKbAdj2"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:layout_margin="1dp"
@@ -265,7 +265,7 @@
 
                     <TextView
                         android:id="@+id/txtKjeldahl"
-                        android:layout_width="100dp"
+                        android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:layout_margin="1dp"
