@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -15,10 +16,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +53,9 @@ import com.google.gson.JsonObject;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.si_ware.neospectra.Activities.ConfigureActivity;
 import com.si_ware.neospectra.Activities.ConnectActivity;
+import com.si_ware.neospectra.Activities.HomeActivity;
 import com.si_ware.neospectra.Activities.Interfaces.Objects;
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
@@ -88,6 +94,15 @@ import static com.si_ware.neospectra.Global.GlobalVariables.scanTime;
 import static com.si_ware.neospectra.Global.MethodsFactory.logMessage;
 import static com.si_ware.neospectra.Global.MethodsFactory.rotateProgressBar;
 import static com.si_ware.neospectra.Global.MethodsFactory.showAlertMessage;
+import static com.si_ware.neospectra.Global.GlobalVariables.gApodizationFunction;
+import static com.si_ware.neospectra.Global.GlobalVariables.gCorrectionMode;
+import static com.si_ware.neospectra.Global.GlobalVariables.gFftPoints;
+import static com.si_ware.neospectra.Global.GlobalVariables.gInterpolationPoints;
+import static com.si_ware.neospectra.Global.GlobalVariables.gIsFftEnabled;
+import static com.si_ware.neospectra.Global.GlobalVariables.gIsInterpolationEnabled;
+import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainSettings;
+import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainValue;
+import static com.si_ware.neospectra.Global.GlobalVariables.gRunMode;
 
 public class ScanPageFragment extends Fragment {
 
@@ -123,9 +138,9 @@ public class ScanPageFragment extends Fragment {
     private double[] ySend;
     private Objects getset = new Objects();
     private float[] yValsnew;
-    private DBHelper dbHelper;
     private String bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjelhal, ktk, mg, morgan, na, olsen, phh2o, phkcl, retensip,
             sand, silt, wbc;
+    private DBHelper dbHelper;
 
     String[] Resolution =
             {
@@ -148,6 +163,9 @@ public class ScanPageFragment extends Fragment {
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
 
         queue = Volley.newRequestQueue(getActivity());
+        queue.getCache().clear();
+
+        dbHelper = new DBHelper(getActivity());
 
         LocalBroadcastManager.getInstance(getActivity()).registerReceiver(mMessageReceiver,
                 new IntentFilter(GlobalVariables.HOME_INTENT_ACTION));
@@ -160,9 +178,9 @@ public class ScanPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        if (bluetoothAPI == null) {
-            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-        }
+//        if (bluetoothAPI == null) {
+//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+//        }
         mContext = getActivity();
 
         scanPresenter = new ScanPresenter();
@@ -208,16 +226,16 @@ public class ScanPageFragment extends Fragment {
         btnProcess.setCardBackgroundColor(Color.parseColor("#0A376A"));
 
         // Get all needed configuration settings
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-//        gRunMode = preferences.getString("run_mode", GlobalVariables.runMode.Single_Mode.toString());
-//        gIsInterpolationEnabled = preferences.getBoolean("linear_interpolation_switch", false);
-//        gInterpolationPoints = preferences.getString("data_points", GlobalVariables.pointsCount.points_257.toString());
-//        gIsFftEnabled = preferences.getBoolean("fft_settings_switch", false);
-//        gApodizationFunction = preferences.getString("apodization_function", GlobalVariables.apodization.Boxcar.toString());
-//        gFftPoints = preferences.getString("fft_points", GlobalVariables.zeroPadding.points_8k.toString());
-//        gOpticalGainSettings = preferences.getString("optical_gain_settings", "Default");
-//        gOpticalGainValue = preferences.getInt(gOpticalGainSettings, 0);
-//        gCorrectionMode = preferences.getString("wavelength_correction", GlobalVariables.wavelengthCorrection.Self_Calibration.toString());
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        gRunMode = preferences.getString("run_mode", GlobalVariables.runMode.Single_Mode.toString());
+        gIsInterpolationEnabled = preferences.getBoolean("linear_interpolation_switch", false);
+        gInterpolationPoints = preferences.getString("data_points", GlobalVariables.pointsCount.points_257.toString());
+        gIsFftEnabled = preferences.getBoolean("fft_settings_switch", false);
+        gApodizationFunction = preferences.getString("apodization_function", GlobalVariables.apodization.Boxcar.toString());
+        gFftPoints = preferences.getString("fft_points", GlobalVariables.zeroPadding.points_8k.toString());
+        gOpticalGainSettings = preferences.getString("optical_gain_settings", "Default");
+        gOpticalGainValue = preferences.getInt(gOpticalGainSettings, 0);
+        gCorrectionMode = preferences.getString("wavelength_correction", GlobalVariables.wavelengthCorrection.Self_Calibration.toString());
 
         ArrayAdapter<CharSequence> bluetoothSpinnerAdapter = ArrayAdapter.createFromResource(mContext,
                 R.array.BLE_Services, android.R.layout.simple_spinner_item);
@@ -346,8 +364,19 @@ public class ScanPageFragment extends Fragment {
 
                 btnScan.setCardBackgroundColor(Color.parseColor("#0A376A"));
                 btnScan.setEnabled(false);
-//                btnViewScan.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.Button_Disabled));
-//                btnViewScan.setEnabled(false);
+                btnClearRecord.setCardBackgroundColor(Color.parseColor("#0A376A"));
+                btnClearRecord.setEnabled(false);
+                btnProcess.setCardBackgroundColor(Color.parseColor("#0A376A"));
+                btnProcess.setEnabled(false);
+                btnRefresh.setCardBackgroundColor(Color.parseColor("#0A376A"));
+                btnRefresh.setEnabled(false);
+
+                Wave wave = new Wave();
+                lProgress.setVisibility(View.VISIBLE);
+                lUtama.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setIndeterminateDrawable(wave);
+
                 isScanBG = true;
 
                 tv_progressCount.setEnabled(false);
@@ -606,7 +635,8 @@ public class ScanPageFragment extends Fragment {
 //            btnViewScan.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.orange));
             btnBackground.setEnabled(true);
             btnBackground.setCardBackgroundColor(Color.parseColor("#1d86ff"));
-
+            btnClearRecord.setEnabled(true);
+            btnClearRecord.setCardBackgroundColor(Color.parseColor("#1d86ff"));
             progressBar.setVisibility(View.GONE);
             lProgress.setVisibility(View.GONE);
             lUtama.setVisibility(View.VISIBLE);
@@ -614,7 +644,9 @@ public class ScanPageFragment extends Fragment {
             btnScan.setCardBackgroundColor(Color.parseColor("#0A376A"));
             btnScan.setEnabled(false);
 //            btnViewScan.setEnabled(false);
-
+            progressBar.setVisibility(View.GONE);
+            lProgress.setVisibility(View.GONE);
+            lUtama.setVisibility(View.VISIBLE);
         }
     }
 
@@ -777,14 +809,14 @@ public class ScanPageFragment extends Fragment {
         }
         isWaitingForBackGroundReading = true;
 
-        btnRefresh.setEnabled(false);
-        btnRefresh.setCardBackgroundColor(Color.parseColor("#0A376A"));
-        btnScan.setEnabled(true);
-        btnScan.setCardBackgroundColor(Color.parseColor("#1D86FF"));
-        btnProcess.setEnabled(false);
-        btnProcess.setCardBackgroundColor(Color.parseColor("#0A376A"));
-        btnBackground.setEnabled(false);
-        btnBackground.setCardBackgroundColor(Color.parseColor("#0A376A"));
+//        btnRefresh.setEnabled(false);
+//        btnRefresh.setCardBackgroundColor(Color.parseColor("#0A376A"));
+//        btnScan.setEnabled(true);
+//        btnScan.setCardBackgroundColor(Color.parseColor("#1D86FF"));
+//        btnProcess.setEnabled(false);
+//        btnProcess.setCardBackgroundColor(Color.parseColor("#0A376A"));
+//        btnBackground.setEnabled(false);
+//        btnBackground.setCardBackgroundColor(Color.parseColor("#0A376A"));
 
         askForBackGroundReading();
     }
@@ -837,19 +869,12 @@ public class ScanPageFragment extends Fragment {
             showAlertMessage(getActivity(),
                     "Error in background reading",
                     "Sorry,You have a problem with your Bluetooth version!");
-            btnScan.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.orange));
+            btnScan.setCardBackgroundColor(Color.parseColor("#0A376A"));
             btnScan.setEnabled(false);
 //            btnViewScan.setBackgroundTintList(ContextCompat.getColorStateList(mContext, R.color.orange));
 //            btnViewScan.setEnabled(false);
             return;
         }
-
-        progressBar.setVisibility(View.VISIBLE);
-        lUtama.setVisibility(View.GONE);
-        lProgress.setVisibility(View.VISIBLE);
-        Wave wave = new Wave();
-        progressBar.setIndeterminateDrawable(wave);
-
         scanPresenter.requestBackgroundReading(2);
     }
 
@@ -871,11 +896,11 @@ public class ScanPageFragment extends Fragment {
 
                     double[] yRef = convertDataToT(yVals);
 
-                    yValsnew = new float[yRef.length];
-                    for (int k = 0; k < yRef.length; k++) {
-                        float newxVlas = (float) yRef[k];
-                        yValsnew[k] = newxVlas;
-                    }
+//                    yValsnew = new float[yRef.length];
+//                    for (int k = 0; k < yRef.length; k++) {
+//                        float newxVlas = (float) yRef[k];
+//                        yValsnew[k] = newxVlas;
+//                    }
 
 //                    Log.e("value float", Arrays.toString(yValsnew));
 //                    String s = "{\"Reflectance\":" + Arrays.toString(yValsnew) + "}";
@@ -910,6 +935,12 @@ public class ScanPageFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.configure, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
 //            AlertDialog.Builder myAlert = new AlertDialog.Builder(mContext);
@@ -928,6 +959,7 @@ public class ScanPageFragment extends Fragment {
                         Intent iMain = new Intent(mContext, IntroActivity.class);
                         iMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(iMain);
+                        getActivity().finish();
                     }
 
                 }
@@ -940,6 +972,11 @@ public class ScanPageFragment extends Fragment {
             });
             myAlert.show();
         }
+
+        if (item.getItemId() == R.id.configure) {
+            Intent iMain = new Intent(getActivity(), ConfigureActivity.class);
+            startActivity(iMain);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -948,17 +985,17 @@ public class ScanPageFragment extends Fragment {
         //final String reflect = String.valueOf(getReflectance());
         //final String reflect = "[1.4923595577160977, 1.4858127248658966, 1.483462090254477, 1.4811798041653559, 1.478962913306713, 1.4855769966447907, 1.4980369452002196, 1.5107358150374268, 1.5237569761463843, 1.5439514620142998, 1.5649235190483481, 1.5867448877083867, 1.6051176087587002, 1.6177447487272167, 1.6306515729737083, 1.6438533274801315, 1.6400895455127638, 1.632582440983541, 1.6252176612788953, 1.6198725907564453, 1.6213354492364858, 1.6228053264183926, 1.6242822812641795, 1.6099011319227792, 1.5868067126139442, 1.5648237847516457, 1.544745673922674, 1.5636719309528466, 1.5836740725983514, 1.6048689016001756, 1.5833574932821064, 1.5116491299523145, 1.4495783456215772, 1.3947959447352576, 1.2918057677397976, 1.1992397828844443, 1.122286417387327, 1.058209672376652, 1.007455383951984, 0.9616205980336366, 0.919799976119593, 0.8816754541295957, 0.846415634923224, 0.8134035619782354, 0.7825288802788117, 0.7581106852285208, 0.7347173332245207, 0.712253776941942, 0.6959946688831977, 0.6868673557709583, 0.6777822485848614, 0.6687370993128493, 0.6634532674684838, 0.6588496038600996, 0.6542135218391817, 0.650439036485605, 0.6494303714709287, 0.6484085532337851, 0.6473733189682102, 0.6505096086613632, 0.6560675123165075, 0.6617844918500856, 0.6678320064423794, 0.6773980334664261, 0.687332888702839, 0.6976609392195393, 0.7077864440092541, 0.7175350110240191, 0.7276659878530138, 0.73820535178606, 0.7374533387312248, 0.7346946485373929, 0.7319157493729622, 0.7308950756427758, 0.7351101120376661, 0.7394239441643337, 0.7438404496531559, 0.7388678656148142, 0.7290543091186971, 0.7193294027380683, 0.7099151909196766, 0.70403827891758, 0.6981470703452413, 0.6922410365016064, 0.6903190692651037, 0.6930791228458978, 0.6959051509864557, 0.6987995815588827, 0.6956334462854157, 0.6914799136196662, 0.6872836231999556, 0.6848054759532685, 0.6871663435453333, 0.6895964758206469, 0.6920991381726384, 0.6881997514678868, 0.6811207774698556, 0.6740306857884835, 0.6675105117176813, 0.6683854189637848, 0.6692756243091352, 0.6701814495037131, 0.6716844131505948, 0.6738771613724109, 0.6761320170891266, 0.678451602444802, 0.6948243849381603, 0.7143272063658798, 0.7352377119243911, 0.7538648675483346, 0.7634400480774127, 0.7734757182625362, 0.78400913200663, 0.7918237369037693, 0.7984098355956745, 0.8052408495927444, 0.8111444969731852, 0.8044351815029898, 0.7976787256758275, 0.7908738034859917, 0.7841548107916759, 0.7775187541599177, 0.770818732192338, 0.7640528921612861, 0.7977884610770649, 0.8411180402148933, 0.8905199272907379, 0.9244988850601861, 0.9057541640924206, 0.887330474469635, 0.8692037451604195, 0.8856491935982594, 0.9199039669891226, 0.9579840144303058, 1.0003030333095635, 1.0438001310390779, 1.0933407551068128, 1.1506824136223224, 1.0894765877615242, 0.9454627210723413, 0.8355442387791785, 0.7462631846605977, 0.6637432281323373, 0.5924926552028972, 0.5301453236911169, 0.48125073981115035, 0.45066956195723673, 0.4216368791132292, 0.3939775868484456, 0.37149194190930995, 0.3513256753499769, 0.3317250220153034, 0.3131407785267416, 0.2989077723773725, 0.28493519458393496, 0.27120896669320177, 0.2629987969754946, 0.25983954212696614, 0.25664953991987993, 0.25342813762191524, 0.24960152947235756, 0.24568123315833998, 0.24171939608237425, 0.238101623523044, 0.23527594257716072, 0.2324141312944353, 0.2295155441563728, 0.22782156831320188, 0.22658716675319324, 0.22533190884787488, 0.22403231016346525, 0.22254695182739576, 0.22103637366931686, 0.21949994774221085, 0.21904981271046203, 0.219609059412783, 0.22018246090487753, 0.22077017247296676, 0.22303717826125743, 0.22549986941964445, 0.22803341709617733, 0.23118147780444603, 0.23555121429637055, 0.24007856001194133, 0.24477213503225362, 0.25245972876455547, 0.26152510502500387, 0.2709911285747663, 0.27890262661229726, 0.274278608942148, 0.2695808791948591, 0.26480715500720775, 0.2604653383026738, 0.25650110129093534, 0.2524811584144779, 0.24840397041427206, 0.24886572731886195, 0.249638296295987, 0.25043289043817996, 0.25154103107053394, 0.2532471330561095, 0.25500381041892867, 0.25681361748936843, 0.26073752051034915, 0.2655234002293547, 0.27049202702863523, 0.27559916289715847, 0.2805806171691589, 0.28575828540902476, 0.291145055803157, 0.30060574516686345, 0.3138064791234264, 0.3277592057718932, 0.3425384322994569, 0.3476534333532286, 0.35243566134093157, 0.3574020646420728, 0.3654625311350187, 0.3793530655132743, 0.39404055914896874, 0.40960457464744937, 0.4157154859762159, 0.41870619427713973, 0.4218053699579598, 0.4258835104095832, 0.43476182516063017, 0.4440338252839598, 0.453728497962529, 0.45411403013578727, 0.4469808275076322, 0.43980396196776317, 0.4325819393582788, 0.42045962461476527, 0.4082495740307261, 0.3961233724474999, 0.3943631551660014, 0.41103574614622995, 0.42884897199882216, 0.44794059373982753, 0.4249756272601481, 0.3909625413993561, 0.3586987573477003, 0.3284363733676303, 0.30166360729313274, 0.27594451540608794, 0.25117512039482465, 0.23389122887124383, 0.22169775881291762, 0.20952791502980017, 0.19737754868412105, 0.1891637996614425, 0.18098640907035374, 0.1727528880332392, 0.16741208053340115, 0.16685723288734378, 0.16629203228837086, 0.16571618563446414]";
         double[] reflectance = new double[]{1.4923595577160977, 1.4858127248658966, 1.483462090254477, 1.4811798041653559, 1.478962913306713, 1.4855769966447907, 1.4980369452002196, 1.5107358150374268, 1.5237569761463843, 1.5439514620142998, 1.5649235190483481, 1.5867448877083867, 1.6051176087587002, 1.6177447487272167, 1.6306515729737083, 1.6438533274801315, 1.6400895455127638, 1.632582440983541, 1.6252176612788953, 1.6198725907564453, 1.6213354492364858, 1.6228053264183926, 1.6242822812641795, 1.6099011319227792, 1.5868067126139442, 1.5648237847516457, 1.544745673922674, 1.5636719309528466, 1.5836740725983514, 1.6048689016001756, 1.5833574932821064, 1.5116491299523145, 1.4495783456215772, 1.3947959447352576, 1.2918057677397976, 1.1992397828844443, 1.122286417387327, 1.058209672376652, 1.007455383951984, 0.9616205980336366, 0.919799976119593, 0.8816754541295957, 0.846415634923224, 0.8134035619782354, 0.7825288802788117, 0.7581106852285208, 0.7347173332245207, 0.712253776941942, 0.6959946688831977, 0.6868673557709583, 0.6777822485848614, 0.6687370993128493, 0.6634532674684838, 0.6588496038600996, 0.6542135218391817, 0.650439036485605, 0.6494303714709287, 0.6484085532337851, 0.6473733189682102, 0.6505096086613632, 0.6560675123165075, 0.6617844918500856, 0.6678320064423794, 0.6773980334664261, 0.687332888702839, 0.6976609392195393, 0.7077864440092541, 0.7175350110240191, 0.7276659878530138, 0.73820535178606, 0.7374533387312248, 0.7346946485373929, 0.7319157493729622, 0.7308950756427758, 0.7351101120376661, 0.7394239441643337, 0.7438404496531559, 0.7388678656148142, 0.7290543091186971, 0.7193294027380683, 0.7099151909196766, 0.70403827891758, 0.6981470703452413, 0.6922410365016064, 0.6903190692651037, 0.6930791228458978, 0.6959051509864557, 0.6987995815588827, 0.6956334462854157, 0.6914799136196662, 0.6872836231999556, 0.6848054759532685, 0.6871663435453333, 0.6895964758206469, 0.6920991381726384, 0.6881997514678868, 0.6811207774698556, 0.6740306857884835, 0.6675105117176813, 0.6683854189637848, 0.6692756243091352, 0.6701814495037131, 0.6716844131505948, 0.6738771613724109, 0.6761320170891266, 0.678451602444802, 0.6948243849381603, 0.7143272063658798, 0.7352377119243911, 0.7538648675483346, 0.7634400480774127, 0.7734757182625362, 0.78400913200663, 0.7918237369037693, 0.7984098355956745, 0.8052408495927444, 0.8111444969731852, 0.8044351815029898, 0.7976787256758275, 0.7908738034859917, 0.7841548107916759, 0.7775187541599177, 0.770818732192338, 0.7640528921612861, 0.7977884610770649, 0.8411180402148933, 0.8905199272907379, 0.9244988850601861, 0.9057541640924206, 0.887330474469635, 0.8692037451604195, 0.8856491935982594, 0.9199039669891226, 0.9579840144303058, 1.0003030333095635, 1.0438001310390779, 1.0933407551068128, 1.1506824136223224, 1.0894765877615242, 0.9454627210723413, 0.8355442387791785, 0.7462631846605977, 0.6637432281323373, 0.5924926552028972, 0.5301453236911169, 0.48125073981115035, 0.45066956195723673, 0.4216368791132292, 0.3939775868484456, 0.37149194190930995, 0.3513256753499769, 0.3317250220153034, 0.3131407785267416, 0.2989077723773725, 0.28493519458393496, 0.27120896669320177, 0.2629987969754946, 0.25983954212696614, 0.25664953991987993, 0.25342813762191524, 0.24960152947235756, 0.24568123315833998, 0.24171939608237425, 0.238101623523044, 0.23527594257716072, 0.2324141312944353, 0.2295155441563728, 0.22782156831320188, 0.22658716675319324, 0.22533190884787488, 0.22403231016346525, 0.22254695182739576, 0.22103637366931686, 0.21949994774221085, 0.21904981271046203, 0.219609059412783, 0.22018246090487753, 0.22077017247296676, 0.22303717826125743, 0.22549986941964445, 0.22803341709617733, 0.23118147780444603, 0.23555121429637055, 0.24007856001194133, 0.24477213503225362, 0.25245972876455547, 0.26152510502500387, 0.2709911285747663, 0.27890262661229726, 0.274278608942148, 0.2695808791948591, 0.26480715500720775, 0.2604653383026738, 0.25650110129093534, 0.2524811584144779, 0.24840397041427206, 0.24886572731886195, 0.249638296295987, 0.25043289043817996, 0.25154103107053394, 0.2532471330561095, 0.25500381041892867, 0.25681361748936843, 0.26073752051034915, 0.2655234002293547, 0.27049202702863523, 0.27559916289715847, 0.2805806171691589, 0.28575828540902476, 0.291145055803157, 0.30060574516686345, 0.3138064791234264, 0.3277592057718932, 0.3425384322994569, 0.3476534333532286, 0.35243566134093157, 0.3574020646420728, 0.3654625311350187, 0.3793530655132743, 0.39404055914896874, 0.40960457464744937, 0.4157154859762159, 0.41870619427713973, 0.4218053699579598, 0.4258835104095832, 0.43476182516063017, 0.4440338252839598, 0.453728497962529, 0.45411403013578727, 0.4469808275076322, 0.43980396196776317, 0.4325819393582788, 0.42045962461476527, 0.4082495740307261, 0.3961233724474999, 0.3943631551660014, 0.41103574614622995, 0.42884897199882216, 0.44794059373982753, 0.4249756272601481, 0.3909625413993561, 0.3586987573477003, 0.3284363733676303, 0.30166360729313274, 0.27594451540608794, 0.25117512039482465, 0.23389122887124383, 0.22169775881291762, 0.20952791502980017, 0.19737754868412105, 0.1891637996614425, 0.18098640907035374, 0.1727528880332392, 0.16741208053340115, 0.16685723288734378, 0.16629203228837086, 0.16571618563446414};
+//        double[] reflectance = getReflectance();
+//        Log.e("reflectane : ", Arrays.toString(reflectance));
+//        Log.e("jumlah array", String.valueOf(reflectance.length));
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         try {
-            for (int i = 0; i < reflectance.length; i++)
-            {
+            for (int i = 0; i < reflectance.length; i++) {
                 jsonArray.put(reflectance[i]);
             }
             jsonObject.put("reflectance", jsonArray);
-        }
-        catch (JSONException e)
-        {
+        } catch (JSONException e) {
             e.getStackTrace();
         }
         final String mRequestBody = jsonObject.toString();
@@ -987,15 +1024,17 @@ public class ScanPageFragment extends Fragment {
                             // set static DataElements
                             setDataElement(outputData.data);
 
-                            inputData();
-
-
                             Toast.makeText(getActivity(), "RESPONSE:" + jsonObject, Toast.LENGTH_LONG).show();
                             Log.e("response:", response);
+
+                            inputData();
+
                             lUtama.setVisibility(View.VISIBLE);
                             lProgress.setVisibility(View.GONE);
                             progressBar.setVisibility(View.GONE);
                             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -1015,6 +1054,7 @@ public class ScanPageFragment extends Fragment {
             public String getBodyContentType() {
                 return "application/json; charset=utf-8";
             }
+
             @Override
             public byte[] getBody() throws AuthFailureError {
                 try {
@@ -1030,37 +1070,228 @@ public class ScanPageFragment extends Fragment {
         queue.add(stringRequest);
     }
 
+    public void setDataElement(ResultPrediction[] datas) {
+        for (int i = 0; i < datas.length; i++) {
+            ResultPrediction rp = datas[i];
+            if (rp.elementName.equals("PH_H2O")) {
+                DataElements.setPhH2o(rp.elementValue);
+                getset.setPhh2o(String.valueOf(rp.elementValue));
+//                phh2o = (Float.toString(DataElements.getPhH2o()));
+            }
+
+            if (rp.elementName.equals("PH_KCL")) {
+                DataElements.setPhKcl(rp.elementValue);
+//                phkcl = (Float.toString(DataElements.getPhKcl()));
+                getset.setPhkcl(String.valueOf(rp.elementValue));
+
+            }
+            //
+            if (rp.elementName.equals("C_N")) {
+                DataElements.setCN(rp.elementValue);
+//                cn = (Float.toString(DataElements.getCN()));
+                getset.setCn(String.valueOf(rp.elementValue));
+
+            }
+            //
+            if (rp.elementName.equals("KJELDAHL_N")) {
+                DataElements.setKjeldahlN(rp.elementValue);
+//                kjelhal = (Float.toString(DataElements.getKjeldahlN()));
+                getset.setKjelhal(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("HCl25_P2O5")) {
+                DataElements.setHCl25P2O5(rp.elementValue);
+//                hclp2o5 = (Float.toString(DataElements.getHCl25P2O5()));
+                getset.setHclp2o5(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("HCl25_K2O")) {
+                DataElements.setHCl25K2O(rp.elementValue);
+//                hclk2o = (Float.toString(DataElements.getHCl25K2O()));
+                getset.setHclk2o(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("Bray1_P2O5")) {
+                DataElements.setBray1P2O5(rp.elementValue);
+//                bray = (Float.toString(DataElements.getBray1P2O5()));
+                getset.setBray(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("Olsen_P2O5")) {
+                DataElements.setOlsenP2O5(rp.elementValue);
+//                olsen = (Float.toString(DataElements.getOlsenP2O5()));
+                getset.setOlsen(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("Ca")) {
+                DataElements.setCa(rp.elementValue);
+//                ca = (Float.toString(DataElements.getCa()));
+                getset.setCa(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("Mg")) {
+                DataElements.setMg(rp.elementValue);
+//                mg = (Float.toString(DataElements.getMg()));
+                getset.setMg(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("K")) {
+                DataElements.setK(rp.elementValue);
+//                k = (Float.toString(DataElements.getK()));
+                getset.setK(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("Na")) {
+                DataElements.setNa(rp.elementValue);
+//                na = (Float.toString(DataElements.getNa()));
+                getset.setNa(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("KB_adjusted")) {
+                DataElements.setKBAdjusted(rp.elementValue);
+//                kbadj = (Float.toString(DataElements.getKBAdjusted()));
+                getset.setKbadj(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("KTK")) {
+                DataElements.setKTK(rp.elementValue);
+//                ktk = (Float.toString(DataElements.getKTK()));
+                getset.setKtk(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("SAND")) {
+                DataElements.setSAND(rp.elementValue);
+//                sand = (Float.toString(DataElements.getSAND()));
+                getset.setSand(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("SILT")) {
+                DataElements.setSILT(rp.elementValue);
+//                silt = (Float.toString(DataElements.getSILT()));
+                getset.setSilt(String.valueOf(rp.elementValue));
+            }
+            //
+            if (rp.elementName.equals("CLAY")) {
+                DataElements.setCLAY(rp.elementValue);
+//                clay = (Float.toString(DataElements.getCLAY()));
+                getset.setClay(String.valueOf(rp.elementValue));
+            }
+            if (rp.elementName.equals("Jumlah")) {
+                DataElements.setJumlah(rp.elementValue);
+//                jumlah = (Float.toString(DataElements.getJumlah()));
+                getset.setJumlah(String.valueOf(rp.elementValue));
+            }
+            if (rp.elementName.equals("Morgan_K2O")) {
+                DataElements.setMorganK2O(rp.elementValue);
+//                morgan = (Float.toString(DataElements.getMorganK2O()));
+                getset.setMorgan(String.valueOf(rp.elementValue));
+            }
+            if (rp.elementName.equals("RetensiP")) {
+                DataElements.setRetensiP(rp.elementValue);
+//                retensip = (Float.toString(DataElements.getRetensiP()));
+                getset.setRetensip(String.valueOf(rp.elementValue));
+            }
+            if (rp.elementName.equals("WBC")) {
+                DataElements.setWBC(rp.elementValue);
+//                wbc = (Float.toString(DataElements.getWBC()));
+                getset.setWbc(String.valueOf(rp.elementValue));
+            }
+            //
+
+        }
+//        String a  = bray;
+//        String b  = ca;
+//        String c  = clay;
+//        String d = cn;
+//        String e  = hclk2o;
+//        String f  = hclp2o5;
+//        String g  = jumlah;
+//        String h  = k;
+//        String i  = kbadj;
+//        String j  = kjelhal;
+//        String k  = ktk;
+//        String l  = mg;
+//        String m  = morgan;
+//        String n  = na;
+//        String o  = olsen;
+//        String p  = phh2o;
+//        String q  = cn;
+//        String r  = phkcl;
+//        String s  = sand;
+//        String t  = silt;
+//        String u  = wbc;
+//
+//        SaveResponsetoSQLITE(a, b, c, d , e , f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u);
+
+        //save to db
+//        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+//        int tahun = calendar.get(Calendar.YEAR);
+//        int bulan = calendar.get(Calendar.MONTH) + 1;
+//        int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
+//        String timestamp = "" + tahun + "-" + bulan + "-" + tanggal;
+//
+//        long id = dbHelper.insertRecord(
+//                "" + bray,
+//                "" + ca,
+//                "" + clay,
+//                "" + cn,
+//                "" + hclk2o,
+//                "" + hclp2o5,
+//                "" + jumlah,
+//                "" + k,
+//                "" + kbadj,
+//                "" + kjelhal,
+//                "" + ktk,
+//                "" + mg,
+//                "" + morgan,
+//                "" + na,
+//                "" + olsen,
+//                "" + phh2o,
+//                "" + cn,
+//                "" + phkcl,
+//                "" + sand,
+//                "" + silt,
+//                "" + wbc,
+//
+//                "" + timestamp);
+    }
+
+    private void SaveResponsetoSQLITE(String bray2, String ca2, String clay2, String cn2, String hclk2o2, String hclp2o52, String jumlah2,
+                                      String k2, String kbadj2, String kjelhal2, String ktk2, String mg2, String morgan2, String na2,
+                                      String olsen2, String phh2o2, String phkcl2, String retensip2, String sand2, String silt2, String wbc2) {
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        int tahun = calendar.get(Calendar.YEAR);
+        int bulan = calendar.get(Calendar.MONTH) + 1;
+        int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
+        String timestamp = "" + tahun + "-" + bulan + "-" + tanggal;
+
+        long id = dbHelper.insertRecord(
+                "" + bray2,
+                "" + ca2,
+                "" + clay2,
+                "" + cn2,
+                "" + hclk2o2,
+                "" + hclp2o52,
+                "" + jumlah2,
+                "" + k2,
+                "" + kbadj2,
+                "" + kjelhal2,
+                "" + ktk2,
+                "" + mg2,
+                "" + morgan2,
+                "" + na2,
+                "" + olsen2,
+                "" + phh2o2,
+                "" + phkcl2,
+                "" + retensip2,
+                "" + sand2,
+                "" + silt2,
+                "" + wbc2,
+
+                "" + timestamp);
+    }
+
     private void inputData() {
-
-
-
-        // get data
-        bray = "" + (Float.toString(DataElements.getBray1P2O5()));
-        ca = "" + (Float.toString(DataElements.getCa()));
-        clay = "" + (Float.toString(DataElements.getCLAY()));
-        cn = "" +(Float.toString(DataElements.getCN()));
-        hclk2o = "" + (Float.toString(DataElements.getHCl25K2O()));
-        hclp2o5 = "" + (Float.toString(DataElements.getHCl25P2O5()));
-        jumlah = "" + (Float.toString(DataElements.getJumlah()));
-        k = "" + (Float.toString(DataElements.getK()));
-        kbadj = "" + (Float.toString(DataElements.getKBAdjusted()));
-        kjelhal = "" + (Float.toString(DataElements.getKjeldahlN()));
-        ktk = "" + (Float.toString(DataElements.getKTK()));
-        mg = "" + (Float.toString(DataElements.getMg()));
-        morgan = "" + (Float.toString(DataElements.getMorganK2O()));
-        na = "" + (Float.toString(DataElements.getNa()));
-        olsen = "" + (Float.toString(DataElements.getOlsenP2O5()));
-        phh2o = "" + (Float.toString(DataElements.getPhH2o()));
-        phkcl = "" + (Float.toString(DataElements.getPhKcl()));
-        retensip = "" + (Float.toString(DataElements.getRetensiP()));
-        sand = "" + (Float.toString(DataElements.getSAND()));
-        silt = "" +(Float.toString(DataElements.getSILT()));
-        wbc = "" + (Float.toString(DataElements.getWBC()));
-
-
-
-
-
         //save to db
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int tahun = calendar.get(Calendar.YEAR);
@@ -1068,47 +1299,31 @@ public class ScanPageFragment extends Fragment {
         int tanggal = calendar.get(Calendar.DAY_OF_MONTH);
         String timestamp = "" + tahun + "-" + bulan + "-" + tanggal;
 
-
         long id = dbHelper.insertRecord(
-                "" + bray,
-                "" + ca,
-                "" + clay,
-                "" + cn,
-                "" + hclk2o,
-                "" + hclp2o5,
-                "" + jumlah,
-                "" + k,
-                "" + kbadj,
-                "" + kjelhal,
-                "" + ktk,
-                "" + mg,
-                "" + morgan,
-                "" + na,
-                "" + olsen,
-                "" + phh2o,
-                "" + cn,
-                "" + phkcl,
-                "" + sand,
-                "" + silt,
-                "" + wbc,
+                "" + getset.getBray(),
+                "" + getset.getCa(),
+                "" + getset.getClay(),
+                "" + getset.getCn(),
+                "" + getset.getHclk2o(),
+                "" + getset.getHclp2o5(),
+                "" + getset.getJumlah(),
+                "" + getset.getK(),
+                "" + getset.getKbadj(),
+                "" + getset.getKjelhal(),
+                "" + getset.getKtk(),
+                "" + getset.getMg(),
+                "" + getset.getMorgan(),
+                "" + getset.getNa(),
+                "" + getset.getOlsen(),
+                "" + getset.getPhh2o(),
+                "" + getset.getPhkcl(),
+                "" + getset.getRetensip(),
+                "" + getset.getSand(),
+                "" + getset.getSilt(),
+                "" + getset.getWbc(),
 
                 "" + timestamp
-
-
         );
-
-    }
-
-    public void setDataElement(ResultPrediction[] datas)
-    {
-        for (int i = 0; i < datas.length; i++)
-        {
-            ResultPrediction rp = datas[i];
-            if (rp.elementName.equals("Bray1_P2O5"))
-            {
-                DataElements.setBray1P2O5(rp.elementValue);
-            }
-        }
     }
 
     public static String[] getStrings(double[] a) {
@@ -1160,3 +1375,4 @@ public class ScanPageFragment extends Fragment {
         return null;
     }
 }
+

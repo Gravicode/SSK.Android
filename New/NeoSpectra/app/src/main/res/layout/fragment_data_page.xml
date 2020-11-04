@@ -591,6 +591,42 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/Lay17"
+                        android:background="#E7F0FF"
+                        android:orientation="vertical"
+                        android:paddingBottom="10dp">
+
+                        <TextView
+                            android:id="@+id/textVie17A"
+                            android:layout_width="372dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="KTK (cmolc/kg)"
+                            android:textColor="#000000"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/txtKTK"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="10dp"
+                            android:background="@drawable/input_bg"
+                            android:ems="10"
+                            android:fontFamily="@font/poppins_regular"
+                            android:hint="KTK (cmolc/kg)"
+                            android:padding="8dp"
+                            android:textColorHint="#76797A"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:id="@+id/Lay14"
                         android:background="#E7F0FF"
                         android:orientation="vertical"
