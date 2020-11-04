@@ -56,7 +56,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.si_ware.neospectra.Activities.ConfigureActivity;
 import com.si_ware.neospectra.Activities.ConnectActivity;
 import com.si_ware.neospectra.Activities.HomeActivity;
-import com.si_ware.neospectra.Activities.Interfaces.Objects;
+import com.si_ware.neospectra.Activities.Interfaces.MyObj;
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.ConfigurableProperties;
@@ -136,7 +136,7 @@ public class ScanPageFragment extends Fragment {
     public double[] reading;
     ProgressBar progressBar;
     private double[] ySend;
-    private Objects getset = new Objects();
+    private MyObj myObj = new MyObj();
     private float[] yValsnew;
     private String bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjelhal, ktk, mg, morgan, na, olsen, phh2o, phkcl, retensip,
             sand, silt, wbc;
@@ -1075,126 +1075,126 @@ public class ScanPageFragment extends Fragment {
             ResultPrediction rp = datas[i];
             if (rp.elementName.equals("PH_H2O")) {
                 DataElements.setPhH2o(rp.elementValue);
-                getset.setPhh2o(String.valueOf(rp.elementValue));
+                myObj.setPhh2o(String.valueOf(rp.elementValue));
 //                phh2o = (Float.toString(DataElements.getPhH2o()));
             }
 
             if (rp.elementName.equals("PH_KCL")) {
                 DataElements.setPhKcl(rp.elementValue);
 //                phkcl = (Float.toString(DataElements.getPhKcl()));
-                getset.setPhkcl(String.valueOf(rp.elementValue));
+                myObj.setPhkcl(String.valueOf(rp.elementValue));
 
             }
             //
             if (rp.elementName.equals("C_N")) {
                 DataElements.setCN(rp.elementValue);
 //                cn = (Float.toString(DataElements.getCN()));
-                getset.setCn(String.valueOf(rp.elementValue));
+                myObj.setCn(String.valueOf(rp.elementValue));
 
             }
             //
             if (rp.elementName.equals("KJELDAHL_N")) {
                 DataElements.setKjeldahlN(rp.elementValue);
 //                kjelhal = (Float.toString(DataElements.getKjeldahlN()));
-                getset.setKjelhal(String.valueOf(rp.elementValue));
+                myObj.setKjelhal(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("HCl25_P2O5")) {
                 DataElements.setHCl25P2O5(rp.elementValue);
 //                hclp2o5 = (Float.toString(DataElements.getHCl25P2O5()));
-                getset.setHclp2o5(String.valueOf(rp.elementValue));
+                myObj.setHclp2o5(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("HCl25_K2O")) {
                 DataElements.setHCl25K2O(rp.elementValue);
 //                hclk2o = (Float.toString(DataElements.getHCl25K2O()));
-                getset.setHclk2o(String.valueOf(rp.elementValue));
+                myObj.setHclk2o(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("Bray1_P2O5")) {
                 DataElements.setBray1P2O5(rp.elementValue);
 //                bray = (Float.toString(DataElements.getBray1P2O5()));
-                getset.setBray(String.valueOf(rp.elementValue));
+                myObj.setBray(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("Olsen_P2O5")) {
                 DataElements.setOlsenP2O5(rp.elementValue);
 //                olsen = (Float.toString(DataElements.getOlsenP2O5()));
-                getset.setOlsen(String.valueOf(rp.elementValue));
+                myObj.setOlsen(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("Ca")) {
                 DataElements.setCa(rp.elementValue);
 //                ca = (Float.toString(DataElements.getCa()));
-                getset.setCa(String.valueOf(rp.elementValue));
+                myObj.setCa(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("Mg")) {
                 DataElements.setMg(rp.elementValue);
 //                mg = (Float.toString(DataElements.getMg()));
-                getset.setMg(String.valueOf(rp.elementValue));
+                myObj.setMg(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("K")) {
                 DataElements.setK(rp.elementValue);
 //                k = (Float.toString(DataElements.getK()));
-                getset.setK(String.valueOf(rp.elementValue));
+                myObj.setK(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("Na")) {
                 DataElements.setNa(rp.elementValue);
 //                na = (Float.toString(DataElements.getNa()));
-                getset.setNa(String.valueOf(rp.elementValue));
+                myObj.setNa(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("KB_adjusted")) {
                 DataElements.setKBAdjusted(rp.elementValue);
 //                kbadj = (Float.toString(DataElements.getKBAdjusted()));
-                getset.setKbadj(String.valueOf(rp.elementValue));
+                myObj.setKbadj(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("KTK")) {
                 DataElements.setKTK(rp.elementValue);
 //                ktk = (Float.toString(DataElements.getKTK()));
-                getset.setKtk(String.valueOf(rp.elementValue));
+                myObj.setKtk(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("SAND")) {
                 DataElements.setSAND(rp.elementValue);
 //                sand = (Float.toString(DataElements.getSAND()));
-                getset.setSand(String.valueOf(rp.elementValue));
+                myObj.setSand(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("SILT")) {
                 DataElements.setSILT(rp.elementValue);
 //                silt = (Float.toString(DataElements.getSILT()));
-                getset.setSilt(String.valueOf(rp.elementValue));
+                myObj.setSilt(String.valueOf(rp.elementValue));
             }
             //
             if (rp.elementName.equals("CLAY")) {
                 DataElements.setCLAY(rp.elementValue);
 //                clay = (Float.toString(DataElements.getCLAY()));
-                getset.setClay(String.valueOf(rp.elementValue));
+                myObj.setClay(String.valueOf(rp.elementValue));
             }
             if (rp.elementName.equals("Jumlah")) {
                 DataElements.setJumlah(rp.elementValue);
 //                jumlah = (Float.toString(DataElements.getJumlah()));
-                getset.setJumlah(String.valueOf(rp.elementValue));
+                myObj.setJumlah(String.valueOf(rp.elementValue));
             }
             if (rp.elementName.equals("Morgan_K2O")) {
                 DataElements.setMorganK2O(rp.elementValue);
 //                morgan = (Float.toString(DataElements.getMorganK2O()));
-                getset.setMorgan(String.valueOf(rp.elementValue));
+                myObj.setMorgan(String.valueOf(rp.elementValue));
             }
             if (rp.elementName.equals("RetensiP")) {
                 DataElements.setRetensiP(rp.elementValue);
 //                retensip = (Float.toString(DataElements.getRetensiP()));
-                getset.setRetensip(String.valueOf(rp.elementValue));
+                myObj.setRetensip(String.valueOf(rp.elementValue));
             }
             if (rp.elementName.equals("WBC")) {
                 DataElements.setWBC(rp.elementValue);
 //                wbc = (Float.toString(DataElements.getWBC()));
-                getset.setWbc(String.valueOf(rp.elementValue));
+                myObj.setWbc(String.valueOf(rp.elementValue));
             }
             //
 
@@ -1300,27 +1300,27 @@ public class ScanPageFragment extends Fragment {
         String timestamp = "" + tahun + "-" + bulan + "-" + tanggal;
 
         long id = dbHelper.insertRecord(
-                "" + getset.getBray(),
-                "" + getset.getCa(),
-                "" + getset.getClay(),
-                "" + getset.getCn(),
-                "" + getset.getHclk2o(),
-                "" + getset.getHclp2o5(),
-                "" + getset.getJumlah(),
-                "" + getset.getK(),
-                "" + getset.getKbadj(),
-                "" + getset.getKjelhal(),
-                "" + getset.getKtk(),
-                "" + getset.getMg(),
-                "" + getset.getMorgan(),
-                "" + getset.getNa(),
-                "" + getset.getOlsen(),
-                "" + getset.getPhh2o(),
-                "" + getset.getPhkcl(),
-                "" + getset.getRetensip(),
-                "" + getset.getSand(),
-                "" + getset.getSilt(),
-                "" + getset.getWbc(),
+                "" + myObj.getBray(),
+                "" + myObj.getCa(),
+                "" + myObj.getClay(),
+                "" + myObj.getCn(),
+                "" + myObj.getHclk2o(),
+                "" + myObj.getHclp2o5(),
+                "" + myObj.getJumlah(),
+                "" + myObj.getK(),
+                "" + myObj.getKbadj(),
+                "" + myObj.getKjelhal(),
+                "" + myObj.getKtk(),
+                "" + myObj.getMg(),
+                "" + myObj.getMorgan(),
+                "" + myObj.getNa(),
+                "" + myObj.getOlsen(),
+                "" + myObj.getPhh2o(),
+                "" + myObj.getPhkcl(),
+                "" + myObj.getRetensip(),
+                "" + myObj.getSand(),
+                "" + myObj.getSilt(),
+                "" + myObj.getWbc(),
 
                 "" + timestamp
         );

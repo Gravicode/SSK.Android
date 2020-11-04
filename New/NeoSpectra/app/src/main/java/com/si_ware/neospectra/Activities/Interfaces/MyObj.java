@@ -1,6 +1,6 @@
 package com.si_ware.neospectra.Activities.Interfaces;
 
-public class Objects {
+public class MyObj {
     public String bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjelhal, ktk, mg, morgan, na, olsen, phh2o, phkcl, retensip,
             sand, silt, wbc;
 
