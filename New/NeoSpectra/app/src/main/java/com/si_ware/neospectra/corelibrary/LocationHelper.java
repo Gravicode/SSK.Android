@@ -1,4 +1,4 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,7 +56,7 @@ public class LocationHelper
 //ORIGINAL LINE: public static IEnumerable<string> GetKabupaten(string Propinsi=null)
 	public static Iterable<String> GetKabupaten(String Propinsi)
 	{
-		if (tangible.StringHelper.isNullOrEmpty(Propinsi))
+		if (com.si_ware.neospectra.tangible.StringHelper.isNullOrEmpty(Propinsi))
 		{
 			ArrayList<String> data = new ArrayList<String>();
 			for (Lokasi item : getDataLokasi())

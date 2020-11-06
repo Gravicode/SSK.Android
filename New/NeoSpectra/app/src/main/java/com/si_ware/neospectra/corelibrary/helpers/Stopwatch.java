@@ -1,4 +1,4 @@
-package corelibrary.helpers;
+package com.si_ware.neospectra.corelibrary.helpers;
 public class Stopwatch {
 
     private final long start;

@@ -1,4 +1,4 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 import com.google.gson.Gson;
 
@@ -6,10 +6,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import corelibrary.helpers.FileHelpers;
-import corelibrary.model.DataMappingNPK;
-import corelibrary.model.FertilizerData;
-import corelibrary.model.FertilizerInfo;
+import com.si_ware.neospectra.corelibrary.helpers.FileHelpers;
+import com.si_ware.neospectra.corelibrary.model.DataMappingNPK;
+import com.si_ware.neospectra.corelibrary.model.FertilizerData;
+import com.si_ware.neospectra.corelibrary.model.FertilizerInfo;
 
 public class FertilizerCalculator
 {

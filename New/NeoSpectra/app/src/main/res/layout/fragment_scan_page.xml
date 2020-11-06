@@ -70,15 +70,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="invisible" />
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_below="@id/titlebar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp" />
-
         <TextView
             android:id="@+id/countProgress"
             android:layout_width="wrap_content"
@@ -86,6 +77,16 @@
             android:layout_below="@+id/graph"
             android:textColorLink="@android:color/black"
             android:textSize="14sp" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_below="@id/titlebar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp" />
+
+
 
         <LinearLayout
             android:id="@+id/l2"

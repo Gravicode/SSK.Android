@@ -7,8 +7,10 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -23,12 +25,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si_ware.neospectra.Activities.IntroActivity;
-import com.si_ware.neospectra.Activities.SettingsActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.DataElements;
 import com.si_ware.neospectra.R;
-
-import corelibrary.model.ModelOutput;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -51,9 +50,9 @@ public class DataPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -63,6 +62,32 @@ public class DataPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+//        btnOk = view.findViewById(R.id.sync);
+
+//        btnOk.setOnClickListener(view13 -> {
+//            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
+//            bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
+//
+//            bottomSheetDialog.setCanceledOnTouchOutside(false);
+//
+//            LinearLayout bottom_sheet_refresh = bottomSheetDialog.findViewById(R.id.bottom_sheet_sync);
+//            CardView btn_yes = bottomSheetDialog.findViewById(R.id.buttonYes);
+//            CardView btn_cancel = bottomSheetDialog.findViewById(R.id.buttonNo);
+//            bottom_sheet_refresh.setVisibility(View.VISIBLE);
+//
+//            btn_yes.setOnClickListener(view1 -> {
+//                Toast.makeText(getActivity(), "Berhasil Mengubah Data..", Toast.LENGTH_SHORT).show();
+//                bottomSheetDialog.dismiss();
+//            });
+//
+//            btn_cancel.setOnClickListener(view12 -> {
+//                Toast.makeText(getActivity(), "cancel..", Toast.LENGTH_SHORT).show();
+//                bottomSheetDialog.dismiss();
+//            });
+//
+//            bottomSheetDialog.show();
+//        });
 
         /* Variable for textview*/
         txtPhh20 = view.findViewById(R.id.txtPhh20);

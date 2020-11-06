@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -19,18 +20,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.Activities.SettingsActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
+import com.si_ware.neospectra.DataElements;
 import com.si_ware.neospectra.R;
+
+import org.w3c.dom.Text;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
 public class RecomendationPageFragment extends Fragment {
     private Context mContext;
     CardView sync;
+    TextView txUrea, txSp36, txKcl, txNpk, txUrea15;
+
 
     @Nullable
     @Override
@@ -42,9 +49,9 @@ public class RecomendationPageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -57,6 +64,19 @@ public class RecomendationPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         sync = view.findViewById(R.id.sync);
+        txUrea = view.findViewById(R.id.txtUrea);
+        txSp36 = view.findViewById(R.id.txtSp35);
+        txKcl = view.findViewById(R.id.txtKcl);
+        txNpk = view.findViewById(R.id.txtNpk);
+        txUrea15 = view.findViewById(R.id.txtUrea15);
+
+        txUrea.setText(DataElements.getUrea());
+        txSp36.setText(DataElements.getSp36());
+        txKcl.setText(DataElements.getKcl());
+        txNpk.setText(DataElements.getNpk());
+        txUrea15.setText(DataElements.getUrea15());
+
+
 
         sync.setOnClickListener(view13 -> {
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());

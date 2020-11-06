@@ -1,4 +1,4 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 import com.google.gson.Gson;
 
@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import corelibrary.helpers.FileHelpers;
-import corelibrary.helpers.Stopwatch;
-import corelibrary.model.InferenceResult;
-import corelibrary.model.ModelOutput;
+import com.si_ware.neospectra.corelibrary.helpers.FileHelpers;
+import com.si_ware.neospectra.corelibrary.helpers.Stopwatch;
+import com.si_ware.neospectra.corelibrary.model.InferenceResult;
+import com.si_ware.neospectra.corelibrary.model.ModelOutput;
 
 public class ModelRunner
 {
@@ -24,7 +24,7 @@ public class ModelRunner
 	{
 		void invoke(String LogType, String Message);
 	}
-	public tangible.Event<LogDataUpdateHandler> LogData = new tangible.Event<LogDataUpdateHandler>();
+	public com.si_ware.neospectra.tangible.Event<LogDataUpdateHandler> LogData = new com.si_ware.neospectra.tangible.Event<LogDataUpdateHandler>();
 
 	private void OnLogDataUpdate(String LogType, String Message)
 	{

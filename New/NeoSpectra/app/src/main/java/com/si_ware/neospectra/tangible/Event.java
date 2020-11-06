@@ -1,4 +1,4 @@
-package tangible;
+package com.si_ware.neospectra.tangible;
 
 //----------------------------------------------------------------------------------------
 //	Copyright © 2007 - 2020 Tangible Software Solutions, Inc.

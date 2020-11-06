@@ -1,7 +1,7 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 //import Newtonsoft.Json.*;
-//import pkdss.corelibrary.properties.*;
+//import pkdss.com.si_ware.neospectra.corelibrary.properties.*;
 public class Lokasi
 {
 	private String Kabupaten;

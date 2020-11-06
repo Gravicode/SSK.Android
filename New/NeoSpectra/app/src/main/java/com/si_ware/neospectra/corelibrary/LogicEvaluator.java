@@ -1,4 +1,4 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 import org.mariuszgromada.math.mxparser.*;
 

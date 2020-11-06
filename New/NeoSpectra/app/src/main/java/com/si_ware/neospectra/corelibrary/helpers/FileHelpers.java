@@ -1,4 +1,4 @@
-package corelibrary.helpers;
+package com.si_ware.neospectra.corelibrary.helpers;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;

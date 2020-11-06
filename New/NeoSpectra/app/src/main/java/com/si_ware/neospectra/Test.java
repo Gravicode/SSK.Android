@@ -1,3 +1,5 @@
+package com.si_ware.neospectra;
+
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 
@@ -6,11 +8,11 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.prefs.Preferences;
 
-import corelibrary.FertilizerCalculator;
-import corelibrary.ModelRunner;
-import corelibrary.Resources;
-import corelibrary.model.FertilizerInfo;
-import corelibrary.model.InferenceResult;
+import com.si_ware.neospectra.corelibrary.FertilizerCalculator;
+import com.si_ware.neospectra.corelibrary.ModelRunner;
+import com.si_ware.neospectra.corelibrary.Resources;
+import com.si_ware.neospectra.corelibrary.model.FertilizerInfo;
+import com.si_ware.neospectra.corelibrary.model.InferenceResult;
 
 //import static sun.misc.Version.print;
 public class Test {

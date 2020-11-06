@@ -1,4 +1,4 @@
-package corelibrary.model;
+package com.si_ware.neospectra.corelibrary.model;
 
 public class FertilizerData
 {

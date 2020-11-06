@@ -127,6 +127,7 @@
                             android:textSize="20dp" />
 
                         <EditText
+                            android:id="@+id/txtUrea"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#FFF"
@@ -143,6 +144,7 @@
                             android:textSize="20dp" />
 
                         <EditText
+                            android:id="@+id/txtSp35"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#FFF"
@@ -159,6 +161,7 @@
                             android:textSize="20dp" />
 
                         <EditText
+                            android:id="@+id/txtKcl"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#FFF"
@@ -220,6 +223,7 @@
                             android:textSize="20dp" />
 
                         <EditText
+                            android:id="@+id/txtNpk"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#FFF"
@@ -236,6 +240,7 @@
                             android:textSize="20dp" />
 
                         <EditText
+                            android:id="@+id/txtUrea15"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:background="#FFF"

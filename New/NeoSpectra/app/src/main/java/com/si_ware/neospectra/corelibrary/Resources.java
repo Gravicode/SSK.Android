@@ -1,4 +1,4 @@
-package corelibrary;
+package com.si_ware.neospectra.corelibrary;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,18 +1,7 @@
-package corelibrary.model;
+package com.si_ware.neospectra.corelibrary.model;
 
-import java.time.LocalDateTime;
-
-public class UnsurModel
+public class ModelOutput
 {
-	private int Id;
-	public final int getId()
-	{
-		return Id;
-	}
-	public final void setId(int value)
-	{
-		Id = value;
-	}
 	private float Bray1_P2O5;
 	public final float getBray1P2O5()
 	{
@@ -201,14 +190,5 @@ public class UnsurModel
 	public final void setWBC(float value)
 	{
 		WBC = value;
-	}
-	private LocalDateTime CreatedDate = LocalDateTime.MIN;
-	public final LocalDateTime getCreatedDate()
-	{
-		return CreatedDate;
-	}
-	public final void setCreatedDate(LocalDateTime value)
-	{
-		CreatedDate = value;
 	}
 }
