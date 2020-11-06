@@ -100,42 +100,7 @@ public class Test {
             }catch (RuntimeException ex){
                 System.out.println(ex);
             }
-            /*
-            String WorkingDirectory = ini.get("Config","WorkingDirectory");
-            String ModelScript = ini.get("Config","ModelScript");
-            String SensorData = ini.get("Config","SensorData");
-            String AnacondaFolder = ini.get("Config","AnacondaFolder");
-            Resources.PathToData = ini.get("Config","PathToData");
-            double ureaConst = Double.parseDouble(ini.get("Config","Urea"));
-            double sp36Const = Double.parseDouble(ini.get("Config","SP36"));
-            double kclConst = Double.parseDouble(ini.get("Config","KCL"));
 
-            ModelRunner ml = new ModelRunner(WorkingDirectory, ModelScript, SensorData, AnacondaFolder);
-
-            InferenceResult hasil = ml.InferenceModel(false, true);
-            if (hasil.getIsSucceed())
-            {
-                try
-                {
-
-                    System.out.println("start recommendation process");
-                    FertilizerCalculator calc = new FertilizerCalculator(DataRekomendasi);
-                    String TxtUrea = String.valueOf(calc.GetFertilizerDoze(hasil.getModel().getCN(), "Padi", "Urea")*ureaConst);
-                    String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(hasil.getModel().getHCl25P2O5(), "Padi", "SP36")*sp36Const);
-                    String TxtKCL = String.valueOf(calc.GetFertilizerDoze(hasil.getModel().getHCl25K2O(), "Padi", "KCL")*kclConst);
-                    System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
-
-                    FertilizerInfo x = calc.GetNPKDoze(hasil.getModel().getHCl25P2O5(), hasil.getModel().getHCl25K2O(), "Padi");
-
-                    System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s",x.getNPK()));
-                    System.out.println(String.format("UREA 15:15:15 = %1$s",x.getUrea()));
-
-                }
-                catch (RuntimeException ex)
-                {
-                    System.out.println(ex);
-                }
-            }*/
 
         } catch (IOException e) {
             e.printStackTrace();

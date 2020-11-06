@@ -1,5 +1,6 @@
 include ':pkdss-release'
 include ':pkdss-release'
+include ':pkdss-release'
 include ':pkdss'
 include ':pkdss'
 include ':app', ':androidlibsvm-release'

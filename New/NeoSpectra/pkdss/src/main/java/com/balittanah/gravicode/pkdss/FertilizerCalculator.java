@@ -1,5 +1,8 @@
 package com.balittanah.gravicode.pkdss;
 
+
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.balittanah.gravicode.pkdss.helpers.FileHelpers;
 import com.balittanah.gravicode.pkdss.model.*;
@@ -19,6 +22,7 @@ public class FertilizerCalculator
 	{
 		DataPath = value;
 	}
+	private Context myContext;
 	private ArrayList<FertilizerData> Datas;
 	public final ArrayList<FertilizerData> getDatas()
 	{
@@ -38,10 +42,11 @@ public class FertilizerCalculator
 		DataNPK = value;
 	}
 	Gson gson = new Gson();
-	public FertilizerCalculator()
+	public FertilizerCalculator(Context appContext)
 	{
+		myContext = appContext;
 		if (getDatas() == null) {
-			String json = Resources.GetResources("Data");
+			String json = Resources.GetResources(myContext,"Data");
 
 			FertilizerData[] datas = gson.fromJson(json, FertilizerData[].class);
 			ArrayList<FertilizerData> list = new ArrayList<FertilizerData>(Arrays.asList(datas));
@@ -51,7 +56,7 @@ public class FertilizerCalculator
 		if (getDataNPK() == null)
 		{
 //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java unless the Java 10 inferred typing option is selected:
-			String[] RowData = Resources.GetResources("NPK").split(System.lineSeparator());
+			String[] RowData = Resources.GetResources(myContext,"NPK").split(System.lineSeparator());
 			int RowCounter = 0;
 			setDataNPK(new ArrayList<DataMappingNPK>());
 //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java unless the Java 10 inferred typing option is selected:

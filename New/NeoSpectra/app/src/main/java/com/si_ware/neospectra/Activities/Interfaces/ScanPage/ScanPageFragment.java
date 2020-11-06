@@ -76,6 +76,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -1387,24 +1388,26 @@ public class ScanPageFragment extends Fragment {
     }
 
     public void Calculator(){
-        String filename = "src/main/assets/config.ini";
+
         Ini ini = null;
         try {
-            ini = new Ini(new File(filename));
+            InputStream inputStream = getContext().getAssets().open("config.ini");
+            ini = new Ini(inputStream);
             java.util.prefs.Preferences prefs = new IniPreferences(ini);
+            //System.out.println("grumpy/homePage: " + prefs.node("grumpy").get("homePage", null));
 
             String DataRekomendasi = ini.get("Config","DataRekomendasi");
             try {
                 double ureaConst = Double.parseDouble(ini.get("Config","Urea"));
                 double sp36Const = Double.parseDouble(ini.get("Config","SP36"));
                 double kclConst = Double.parseDouble(ini.get("Config","KCL"));
-                FertilizerCalculator calc = new FertilizerCalculator(DataRekomendasi);
+                FertilizerCalculator calc = new FertilizerCalculator(getContext());
                 String TxtUrea = String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea")*ureaConst);
                 String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36")*sp36Const);
                 String TxtKCL = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL")*kclConst);
                 System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
 
-                FertilizerInfo x = calc.GetNPKDoze(DataElements.getHCl25P2O5(), DataElements.getHCl25K2O(), "Padi");
+                FertilizerInfo x = calc.GetNPKDoze(10, 10, "Padi");
 
                 System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s",x.getNPK()));
                 System.out.println(String.format("UREA 15:15:15 = %1$s",x.getUrea()));
