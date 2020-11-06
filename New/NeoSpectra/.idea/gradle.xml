@@ -13,10 +13,11 @@
             <option value="$PROJECT_DIR$/androidlibsvm-release" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/neospectralib" />
+            <option value="$PROJECT_DIR$/pkdss" />
+            <option value="$PROJECT_DIR$/pkdss-release" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -109,5 +109,6 @@ dependencies {
     implementation 'org.ini4j:ini4j:0.5.4'
     implementation 'org.mariuszgromada.math:MathParser.org-mXparser:4.4.2'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation project(':pkdss-release')
 }
 apply plugin: 'com.google.gms.google-services'

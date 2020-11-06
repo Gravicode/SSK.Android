@@ -47,6 +47,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.balittanah.gravicode.pkdss.FertilizerInfo;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -88,11 +89,10 @@ import java.util.TimeZone;
 import java.util.prefs.Preferences;
 
 import com.google.gson.Gson;
-import com.si_ware.neospectra.corelibrary.FertilizerCalculator;
-import com.si_ware.neospectra.corelibrary.ModelRunner;
-import com.si_ware.neospectra.corelibrary.Resources;
-import com.si_ware.neospectra.corelibrary.model.FertilizerInfo;
-import com.si_ware.neospectra.corelibrary.model.InferenceResult;
+import com.balittanah.gravicode.pkdss.FertilizerCalculator;
+import com.balittanah.gravicode.pkdss.ModelRunner;
+import com.balittanah.gravicode.pkdss.Resources;
+import com.balittanah.gravicode.pkdss.model.InferenceResult;
 import com.si_ware.neospectra.dbtable.DBHelper;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.MAX_SCANNER_MEMORY;
@@ -1387,9 +1387,47 @@ public class ScanPageFragment extends Fragment {
     }
 
     public void Calculator(){
+        String filename = "src/main/assets/config.ini";
+        Ini ini = null;
+        try {
+            ini = new Ini(new File(filename));
+            java.util.prefs.Preferences prefs = new IniPreferences(ini);
+
+            String DataRekomendasi = ini.get("Config","DataRekomendasi");
+            try {
+                double ureaConst = Double.parseDouble(ini.get("Config","Urea"));
+                double sp36Const = Double.parseDouble(ini.get("Config","SP36"));
+                double kclConst = Double.parseDouble(ini.get("Config","KCL"));
+                FertilizerCalculator calc = new FertilizerCalculator(DataRekomendasi);
+                String TxtUrea = String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea")*ureaConst);
+                String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36")*sp36Const);
+                String TxtKCL = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL")*kclConst);
+                System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
+
+                FertilizerInfo x = calc.GetNPKDoze(DataElements.getHCl25P2O5(), DataElements.getHCl25K2O(), "Padi");
+
+                System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s",x.getNPK()));
+                System.out.println(String.format("UREA 15:15:15 = %1$s",x.getUrea()));
+
+                DataElements.setUrea(String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea")*ureaConst));
+                DataElements.setSp36(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36")*sp36Const));
+                DataElements.setKcl(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL")*kclConst));
+                DataElements.setNpk(String.valueOf(x.getNPK()));
+                DataElements.setUrea15(String.valueOf(x.getUrea()));
+
+            }catch (RuntimeException ex){
+                System.out.println(ex);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*
         String filename = "SSK.Mobile\\SSK.Desktop\\src\\main\\java\\data\\config.ini";
         Ini ini = null;
         try {
+
             ini = new Ini(new File(filename));
             Preferences prefs = new IniPreferences(ini);
             //System.out.println("grumpy/homePage: " + prefs.node("grumpy").get("homePage", null));
@@ -1436,9 +1474,10 @@ public class ScanPageFragment extends Fragment {
                     System.out.println(ex);
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }
 
