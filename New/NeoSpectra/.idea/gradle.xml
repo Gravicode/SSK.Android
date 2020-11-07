@@ -15,9 +15,12 @@
             <option value="$PROJECT_DIR$/neospectralib" />
             <option value="$PROJECT_DIR$/pkdss" />
             <option value="$PROJECT_DIR$/pkdss-release" />
+            <option value="$PROJECT_DIR$/poi-ooxml-3.15" />
+            <option value="$PROJECT_DIR$/poi-ooxml-schemas-3.15" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -5,8 +5,15 @@
 <!--    <item android:id="@+id/action_share"-->
 <!--        android:title="Share"/>-->
 <!--export-->
-    <item android:id="@+id/action_export"
-        android:title="Export"/>
+    <item android:title="Export">
+        <menu>
+            <item android:id="@+id/action_export"
+                android:title="Export to CSV"/>
+            <item android:id="@+id/action_exportXls"
+                android:title="Export to XLS"/>
+        </menu>
+    </item>
+
 <!--short item menu-->
     <item android:id="@+id/action_sort"
         android:title="Short"
