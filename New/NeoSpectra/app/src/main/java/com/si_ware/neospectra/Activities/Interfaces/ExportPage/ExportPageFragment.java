@@ -50,8 +50,10 @@ import com.si_ware.neospectra.dbtable.addUpdateRecord;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -108,7 +110,7 @@ public class ExportPageFragment extends Fragment {
 
 
     //sort option
-    String orderByNewest = Constants.C_ADDED_TIME_STAMP + " DESC";
+    String orderByNewest = Constants.C_ID + " DESC";
     String orderByOldest = Constants.C_ADDED_TIME_STAMP + " ASC";
 
     //for refresh records, refresh with last choosen sort option
@@ -485,7 +487,7 @@ public class ExportPageFragment extends Fragment {
         if (id == R.id.action_sort) {
             //show sort options (show in dialog)
 //            sortOptionDialog();
-            loadRecords(orderByOldest);
+            loadRecords(orderByNewest);
         }
         if (item.getItemId() == android.R.id.home) {
 //            AlertDialog.Builder myAlert = new AlertDialog.Builder(mContext);
@@ -521,23 +523,24 @@ public class ExportPageFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void sortOptionDialog() {
-        String[] options = {"Newest", "Oldest"};
-        //dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Sort By")
-                .setItems(options, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int which) {
-                        if (which == 0) {
-                            loadRecords(orderByNewest);
-                        } else if (which == 1) {
-                            loadRecords(orderByOldest);
-                        }
-                    }
-                })
-                .create().show();
-    }
+//
+//    private void sortOptionDialog() {
+//        String[] options = {"Newest", "Oldest"};
+//        //dialog
+//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//        builder.setTitle("Sort By")
+//                .setItems(options, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int which) {
+//                        if (which == 0) {
+//                            loadRecords(orderByNewest);
+//                        } else if (which == 1) {
+//                            loadRecords(orderByNewest);
+//                        }
+//                    }
+//                })
+//                .create().show();
+//    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -564,7 +567,21 @@ public class ExportPageFragment extends Fragment {
         Workbook workbook = new HSSFWorkbook();
         Cell cell = null;
         CellStyle cellStyle = workbook.createCellStyle();
-        cellStyle.setFillBackgroundColor(HSSFColor.LIGHT_BLUE.index);
+        cellStyle.setFillBackgroundColor(HSSFColor.SEA_GREEN.index);
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle.setBorderBottom(BorderStyle.THICK);
+        cellStyle.setBorderLeft(BorderStyle.THICK);
+        cellStyle.setBorderRight(BorderStyle.THICK);
+        cellStyle.setBorderTop(BorderStyle.THICK);
+
+
+        CellStyle cellStyle1 = workbook.createCellStyle();
+        cellStyle1.setFillBackgroundColor(HSSFColor.SEA_GREEN.index);
+        cellStyle1.setAlignment(HorizontalAlignment.CENTER);
+        cellStyle1.setBorderBottom(BorderStyle.THIN);
+        cellStyle1.setBorderLeft(BorderStyle.THIN);
+        cellStyle1.setBorderRight(BorderStyle.THIN);
+        cellStyle1.setBorderTop(BorderStyle.THIN);
 
         //get records
         ArrayList<ModelRecord> recordsList = new ArrayList<>();
@@ -573,7 +590,7 @@ public class ExportPageFragment extends Fragment {
 
         //creating sheet
         Sheet sheet = null;
-        sheet = workbook.createSheet("data scan");
+        sheet = workbook.createSheet("Data Scan");
 
         //create row and column
         Row row = null;
@@ -582,67 +599,73 @@ public class ExportPageFragment extends Fragment {
                 row = sheet.createRow(0);
 
                 cell = row.createCell(0);
-                cell.setCellValue("Bray1_P20");
+                cell.setCellValue("Id");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(1);
-                cell.setCellValue("Ca");
+                cell.setCellValue("Bray1_P20");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(2);
-                cell.setCellValue("CLAY");
+                cell.setCellValue("Ca");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(3);
-                cell.setCellValue("C_N");
+                cell.setCellValue("CLAY");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(4);
-                cell.setCellValue("HCl25_K2O");
+                cell.setCellValue("C_N");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(5);
-                cell.setCellValue("HCl25_P2O5");
+                cell.setCellValue("HCl25_K2O");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(6);
-                cell.setCellValue("Jumlah");
+                cell.setCellValue("HCl25_P2O5");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(7);
-                cell.setCellValue("K");
+                cell.setCellValue("Jumlah");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(8);
-                cell.setCellValue("KB_adjusted");
+                cell.setCellValue("K");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(9);
-                cell.setCellValue("KJELDAHL_N");
+                cell.setCellValue("KB_adjusted");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(10);
-                cell.setCellValue("KTK");
+                cell.setCellValue("KJELDAHL_N");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(11);
-                cell.setCellValue("Mg");
+                cell.setCellValue("KTK");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(12);
-                cell.setCellValue("Morgan_K2O");
+                cell.setCellValue("Mg");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(13);
-                cell.setCellValue("Na");
+                cell.setCellValue("Morgan_K2O");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(14);
-                cell.setCellValue("Olsen_P2O5");
+                cell.setCellValue("Na");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(15);
-                cell.setCellValue("PH_H2O");
+                cell.setCellValue("Olsen_P2O5");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(16);
-                cell.setCellValue("PH_KCL");
+                cell.setCellValue("PH_H2O");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(17);
-                cell.setCellValue("RetensiP");
+                cell.setCellValue("PH_KCL");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(18);
-                cell.setCellValue("SAND");
+                cell.setCellValue("RetensiP");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(19);
-                cell.setCellValue("SILT");
+                cell.setCellValue("SAND");
                 cell.setCellStyle(cellStyle);
                 cell = row.createCell(20);
+                cell.setCellValue("SILT");
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(21);
                 cell.setCellValue("WBC");
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(22);
+                cell.setCellValue("Date");
                 cell.setCellStyle(cellStyle);
             }
             if (i > 0) {
@@ -650,73 +673,79 @@ public class ExportPageFragment extends Fragment {
                 row = sheet.createRow(i);
 
                 cell = row.createCell(nextCell);
-                cell.setCellValue("" + recordsList.get(i).getBray());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getId());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 1);
-                cell.setCellValue("" + recordsList.get(i).getCa());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getBray());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 2);
-                cell.setCellValue("" + recordsList.get(i).getClay());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getCa());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 3);
-                cell.setCellValue("" + recordsList.get(i).getCn());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getClay());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 4);
-                cell.setCellValue("" + recordsList.get(i).getHclk2o());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getCn());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 5);
-                cell.setCellValue("" + recordsList.get(i).getHclp2o5());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getHclk2o());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 6);
-                cell.setCellValue("" + recordsList.get(i).getJumlah());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getHclp2o5());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 7);
-                cell.setCellValue("" + recordsList.get(i).getK());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getJumlah());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 8);
-                cell.setCellValue("" + recordsList.get(i).getKbadj());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getK());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 9);
-                cell.setCellValue("" + recordsList.get(i).getKjeldahl());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getKbadj());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 10);
-                cell.setCellValue("" + recordsList.get(i).getKtk());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getKjeldahl());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 11);
-                cell.setCellValue("" + recordsList.get(i).getMg());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getKtk());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 12);
-                cell.setCellValue("" + recordsList.get(i).getMorgan());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getMg());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 13);
-                cell.setCellValue("" + recordsList.get(i).getNa());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getMorgan());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 14);
-                cell.setCellValue("" + recordsList.get(i).getOlsen());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getNa());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 15);
-                cell.setCellValue("" + recordsList.get(i).getPhh2o());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getOlsen());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 16);
-                cell.setCellValue("" + recordsList.get(i).getPhkcl());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getPhh2o());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 17);
-                cell.setCellValue("" + recordsList.get(i).getRetensip());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getPhkcl());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 18);
-                cell.setCellValue("" + recordsList.get(i).getSand());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getRetensip());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 19);
-                cell.setCellValue("" + recordsList.get(i).getSilt());
-                cell.setCellStyle(cellStyle);
+                cell.setCellValue("" + recordsList.get(i).getSand());
+                cell.setCellStyle(cellStyle1);
                 cell = row.createCell(nextCell + 20);
+                cell.setCellValue("" + recordsList.get(i).getSilt());
+                cell.setCellStyle(cellStyle1);
+                cell = row.createCell(nextCell + 21);
                 cell.setCellValue("" + recordsList.get(i).getWbc());
-                cell.setCellStyle(cellStyle);
+                cell.setCellStyle(cellStyle1);
+                cell = row.createCell(nextCell + 22);
+                cell.setCellValue("" + recordsList.get(i).getAddedTime());
+                cell.setCellStyle(cellStyle1);
             }
         }
 
 
-        sheet.setColumnWidth(0, (10 * 500));
+        sheet.setColumnWidth(0, (10 * 200));
         sheet.setColumnWidth(1, (10 * 500));
         sheet.setColumnWidth(2, (10 * 500));
         sheet.setColumnWidth(3, (10 * 500));
@@ -738,17 +767,36 @@ public class ExportPageFragment extends Fragment {
         sheet.setColumnWidth(19, (10 * 500));
         sheet.setColumnWidth(20, (10 * 500));
         sheet.setColumnWidth(21, (10 * 500));
+        sheet.setColumnWidth(22, (10 * 500));
+        sheet.setColumnWidth(23, (10 * 500));
 
-        File file = new File(getActivity().getExternalFilesDir(null), "neo.xls");
+
+        File folder = new File(Environment.getExternalStorageDirectory() + "/" + "Neospectra"); // Neospectra is folder name
+
+        boolean isFolderCreated = false;
+        if (!folder.exists()) {
+            isFolderCreated = folder.mkdir(); //create folder if not exists
+        }
+        Log.d("CSC_TAG", "export To Excel: " + isFolderCreated);
+
+        //file name
+        String excelFileName = "Neospectra.xls";
+
+
+        //complate path and name
+        String filePathAndName = folder.toString() + "/" + excelFileName;
+
+
+//        File file = new File(getActivity().getExternalFilesDir(null), "Neospectra.xls");
         FileOutputStream fileOutputStream = null;
 
         try {
-            fileOutputStream = new FileOutputStream(file);
+            fileOutputStream = new FileOutputStream(filePathAndName);
             workbook.write(fileOutputStream);
-            Toast.makeText(mContext, "neo.xls created", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Exported to : " + filePathAndName , Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(mContext, "neo.xls not created", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Neospectra.xls Not Created", Toast.LENGTH_SHORT).show();
             try {
                 fileOutputStream.close();
             } catch (IOException ex) {
@@ -771,10 +819,12 @@ public class ExportPageFragment extends Fragment {
         Log.d("CSC_TAG", "exportCSV: " + isFolderCreated);
 
         //file name
-        String csvFileName = "NEO.csv";
+        String csvFileName = "Neospectra.csv";
+
 
         //complate path and name
         String filePathAndName = folder.toString() + "/" + csvFileName;
+
 
         //get records
         ArrayList<ModelRecord> recordsList = new ArrayList<>();
