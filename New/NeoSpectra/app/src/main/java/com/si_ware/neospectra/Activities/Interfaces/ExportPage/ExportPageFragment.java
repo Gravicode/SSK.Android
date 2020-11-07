@@ -132,9 +132,9 @@ public class ExportPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (bluetoothAPI == null) {
-            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-        }
+//        if (bluetoothAPI == null) {
+//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+//        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -576,7 +576,6 @@ public class ExportPageFragment extends Fragment {
         sheet = workbook.createSheet("data scan");
 
         //create row and column
-
         Row row = null;
         for (int i = 0; i < recordsList.size(); i++) {
             if (i == 0) {
@@ -646,72 +645,74 @@ public class ExportPageFragment extends Fragment {
                 cell.setCellValue("WBC");
                 cell.setCellStyle(cellStyle);
             }
+            if (i > 0) {
+                int nextCell = ((i/i)-1);
+                row = sheet.createRow(i);
 
-            row = sheet.createRow(i + 1);
-
-            cell = row.createCell(i);
-            cell.setCellValue("" + recordsList.get(i).getBray());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 1);
-            cell.setCellValue("" + recordsList.get(i).getCa());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 2);
-            cell.setCellValue("" + recordsList.get(i).getClay());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 3);
-            cell.setCellValue("" + recordsList.get(i).getCn());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 4);
-            cell.setCellValue("" + recordsList.get(i).getHclk2o());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 5);
-            cell.setCellValue("" + recordsList.get(i).getHclp2o5());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 6);
-            cell.setCellValue("" + recordsList.get(i).getJumlah());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 7);
-            cell.setCellValue("" + recordsList.get(i).getK());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 8);
-            cell.setCellValue("" + recordsList.get(i).getKbadj());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 9);
-            cell.setCellValue("" + recordsList.get(i).getKjeldahl());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 10);
-            cell.setCellValue("" + recordsList.get(i).getKtk());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 11);
-            cell.setCellValue("" + recordsList.get(i).getMg());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 12);
-            cell.setCellValue("" + recordsList.get(i).getMorgan());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 13);
-            cell.setCellValue("" + recordsList.get(i).getNa());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 14);
-            cell.setCellValue("" + recordsList.get(i).getOlsen());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 15);
-            cell.setCellValue("" + recordsList.get(i).getPhh2o());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 16);
-            cell.setCellValue("" + recordsList.get(i).getPhkcl());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 17);
-            cell.setCellValue("" + recordsList.get(i).getRetensip());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 18);
-            cell.setCellValue("" + recordsList.get(i).getSand());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 19);
-            cell.setCellValue("" + recordsList.get(i).getSilt());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 20);
-            cell.setCellValue("" + recordsList.get(i).getWbc());
-            cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell);
+                cell.setCellValue("" + recordsList.get(i).getBray());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 1);
+                cell.setCellValue("" + recordsList.get(i).getCa());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 2);
+                cell.setCellValue("" + recordsList.get(i).getClay());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 3);
+                cell.setCellValue("" + recordsList.get(i).getCn());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 4);
+                cell.setCellValue("" + recordsList.get(i).getHclk2o());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 5);
+                cell.setCellValue("" + recordsList.get(i).getHclp2o5());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 6);
+                cell.setCellValue("" + recordsList.get(i).getJumlah());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 7);
+                cell.setCellValue("" + recordsList.get(i).getK());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 8);
+                cell.setCellValue("" + recordsList.get(i).getKbadj());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 9);
+                cell.setCellValue("" + recordsList.get(i).getKjeldahl());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 10);
+                cell.setCellValue("" + recordsList.get(i).getKtk());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 11);
+                cell.setCellValue("" + recordsList.get(i).getMg());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 12);
+                cell.setCellValue("" + recordsList.get(i).getMorgan());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 13);
+                cell.setCellValue("" + recordsList.get(i).getNa());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 14);
+                cell.setCellValue("" + recordsList.get(i).getOlsen());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 15);
+                cell.setCellValue("" + recordsList.get(i).getPhh2o());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 16);
+                cell.setCellValue("" + recordsList.get(i).getPhkcl());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 17);
+                cell.setCellValue("" + recordsList.get(i).getRetensip());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 18);
+                cell.setCellValue("" + recordsList.get(i).getSand());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 19);
+                cell.setCellValue("" + recordsList.get(i).getSilt());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(nextCell + 20);
+                cell.setCellValue("" + recordsList.get(i).getWbc());
+                cell.setCellStyle(cellStyle);
+            }
         }
 
 
