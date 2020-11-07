@@ -132,9 +132,9 @@ public class ExportPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -646,118 +646,74 @@ public class ExportPageFragment extends Fragment {
                 cell.setCellValue("WBC");
                 cell.setCellStyle(cellStyle);
             }
-            row = sheet.createRow(i + 1);
 
-            cell = row.createCell(i);
-            cell.setCellValue("" + recordsList.get(i).getBray());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i + 1);
-            cell.setCellValue("" + recordsList.get(i).getCa());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+2);
-            cell.setCellValue(""+recordsList.get(i).getClay());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+3);
-            cell.setCellValue(""+recordsList.get(i).getCn());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+4);
-            cell.setCellValue(""+recordsList.get(i).getHclk2o());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+5);
-            cell.setCellValue(""+recordsList.get(i).getHclp2o5());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+6);
-            cell.setCellValue(""+recordsList.get(i).getJumlah());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+7);
-            cell.setCellValue(""+recordsList.get(i).getK());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+8);
-            cell.setCellValue(""+recordsList.get(i).getKbadj());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+9);
-            cell.setCellValue(""+recordsList.get(i).getKjeldahl());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+10);
-            cell.setCellValue(""+recordsList.get(i).getKtk());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+11);
-            cell.setCellValue(""+recordsList.get(i).getMg());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+12);
-            cell.setCellValue(""+recordsList.get(i).getMorgan());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+13);
-            cell.setCellValue(""+recordsList.get(i).getNa());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+14);
-            cell.setCellValue(""+recordsList.get(i).getOlsen());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+15);
-            cell.setCellValue(""+recordsList.get(i).getPhh2o());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+16);
-            cell.setCellValue(""+recordsList.get(i).getPhkcl());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+17);
-            cell.setCellValue(""+recordsList.get(i).getRetensip());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+18);
-            cell.setCellValue(""+recordsList.get(i).getSand());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+19);
-            cell.setCellValue(""+recordsList.get(i).getSilt());
-            cell.setCellStyle(cellStyle);
-            cell = row.createCell(i+20);
-            cell.setCellValue(""+recordsList.get(i).getWbc());
-            cell.setCellStyle(cellStyle);
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getBray()); //bray
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getCa()); //ca
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getClay()); //clay
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getCn()); //cn
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getHclk2o()); //kclk2o
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getHclp2o5()); //hclp2o5
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getJumlah()); //jumlah
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getK()); //k
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getKbadj()); //kbabj
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getKjeldahl()); //kjeldahl
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getKtk()); //ktk
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getMg()); //mg
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getMorgan()); //morgan
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getNa()); //na
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getOlsen()); //olsen
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getPhh2o()); //phh2o
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getPhkcl()); //phkcl
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getRetensip()); //retensip
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getSand()); //sand
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getSilt()); //silt
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getWbc()); //wbc
-//            fw.append(",");
-//            fw.append("" + recordsList.get(i).getAddedTime()); //addtime
-//            fw.append("\n");
+            if (i < 0) {
+                row = sheet.createRow(i + 1);
 
-
+                cell = row.createCell(i);
+                cell.setCellValue("" + recordsList.get(i).getBray());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 1);
+                cell.setCellValue("" + recordsList.get(i).getCa());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 2);
+                cell.setCellValue("" + recordsList.get(i).getClay());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 3);
+                cell.setCellValue("" + recordsList.get(i).getCn());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 4);
+                cell.setCellValue("" + recordsList.get(i).getHclk2o());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 5);
+                cell.setCellValue("" + recordsList.get(i).getHclp2o5());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 6);
+                cell.setCellValue("" + recordsList.get(i).getJumlah());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 7);
+                cell.setCellValue("" + recordsList.get(i).getK());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 8);
+                cell.setCellValue("" + recordsList.get(i).getKbadj());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 9);
+                cell.setCellValue("" + recordsList.get(i).getKjeldahl());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 10);
+                cell.setCellValue("" + recordsList.get(i).getKtk());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 11);
+                cell.setCellValue("" + recordsList.get(i).getMg());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 12);
+                cell.setCellValue("" + recordsList.get(i).getMorgan());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 13);
+                cell.setCellValue("" + recordsList.get(i).getNa());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 14);
+                cell.setCellValue("" + recordsList.get(i).getOlsen());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 15);
+                cell.setCellValue("" + recordsList.get(i).getPhh2o());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 16);
+                cell.setCellValue("" + recordsList.get(i).getPhkcl());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 17);
+                cell.setCellValue("" + recordsList.get(i).getRetensip());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 18);
+                cell.setCellValue("" + recordsList.get(i).getSand());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 19);
+                cell.setCellValue("" + recordsList.get(i).getSilt());
+                cell.setCellStyle(cellStyle);
+                cell = row.createCell(i + 20);
+                cell.setCellValue("" + recordsList.get(i).getWbc());
+                cell.setCellStyle(cellStyle);
+            }
         }
 
 
