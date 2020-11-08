@@ -36,142 +36,31 @@
             app:title="Scanning"
             app:titleTextColor="@color/black" />
 
-        <EditText
-            android:id="@+id/tx_numberOfRuns"
-            android:layout_width="31dp"
-            android:layout_height="39dp"
-            android:layout_below="@+id/graph"
-            android:layout_centerHorizontal="true"
-            android:ems="10"
-            android:enabled="false"
-            android:text="1"
-            android:textColor="@android:color/black"
-            android:textColorLink="@android:color/black"
-            android:textSize="14sp"
-            android:visibility="invisible"
-            tools:textColorLink="@android:color/black" />
-
-        <TextView
-            android:id="@+id/tv_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/graph"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="2"
-            android:textColor="@color/black"
-            android:visibility="invisible" />
-
-        <ProgressBar
-            android:id="@+id/progressBarMain"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="invisible" />
-        <TextView
-            android:id="@+id/countProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/graph"
-            android:textColorLink="@android:color/black"
-            android:textSize="14sp" />
-
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/graph"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@id/titlebar"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp" />
-
-
-
         <LinearLayout
-            android:id="@+id/l2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/graph"
-            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/titlebar"
             android:orientation="vertical">
 
-            <ScrollView
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titlebar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="0dp"
+                android:layout_weight="1" />
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_regular"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:text="Pelase choose your setting"
-                            android:textColor="#000"
-                            android:textSize="18dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="24dp"
-                            android:text="Resolution"
-                            android:textColor="#000"
-                            android:textSize="16dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:background="#F6F6F6"
-                            android:orientation="vertical">
-
-                            <Spinner
-                                android:id="@+id/edtResolution"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/poppins_regular"
-                            android:paddingLeft="20dp"
-                            android:paddingRight="20dp"
-                            android:text="Optical Gain"
-                            android:textColor="#000"
-                            android:textSize="16dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp"
-                            android:background="#F6F6F6"
-                            android:orientation="vertical">
-
-                            <Spinner
-                                android:id="@+id/edtOptical"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-                    </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -340,6 +229,141 @@
                             </LinearLayout>
                         </android.support.v7.widget.CardView>
                     </LinearLayout>
+
+                </ScrollView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/tx_numberOfRuns"
+            android:layout_width="31dp"
+            android:layout_height="39dp"
+            android:layout_below="@id/titlebar"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:enabled="false"
+            android:text="1"
+            android:textColor="@android:color/black"
+            android:textColorLink="@android:color/black"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            tools:textColorLink="@android:color/black" />
+
+        <TextView
+            android:id="@+id/tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titlebar"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="2"
+            android:textColor="@color/black"
+            android:visibility="invisible" />
+
+        <ProgressBar
+            android:id="@+id/progressBarMain"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/countProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titlebar"
+            android:textColorLink="@android:color/black"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/l2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titlebar"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_regular"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="Pelase choose your setting"
+                            android:textColor="#000"
+                            android:textSize="18dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="24dp"
+                            android:text="Resolution"
+                            android:textColor="#000"
+                            android:textSize="16dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="#F6F6F6"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/edtResolution"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp"
+                            android:text="Optical Gain"
+                            android:textColor="#000"
+                            android:textSize="16dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="#F6F6F6"
+                            android:orientation="vertical">
+
+                            <Spinner
+                                android:id="@+id/edtOptical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
             </ScrollView>
 

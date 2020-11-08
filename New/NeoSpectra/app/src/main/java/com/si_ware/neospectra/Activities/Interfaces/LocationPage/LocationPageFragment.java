@@ -16,12 +16,24 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.GPS.GpsTracker;
 import com.si_ware.neospectra.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -31,6 +43,35 @@ public class LocationPageFragment extends Fragment {
     TextView xCoordinate, yCoordinate;
     private GpsTracker gpsTracker;
     private Context mContext;
+
+    String json = null;
+    Spinner spinnerProv;
+    Spinner spinnerKab;
+    TextView txtProv;
+
+    public String loadJSONFromAsset() {
+
+        try {
+            InputStream is = getActivity().getAssets().open("Lokasi.json");
+
+            int size = is.available();
+
+            byte[] buffer = new byte[size];
+
+            is.read(buffer);
+
+            is.close();
+
+            json = new String(buffer, "UTF-8");
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
 
     @Nullable
     @Override
@@ -43,9 +84,9 @@ public class LocationPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        if (bluetoothAPI == null) {
-//            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
-//        }
+        if (bluetoothAPI == null) {
+            bluetoothAPI = new SWS_P3API(getActivity(), mContext);
+        }
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -67,6 +108,71 @@ public class LocationPageFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+
+            spinnerProv = view.findViewById(R.id.spinnerProv);
+            txtProv = view.findViewById(R.id.txtProv);
+            List<String> items = new ArrayList<>();
+
+            spinnerKab = view.findViewById(R.id.spinnerKab);
+            List<String> item = new ArrayList<>();
+
+            JSONObject obj = new JSONObject(loadJSONFromAsset());
+            JSONArray array = obj.getJSONArray("lokasi1");
+
+            JSONObject obj1 = new JSONObject(loadJSONFromAsset());
+            JSONArray array1 = obj1.getJSONArray("lokasi1");
+
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                items.add(object.getString("Propinsi"));
+                //    item.add(object.getString("FIELD2"));
+                //    items.add(object.getString("FIELD3"));
+            }
+
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject object = array.getJSONObject(i);
+                //    items.add(object.getString("FIELD1"));
+                item.add(object.getString("Kabupaten"));
+            }
+
+            ArrayAdapter adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
+            spinnerProv.setAdapter(adapter);
+            ArrayAdapter adapter1 = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, item);
+            spinnerKab.setAdapter(adapter1);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        spinnerProv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerKab.setSelection(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
+
+        spinnerKab.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                spinnerProv.setSelection(position);
+                spinnerProv.getItemAtPosition(position).toString();
+                String prov = spinnerProv.getItemAtPosition(position).toString();
+                txtProv.setText(prov);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+            }
+        });
 
         getLocation();
 
@@ -113,5 +219,11 @@ public class LocationPageFragment extends Fragment {
             myAlert.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        getLocation();
+        super.onResume();
     }
 }
