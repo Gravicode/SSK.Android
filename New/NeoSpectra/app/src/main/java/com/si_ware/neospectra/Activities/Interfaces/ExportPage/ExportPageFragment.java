@@ -668,7 +668,7 @@ public class ExportPageFragment extends Fragment {
         for (int i = 0; i < recordsList.size(); i++) {
             if (i == 0) {
 //                int nextCell = ((i/i)-1);
-                row = sheet.createRow(i+1);
+                row = sheet.createRow(i + 1);
 
                 cell = row.createCell(i);
                 cell.setCellValue("" + recordsList.get(i).getId());
@@ -741,8 +741,8 @@ public class ExportPageFragment extends Fragment {
                 cell.setCellStyle(cellStyle1);
             }
             if (i > 0) {
-                int nextCell = ((i/i)-1);
-                row = sheet.createRow(i+1);
+                int nextCell = ((i / i) - 1);
+                row = sheet.createRow(i + 1);
 
                 cell = row.createCell(nextCell);
                 cell.setCellValue("" + recordsList.get(i).getId());
@@ -865,7 +865,7 @@ public class ExportPageFragment extends Fragment {
         try {
             fileOutputStream = new FileOutputStream(filePathAndName);
             workbook.write(fileOutputStream);
-            Toast.makeText(mContext, "Exported to : " + filePathAndName , Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Exported to : " + filePathAndName, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(mContext, "Neospectra.xls Not Created", Toast.LENGTH_SHORT).show();

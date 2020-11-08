@@ -1387,7 +1387,7 @@ public class ScanPageFragment extends Fragment {
         return null;
     }
 
-    public void Calculator(){
+    public void Calculator() {
 
         Ini ini = null;
         try {
@@ -1396,29 +1396,32 @@ public class ScanPageFragment extends Fragment {
             java.util.prefs.Preferences prefs = new IniPreferences(ini);
             //System.out.println("grumpy/homePage: " + prefs.node("grumpy").get("homePage", null));
 
-            String DataRekomendasi = ini.get("Config","DataRekomendasi");
+            String DataRekomendasi = ini.get("Config", "DataRekomendasi");
             try {
-                double ureaConst = Double.parseDouble(ini.get("Config","Urea"));
-                double sp36Const = Double.parseDouble(ini.get("Config","SP36"));
-                double kclConst = Double.parseDouble(ini.get("Config","KCL"));
+                double ureaConst = Double.parseDouble(ini.get("Config", "Urea"));
+                double sp36Const = Double.parseDouble(ini.get("Config", "SP36"));
+                double kclConst = Double.parseDouble(ini.get("Config", "KCL"));
                 FertilizerCalculator calc = new FertilizerCalculator(getContext());
-                String TxtUrea = String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea")*ureaConst);
-                String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36")*sp36Const);
-                String TxtKCL = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL")*kclConst);
+                String TxtUrea = String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea") * ureaConst);
+                String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36") * sp36Const);
+                String TxtKCL = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL") * kclConst);
                 System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
 
                 FertilizerInfo x = calc.GetNPKDoze(10, 10, "Padi");
+                String Urea = String.valueOf(x.getUrea());
+                String Npk = String.valueOf(x.getNPK());
 
-                System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s",x.getNPK()));
-                System.out.println(String.format("UREA 15:15:15 = %1$s",x.getUrea()));
 
-                DataElements.setUrea(String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea")*ureaConst));
-                DataElements.setSp36(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36")*sp36Const));
-                DataElements.setKcl(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL")*kclConst));
-                DataElements.setNpk(String.valueOf(x.getNPK()));
-                DataElements.setUrea15(String.valueOf(x.getUrea()));
+                System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s", Npk));
+                System.out.println(String.format("UREA 15:15:15 = %1$s", Urea));
 
-            }catch (RuntimeException ex){
+                DataElements.setUrea(String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), "Padi", "Urea") * ureaConst));
+                DataElements.setSp36(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), "Padi", "SP36") * sp36Const));
+                DataElements.setKcl(String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), "Padi", "KCL") * kclConst));
+                DataElements.setNpk(Npk);
+                DataElements.setUrea15(Urea);
+
+            } catch (RuntimeException ex) {
                 System.out.println(ex);
             }
 

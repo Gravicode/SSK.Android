@@ -140,7 +140,7 @@ public class LocationPageFragment extends Fragment {
 
             ArrayAdapter adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
             spinnerProv.setAdapter(adapter);
-            ArrayAdapter adapter1 = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1, item);
+            ArrayAdapter adapter1 = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, item);
             spinnerKab.setAdapter(adapter1);
 
         } catch (JSONException e) {

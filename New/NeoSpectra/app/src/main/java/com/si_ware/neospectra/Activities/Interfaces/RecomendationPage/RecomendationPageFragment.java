@@ -77,7 +77,6 @@ public class RecomendationPageFragment extends Fragment {
         txUrea15.setText(DataElements.getUrea15());
 
 
-
         sync.setOnClickListener(view13 -> {
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
             bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);

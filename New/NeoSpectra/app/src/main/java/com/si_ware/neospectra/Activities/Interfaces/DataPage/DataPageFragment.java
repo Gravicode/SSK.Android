@@ -426,8 +426,7 @@ public class DataPageFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public void setTextView()
-    {
+    public void setTextView() {
         /* set value textview */
         txtPhh20.setText(Float.toString(DataElements.getPhH2o()));
         txtPhkcl.setText(Float.toString(DataElements.getPhKcl()));
