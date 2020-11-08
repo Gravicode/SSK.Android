@@ -10,14 +10,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pkdss-release/NeoSpectra.pkdss-release.iml" filepath="$PROJECT_DIR$/.idea/modules/pkdss-release/NeoSpectra.pkdss-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/NeoSpectra.poi-ooxml-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/NeoSpectra.poi-ooxml-3.15.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/NeoSpectra.poi-ooxml-schemas-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/NeoSpectra.poi-ooxml-schemas-3.15.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/New-NeoSpectra.iml" filepath="$PROJECT_DIR$/.idea/modules/New-NeoSpectra.iml" group="NeoSpectra" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidlibsvm-release/androidlibsvm-release.iml" filepath="$PROJECT_DIR$/.idea/modules/androidlibsvm-release/androidlibsvm-release.iml" group="NeoSpectra/androidlibsvm-release" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="NeoSpectra/app" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/neospectralib/neospectralib.iml" filepath="$PROJECT_DIR$/.idea/modules/neospectralib/neospectralib.iml" group="NeoSpectra/neospectralib" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pkdss/pkdss.iml" filepath="$PROJECT_DIR$/.idea/modules/pkdss/pkdss.iml" group="NeoSpectra/pkdss" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pkdss-release/pkdss-release.iml" filepath="$PROJECT_DIR$/.idea/modules/pkdss-release/pkdss-release.iml" group="NeoSpectra/pkdss-release" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/poi-ooxml-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/poi-ooxml-3.15.iml" group="NeoSpectra/poi-ooxml-3.15" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/poi-ooxml-schemas-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/poi-ooxml-schemas-3.15.iml" group="NeoSpectra/poi-ooxml-schemas-3.15" />
     </modules>
   </component>
 </project>
