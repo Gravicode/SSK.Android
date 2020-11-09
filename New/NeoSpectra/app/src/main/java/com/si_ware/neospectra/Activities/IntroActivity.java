@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -53,6 +54,8 @@ public class IntroActivity extends AppCompatActivity {
 
         btnConnect = findViewById(R.id.btnConnect);
 
+        checkStoragePermission();
+
         // Request permission if it was not enable
         if (!hasPermissions(this, PERMISSIONS)) {
             ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
@@ -65,6 +68,13 @@ public class IntroActivity extends AppCompatActivity {
                 startActivity(connectActivity);
             }
         });
+    }
+
+    private boolean checkStoragePermission() {
+        //check if storage permission is enabled or not and return true/false
+        boolean result = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+        return result;
     }
 
         // Check self permission if enabled or not

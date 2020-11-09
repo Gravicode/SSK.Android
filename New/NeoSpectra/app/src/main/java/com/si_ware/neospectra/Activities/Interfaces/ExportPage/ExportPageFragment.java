@@ -236,7 +236,6 @@ public class ExportPageFragment extends Fragment {
             }
         });
 
-
         edtDate.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
