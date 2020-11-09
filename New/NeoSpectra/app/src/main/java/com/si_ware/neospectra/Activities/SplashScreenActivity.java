@@ -42,7 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         if(restorePrefData()){
 
-            Intent intent = new Intent(getApplicationContext(),MainPage.class);
+            Intent intent = new Intent(getApplicationContext(),IntroActivity.class);
             startActivity(intent);
             finish();
         }
@@ -107,7 +107,10 @@ public class SplashScreenActivity extends AppCompatActivity {
             Intent intent = new Intent(SplashScreenActivity.this, IntroActivity.class);
             startActivity(intent);
 
+            //shared preferences
 
+            savePreferences();
+            finish();
         });
 
 
