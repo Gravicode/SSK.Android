@@ -197,6 +197,7 @@ public class DataElements {
     private static String Kcl;
     private static String Npk;
     private static String Urea15;
+    private static String Komoditas="Padi";
 
     public static String getUrea() {
         return Urea;
@@ -236,5 +237,13 @@ public class DataElements {
 
     public static void setUrea15(String urea15) {
         Urea15 = urea15;
+    }
+
+    public static String getKomoditas() {
+        return Komoditas;
+    }
+
+    public static void setKomoditas(String komoditas) {
+        Komoditas = komoditas;
     }
 }

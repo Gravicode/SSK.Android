@@ -202,7 +202,6 @@
     <!--    <string name="export">Export</string>-->
 
     <string-array name="Spinner_items">
-        <item>-Pilih Tanamanmu-</item>
         <item>Jagung</item>
         <item>Kedelai</item>
         <item>Padi</item>

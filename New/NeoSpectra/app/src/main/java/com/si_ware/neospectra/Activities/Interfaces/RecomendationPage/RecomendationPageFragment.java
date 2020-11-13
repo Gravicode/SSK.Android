@@ -19,7 +19,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +40,7 @@ public class RecomendationPageFragment extends Fragment {
     private Context mContext;
     CardView sync;
     TextView txUrea, txSp36, txKcl, txNpk, txUrea15;
-
+    Spinner cmbKomoditas;
 
     @Nullable
     @Override
@@ -58,7 +61,7 @@ public class RecomendationPageFragment extends Fragment {
 
         Toolbar toolbar = view.findViewById(R.id.titlebar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Rekomomendasi Pupuk");
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Rekomendasi Pemupukan");
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -70,12 +73,37 @@ public class RecomendationPageFragment extends Fragment {
         txNpk = view.findViewById(R.id.txtNpk);
         txUrea15 = view.findViewById(R.id.txtUrea15);
 
+        cmbKomoditas = view.findViewById(R.id.aSpinner);
+
+
         txUrea.setText(DataElements.getUrea());
         txSp36.setText(DataElements.getSp36());
         txKcl.setText(DataElements.getKcl());
         txNpk.setText(DataElements.getNpk());
         txUrea15.setText(DataElements.getUrea15());
 
+        String compareValue = DataElements.getKomoditas();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.Spinner_items, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cmbKomoditas.setAdapter(adapter);
+        if (compareValue != null) {
+            int spinnerPosition = adapter.getPosition(compareValue);
+            cmbKomoditas.setSelection(spinnerPosition);
+        }
+        cmbKomoditas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String[] items = getResources().getStringArray(R.array.Spinner_items);
+                DataElements.setKomoditas(items[position]);
+                // your code here
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
 
         sync.setOnClickListener(view13 -> {
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
