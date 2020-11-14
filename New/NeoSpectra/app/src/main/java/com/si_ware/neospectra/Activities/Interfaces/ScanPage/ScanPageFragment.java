@@ -113,6 +113,7 @@ import static com.si_ware.neospectra.Global.GlobalVariables.gIsInterpolationEnab
 import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainSettings;
 import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainValue;
 import static com.si_ware.neospectra.Global.GlobalVariables.gRunMode;
+import static com.si_ware.neospectra.Global.MethodsFactory.switch_NM_CM;
 
 public class ScanPageFragment extends Fragment {
 
@@ -1404,10 +1405,40 @@ public class ScanPageFragment extends Fragment {
                 double ureaConst = Double.parseDouble(ini.get("Config", "Urea"));
                 double sp36Const = Double.parseDouble(ini.get("Config", "SP36"));
                 double kclConst = Double.parseDouble(ini.get("Config", "KCL"));
+
+                double KCLMin = Double.parseDouble(ini.get("Config", "KCLMin"));
+                double UreaMin = Double.parseDouble(ini.get("Config", "UreaMin"));
+                double SP36Min = Double.parseDouble(ini.get("Config", "SP36Min"));
+
                 FertilizerCalculator calc = new FertilizerCalculator(getContext());
-                String TxtUrea = String.valueOf(calc.GetFertilizerDoze(DataElements.getCN(), DataElements.getKomoditas(), "Urea") * ureaConst);
-                String TxtSP36 = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const);
-                String TxtKCL = String.valueOf(calc.GetFertilizerDoze(DataElements.getHCl25K2O(), DataElements.getKomoditas(), "KCL") * kclConst);
+                double ureaVal =0;
+                double sp36Val=0;
+                double kclVal =0;
+                switch(DataElements.getKomoditas()){
+                    case "Padi":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getHCl25K2O(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+                    case "Jagung":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getBray1P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getHCl25K2O(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+                    case "Kedelai":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getBray1P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getK(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+
+                }
+                ureaVal = ureaVal < UreaMin ? UreaMin : ureaVal;
+                sp36Val = sp36Val < SP36Min ? SP36Min : sp36Val;
+                kclVal = kclVal < KCLMin ? KCLMin : kclVal;
+
+                String TxtUrea = String.valueOf(ureaVal);
+                String TxtSP36 = String.valueOf(sp36Val);
+                String TxtKCL = String.valueOf(kclVal);
                 System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
 
                 FertilizerInfo x = calc.GetNPKDoze(DataElements.getHCl25P2O5(), DataElements.getHCl25K2O(), DataElements.getKomoditas());

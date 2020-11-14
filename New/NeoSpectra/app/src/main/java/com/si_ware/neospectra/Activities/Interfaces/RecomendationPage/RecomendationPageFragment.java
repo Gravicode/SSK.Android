@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,7 +40,8 @@ import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 public class RecomendationPageFragment extends Fragment {
     private Context mContext;
     CardView sync;
-    TextView txUrea, txSp36, txKcl, txNpk, txUrea15;
+    TextView txUrea, txSp36, txKcl, txNpk, txUrea15, lblUrea15;
+
     Spinner cmbKomoditas;
 
     @Nullable
@@ -72,6 +74,8 @@ public class RecomendationPageFragment extends Fragment {
         txKcl = view.findViewById(R.id.txtKcl);
         txNpk = view.findViewById(R.id.txtNpk);
         txUrea15 = view.findViewById(R.id.txtUrea15);
+        lblUrea15 = view.findViewById(R.id.lblUrea15);
+
 
         cmbKomoditas = view.findViewById(R.id.aSpinner);
 
@@ -81,6 +85,8 @@ public class RecomendationPageFragment extends Fragment {
         txKcl.setText(DataElements.getKcl());
         txNpk.setText(DataElements.getNpk());
         txUrea15.setText(DataElements.getUrea15());
+
+
 
         String compareValue = DataElements.getKomoditas();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.Spinner_items, android.R.layout.simple_spinner_item);
@@ -95,8 +101,16 @@ public class RecomendationPageFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String[] items = getResources().getStringArray(R.array.Spinner_items);
                 DataElements.setKomoditas(items[position]);
+                if(items[position]=="Kedelai"){
+                    lblUrea15.setVisibility(View.INVISIBLE);
+                    txUrea15.setVisibility(View.INVISIBLE);
+                }else{
+                    lblUrea15.setVisibility(View.VISIBLE);
+                    txUrea15.setVisibility(View.VISIBLE);
+                }
                 // your code here
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
