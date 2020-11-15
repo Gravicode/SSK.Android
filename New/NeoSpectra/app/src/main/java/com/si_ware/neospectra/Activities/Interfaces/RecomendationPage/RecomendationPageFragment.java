@@ -76,17 +76,13 @@ public class RecomendationPageFragment extends Fragment {
         txUrea15 = view.findViewById(R.id.txtUrea15);
         lblUrea15 = view.findViewById(R.id.lblUrea15);
 
-
         cmbKomoditas = view.findViewById(R.id.aSpinner);
-
 
         txUrea.setText(DataElements.getUrea());
         txSp36.setText(DataElements.getSp36());
         txKcl.setText(DataElements.getKcl());
         txNpk.setText(DataElements.getNpk());
         txUrea15.setText(DataElements.getUrea15());
-
-
 
         String compareValue = DataElements.getKomoditas();
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.Spinner_items, android.R.layout.simple_spinner_item);
@@ -104,9 +100,14 @@ public class RecomendationPageFragment extends Fragment {
                 if(items[position]=="Kedelai"){
                     lblUrea15.setVisibility(View.INVISIBLE);
                     txUrea15.setVisibility(View.INVISIBLE);
+
+                    Toast.makeText(mContext, "Pilihan komoditas saat ini adalah Kedelai", Toast.LENGTH_LONG).show();
+
                 }else{
                     lblUrea15.setVisibility(View.VISIBLE);
                     txUrea15.setVisibility(View.VISIBLE);
+
+                    Toast.makeText(mContext, "Pilihan komoditas saat ini adalah " + items[position], Toast.LENGTH_LONG).show();
                 }
                 // your code here
             }

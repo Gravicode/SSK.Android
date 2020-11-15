@@ -3,6 +3,7 @@ package com.si_ware.neospectra.Activities.Interfaces.LocationPage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -140,8 +141,12 @@ public class LocationPageFragment extends Fragment {
 
             ArrayAdapter adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, items);
             spinnerProv.setAdapter(adapter);
-            ArrayAdapter adapter1 = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, item);
+
+            ArrayAdapter adapter1 = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_dropdown_item, item);
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
             spinnerKab.setAdapter(adapter1);
+//            spinnerKab.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
         } catch (JSONException e) {
             e.printStackTrace();
