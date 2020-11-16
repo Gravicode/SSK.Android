@@ -27,13 +27,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.balittanah.gravicode.pkdss.FertilizerCalculator;
+import com.balittanah.gravicode.pkdss.FertilizerInfo;
+import com.si_ware.neospectra.Activities.Interfaces.ScanPage.ScanPageFragment;
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.Activities.SettingsActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.DataElements;
 import com.si_ware.neospectra.R;
 
+import org.ini4j.Ini;
+import org.ini4j.IniPreferences;
 import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -97,21 +105,22 @@ public class RecomendationPageFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String[] items = getResources().getStringArray(R.array.Spinner_items);
                 DataElements.setKomoditas(items[position]);
+                Calculator();
+                SetUI();
+                /*ScanPageFragment obj = new ScanPageFragment();
+                obj.Calculator();
                 if(items[position]=="Kedelai"){
                     lblUrea15.setVisibility(View.INVISIBLE);
                     txUrea15.setVisibility(View.INVISIBLE);
-
                     Toast.makeText(mContext, "Pilihan komoditas saat ini adalah Kedelai", Toast.LENGTH_LONG).show();
-
-                }else{
+                }
+                else{
                     lblUrea15.setVisibility(View.VISIBLE);
                     txUrea15.setVisibility(View.VISIBLE);
 
                     Toast.makeText(mContext, "Pilihan komoditas saat ini adalah " + items[position], Toast.LENGTH_LONG).show();
-                }
-                // your code here
+                }*/
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -174,5 +183,87 @@ public class RecomendationPageFragment extends Fragment {
             myAlert.show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Calculator() {
+        Ini ini = null;
+        try {
+            InputStream inputStream = getContext().getAssets().open("config.ini");
+            ini = new Ini(inputStream);
+            java.util.prefs.Preferences prefs = new IniPreferences(ini);
+            //System.out.println("grumpy/homePage: " + prefs.node("grumpy").get("homePage", null));
+
+            String DataRekomendasi = ini.get("Config", "DataRekomendasi");
+            try {
+                double ureaConst = Double.parseDouble(ini.get("Config", "Urea"));
+                double sp36Const = Double.parseDouble(ini.get("Config", "SP36"));
+                double kclConst = Double.parseDouble(ini.get("Config", "KCL"));
+
+                double KCLMin = Double.parseDouble(ini.get("Config", "KCLMin"));
+                double UreaMin = Double.parseDouble(ini.get("Config", "UreaMin"));
+                double SP36Min = Double.parseDouble(ini.get("Config", "SP36Min"));
+
+                FertilizerCalculator calc = new FertilizerCalculator(getContext());
+                double ureaVal = 0;
+                double sp36Val = 0;
+                double kclVal = 0;
+                switch (DataElements.getKomoditas()) {
+                    case "Padi":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getHCl25P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getHCl25K2O(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+                    case "Jagung":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getBray1P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getHCl25K2O(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+                    case "Kedelai":
+                        ureaVal = calc.GetFertilizerDoze(DataElements.getKjeldahlN(), DataElements.getKomoditas(), "Urea") * ureaConst;
+                        sp36Val = calc.GetFertilizerDoze(DataElements.getBray1P2O5(), DataElements.getKomoditas(), "SP36") * sp36Const;
+                        kclVal = calc.GetFertilizerDoze(DataElements.getK(), DataElements.getKomoditas(), "KCL") * kclConst;
+                        break;
+
+                }
+                ureaVal = ureaVal < UreaMin ? UreaMin : ureaVal;
+                sp36Val = sp36Val < SP36Min ? SP36Min : sp36Val;
+                kclVal = kclVal < KCLMin ? KCLMin : kclVal;
+
+                String TxtUrea = String.valueOf(ureaVal);
+                String TxtSP36 = String.valueOf(sp36Val);
+                String TxtKCL = String.valueOf(kclVal);
+                System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
+
+                FertilizerInfo x = calc.GetNPKDoze(DataElements.getHCl25P2O5(), DataElements.getHCl25K2O(), DataElements.getKomoditas());
+                String Urea = String.valueOf(x.getUrea());
+                String Npk = String.valueOf(x.getNPK());
+
+
+                System.out.println(String.format("Rekomendasi NPK 15:15:15 = %1$s", Npk));
+                System.out.println(String.format("UREA 15:15:15 = %1$s", Urea));
+
+                DataElements.setUrea(TxtUrea);
+                DataElements.setSp36(TxtSP36);
+                DataElements.setKcl(TxtKCL);
+                DataElements.setNpk(Npk);
+                DataElements.setUrea15(Urea);
+
+            } catch (RuntimeException ex) {
+                System.out.println(ex);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  void SetUI()
+    {
+        txUrea.setText(DataElements.getUrea());
+        txSp36.setText(DataElements.getSp36());
+        txKcl.setText(DataElements.getKcl());
+        txNpk.setText(DataElements.getNpk());
+        txUrea15.setText(DataElements.getUrea15());
     }
 }
