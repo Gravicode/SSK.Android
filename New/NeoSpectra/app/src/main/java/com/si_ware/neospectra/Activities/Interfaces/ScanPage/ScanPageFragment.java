@@ -256,7 +256,7 @@ public class ScanPageFragment extends Fragment {
         btnRefresh.setCardBackgroundColor(Color.parseColor("#0A376A"));
         btnScan.setEnabled(false);
         btnScan.setCardBackgroundColor(Color.parseColor("#0A376A"));
-        btnProcess.setEnabled(true);
+        btnProcess.setEnabled(false);
         btnProcess.setCardBackgroundColor(Color.parseColor("#0A376A"));
 
         // Get all needed configuration settings
