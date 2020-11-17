@@ -50,9 +50,11 @@ public class DataPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //comment or uncomment this function to test the aplication without connect to device
         if (bluetoothAPI == null) {
             bluetoothAPI = new SWS_P3API(getActivity(), mContext);
         }
+
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -62,32 +64,6 @@ public class DataPageFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeAsUpIndicator(upArrow);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-//        btnOk = view.findViewById(R.id.sync);
-
-//        btnOk.setOnClickListener(view13 -> {
-//            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
-//            bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
-//
-//            bottomSheetDialog.setCanceledOnTouchOutside(false);
-//
-//            LinearLayout bottom_sheet_refresh = bottomSheetDialog.findViewById(R.id.bottom_sheet_sync);
-//            CardView btn_yes = bottomSheetDialog.findViewById(R.id.buttonYes);
-//            CardView btn_cancel = bottomSheetDialog.findViewById(R.id.buttonNo);
-//            bottom_sheet_refresh.setVisibility(View.VISIBLE);
-//
-//            btn_yes.setOnClickListener(view1 -> {
-//                Toast.makeText(getActivity(), "Berhasil Mengubah Data..", Toast.LENGTH_SHORT).show();
-//                bottomSheetDialog.dismiss();
-//            });
-//
-//            btn_cancel.setOnClickListener(view12 -> {
-//                Toast.makeText(getActivity(), "cancel..", Toast.LENGTH_SHORT).show();
-//                bottomSheetDialog.dismiss();
-//            });
-//
-//            bottomSheetDialog.show();
-//        });
 
         /* Variable for textview*/
         txtPhh20 = view.findViewById(R.id.txtPhh20);
@@ -274,22 +250,22 @@ public class DataPageFragment extends Fragment {
                     @Override
                     public void onClick(View view) {
 
-                        if (!chck1.isChecked() ||
-                                !chck2.isChecked() ||
-                                !chck3.isChecked() ||
-                                !chck4.isChecked() ||
-                                !chck5.isChecked() ||
-                                !chck6.isChecked() ||
-                                !chck7.isChecked() ||
-                                !chck8.isChecked() ||
-                                !chck9.isChecked() ||
-                                !chck10.isChecked() ||
-                                !chck11.isChecked() ||
-                                !chck12.isChecked() ||
-                                !chck13.isChecked() ||
-                                !chck17.isChecked() ||
-                                !chck14.isChecked() ||
-                                !chck15.isChecked() ||
+                        if (!chck1.isChecked() &&
+                                !chck2.isChecked() &&
+                                !chck3.isChecked() &&
+                                !chck4.isChecked() &&
+                                !chck5.isChecked() &&
+                                !chck6.isChecked() &&
+                                !chck7.isChecked() &&
+                                !chck8.isChecked() &&
+                                !chck9.isChecked() &&
+                                !chck10.isChecked() &&
+                                !chck11.isChecked() &&
+                                !chck12.isChecked() &&
+                                !chck13.isChecked() &&
+                                !chck17.isChecked() &&
+                                !chck14.isChecked() &&
+                                !chck15.isChecked() &&
                                 !chck16.isChecked()) {
                             Toast.makeText(getActivity(), "Please check the list first", Toast.LENGTH_SHORT).show();
                         }
@@ -446,5 +422,23 @@ public class DataPageFragment extends Fragment {
         txtPasir.setText(Float.toString(DataElements.getSAND()));
         txtDebu.setText(Float.toString(DataElements.getSILT()));
         txtLiat.setText(Float.toString(DataElements.getCLAY()));
+    }
+
+    @Override
+    public void onResume() {
+        //comment or uncomment this function to test the aplication without connect to device
+        if (bluetoothAPI != null) {
+            if (!bluetoothAPI.isDeviceConnected()) {
+                endActivity();
+                return;
+            }
+        }
+        super.onResume();
+    }
+
+    private void endActivity() {
+        bluetoothAPI = null;
+        Intent mIntent = new Intent(getActivity(), IntroActivity.class);
+        startActivity(mIntent);
     }
 }

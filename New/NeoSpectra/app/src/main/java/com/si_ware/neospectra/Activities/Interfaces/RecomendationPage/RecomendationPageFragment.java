@@ -62,6 +62,8 @@ public class RecomendationPageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //comment or uncomment this function to test the aplication without connect to device
         if (bluetoothAPI == null) {
             bluetoothAPI = new SWS_P3API(getActivity(), mContext);
         }
@@ -107,6 +109,7 @@ public class RecomendationPageFragment extends Fragment {
                 DataElements.setKomoditas(items[position]);
                 Calculator();
                 SetUI();
+                Toast.makeText(mContext, "Komoditas " + items[position], Toast.LENGTH_SHORT).show();
                 /*ScanPageFragment obj = new ScanPageFragment();
                 obj.Calculator();
                 if(items[position]=="Kedelai"){
@@ -265,5 +268,23 @@ public class RecomendationPageFragment extends Fragment {
         txKcl.setText(DataElements.getKcl());
         txNpk.setText(DataElements.getNpk());
         txUrea15.setText(DataElements.getUrea15());
+    }
+
+    @Override
+    public void onResume() {
+        //comment or uncomment this function to test the aplication without connect to device
+        if (bluetoothAPI != null) {
+            if (!bluetoothAPI.isDeviceConnected()) {
+                endActivity();
+                return;
+            }
+        }
+        super.onResume();
+    }
+
+    private void endActivity() {
+        bluetoothAPI = null;
+        Intent mIntent = new Intent(getActivity(), IntroActivity.class);
+        startActivity(mIntent);
     }
 }

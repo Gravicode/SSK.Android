@@ -39,7 +39,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // ngecek aplikasi
-
         if(restorePrefData()){
 
             Intent intent = new Intent(getApplicationContext(),IntroActivity.class);
@@ -53,17 +52,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         btnGetStarted = findViewById(R.id.btn_get_started);
 
 
-
-
         //fill list screen
-
         final List<ScreemItem> mList = new ArrayList<>();
         mList.add(new ScreemItem("Pindai tanahmu","Pindai tanahmu menggunakan alat pemindai tanah",R.drawable.splash1));
         mList.add(new ScreemItem("Temnukan data unsur!","Kamu dapat melihat data dari hasil pindai tanahmu disini",R.drawable.splash2));
         mList.add(new ScreemItem("Simpan datamu","Kamu dapat menyimpan data hasil pindai tanahmu",R.drawable.splash3));
 
         // setup viewPager
-
         screenPager = findViewById(R.id.viewPager);
         introViewPagerAdapter = new IntroViewPagerAdapter(this,mList);
         screenPager.setAdapter(introViewPagerAdapter);

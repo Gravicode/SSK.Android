@@ -85,9 +85,11 @@ public class LocationPageFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //comment or uncomment this function to test the aplication without connect to device
         if (bluetoothAPI == null) {
             bluetoothAPI = new SWS_P3API(getActivity(), mContext);
         }
+
         mContext = getActivity();
 
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
@@ -129,13 +131,10 @@ public class LocationPageFragment extends Fragment {
             for (int i = 0; i < array.length(); i++) {
                 JSONObject object = array.getJSONObject(i);
                 items.add(object.getString("Propinsi"));
-                //    item.add(object.getString("FIELD2"));
-                //    items.add(object.getString("FIELD3"));
             }
 
             for (int i = 0; i < array.length(); i++) {
                 JSONObject object = array.getJSONObject(i);
-                //    items.add(object.getString("FIELD1"));
                 item.add(object.getString("Kabupaten"));
             }
 
@@ -146,7 +145,6 @@ public class LocationPageFragment extends Fragment {
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
             spinnerKab.setAdapter(adapter1);
-//            spinnerKab.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -229,6 +227,19 @@ public class LocationPageFragment extends Fragment {
     @Override
     public void onResume() {
         getLocation();
+        //comment or uncomment this function to test the aplication without connect to device
+        if (bluetoothAPI != null) {
+            if (!bluetoothAPI.isDeviceConnected()) {
+                endActivity();
+                return;
+            }
+        }
         super.onResume();
+    }
+
+    private void endActivity() {
+        bluetoothAPI = null;
+        Intent mIntent = new Intent(getActivity(), IntroActivity.class);
+        startActivity(mIntent);
     }
 }
