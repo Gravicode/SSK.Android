@@ -191,6 +191,7 @@ public class ScanPageFragment extends Fragment {
         if (bluetoothAPI == null) {
             bluetoothAPI = new SWS_P3API(getActivity(), mContext);
         }
+
         /*if(bluetoothAPI != null)
         {
             bluetoothAPI.setHomeContext(this.mContext);
@@ -214,6 +215,7 @@ public class ScanPageFragment extends Fragment {
                     break;
             }
         }*/
+
         mContext = getActivity();
 
         scanPresenter = new ScanPresenter();
@@ -294,10 +296,13 @@ public class ScanPageFragment extends Fragment {
                 myAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(@NonNull DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
+
                         if (bluetoothAPI != null)
                             bluetoothAPI.sendClearMemoryRequest();
+
                         dialogInterface.dismiss();
+
+                        Toast.makeText(getActivity(), "Clear record succes", Toast.LENGTH_SHORT).show();
                     }
                 });
                 myAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -355,6 +360,8 @@ public class ScanPageFragment extends Fragment {
                         lProgress.setVisibility(View.GONE);
                         lUtama.setVisibility(View.VISIBLE);
                         bottomSheetDialog.hide();
+
+                        Toast.makeText(getActivity(), "Refresh succes", Toast.LENGTH_SHORT).show();
 
                     }
                 });
