@@ -404,24 +404,111 @@ public class DataPageFragment extends Fragment {
 
     public void setTextView() {
         /* set value textview */
-        txtPhh20.setText(Float.toString(DataElements.getPhH2o()));
-        txtPhkcl.setText(Float.toString(DataElements.getPhKcl()));
-        txtCorg.setText(Float.toString(DataElements.getCN()));
-        txtNtotal.setText(Float.toString(DataElements.getKjeldahlN()));
-        txtp20sHcl.setText(Float.toString(DataElements.getHCl25P2O5()));
-        txtk20Hcl.setText(Float.toString(DataElements.getHCl25K2O()));
-        String data1 = Float.toString(DataElements.getBray1P2O5());
-        txtp20sBray.setText(Float.toString(DataElements.getBray1P2O5()));
-        txtP20Olsen.setText(Float.toString(DataElements.getOlsenP2O5()));
-        txtCa.setText(Float.toString(DataElements.getCa()));
-        txtMg.setText(Float.toString(DataElements.getMg()));
-        txtK.setText(Float.toString(DataElements.getK()));
-        txtNa.setText(Float.toString(DataElements.getNa()));
-        txtKb.setText(Float.toString(DataElements.getKBAdjusted()));
-        txtKTK.setText(Float.toString(DataElements.getKTK()));
-        txtPasir.setText(Float.toString(DataElements.getSAND()));
-        txtDebu.setText(Float.toString(DataElements.getSILT()));
-        txtLiat.setText(Float.toString(DataElements.getCLAY()));
+        if (DataElements.getPhH2o() > 0) {
+            txtPhh20.setText(String.format("%.2f", DataElements.getPhH2o()));
+        }
+        else
+        {
+            txtPhh20.setText(Float.toString(0));
+        }
+        if (DataElements.getPhKcl() > 0) {
+            txtPhkcl.setText(String.format("%.2f", DataElements.getPhKcl()));
+        }
+        else
+        {
+            txtPhkcl.setText(Float.toString(0));
+        }
+        if (DataElements.getCN() > 0) {
+            txtCorg.setText(String.format("%.2f", DataElements.getCN()));
+        }
+        else {
+            txtCorg.setText(Float.toString(0));
+        }
+        if (DataElements.getKjeldahlN() > 0) {
+            txtNtotal.setText(String.format("%.2f", DataElements.getKjeldahlN()));
+        }
+        else {
+            txtNtotal.setText(Float.toString(0));
+        }
+        if (DataElements.getHCl25P2O5() > 0) {
+            txtp20sHcl.setText(String.format("%.2f", DataElements.getHCl25P2O5()));
+        }
+        else {
+            txtp20sHcl.setText(Float.toString(0));
+        }
+        if (DataElements.getHCl25K2O() > 0) {
+            txtk20Hcl.setText(String.format("%.2f", DataElements.getHCl25K2O()));
+        }
+        else {
+            txtk20Hcl.setText(Float.toString(0));
+        }
+        //String data1 = Float.toString(DataElements.getBray1P2O5());
+        if (DataElements.getBray1P2O5() > 0) {
+            txtp20sBray.setText(String.format("%.2f", DataElements.getBray1P2O5()));
+        }
+        else {
+            txtp20sBray.setText(Float.toString(0));
+        }
+        if (DataElements.getOlsenP2O5() > 0) {
+            txtP20Olsen.setText(String.format("%.2f", DataElements.getOlsenP2O5()));
+        }
+        else {
+            txtP20Olsen.setText(Float.toString(0));
+        }
+        if (DataElements.getCa() > 0) {
+            txtCa.setText(String.format("%.2f", DataElements.getCa()));
+        }
+        else {
+            txtCa.setText(Float.toString(0));
+        }
+        if (DataElements.getMg() > 0) {
+            txtMg.setText(String.format("%.2f", DataElements.getMg()));
+        }
+        else {
+            txtMg.setText(Float.toString(0));
+        }
+        if (DataElements.getK() > 0) {
+            txtK.setText(String.format("%.2f", DataElements.getK()));
+        }
+        else {
+            txtK.setText(Float.toString(0));
+        }
+        if (DataElements.getNa() > 0) {
+            txtNa.setText(String.format("%.2f", DataElements.getNa()));
+        }
+        else {
+            txtNa.setText(Float.toString(0));
+        }
+        if (DataElements.getKBAdjusted() > 0) {
+            txtKb.setText(String.format("%.2f", DataElements.getKBAdjusted()));
+        }
+        else {
+            txtKb.setText(Float.toString(0));
+        }
+        if (DataElements.getKTK() > 0) {
+            txtKTK.setText(String.format("%.2f", DataElements.getKTK()));
+        }
+        else {
+            txtKTK.setText(Float.toString(0));
+        }
+        if (DataElements.getSAND() > 0) {
+            txtPasir.setText(String.format("%.2f", DataElements.getSAND()));
+        }
+        else {
+            txtPasir.setText(Float.toString(0));
+        }
+        if (DataElements.getSILT() > 0) {
+            txtDebu.setText(String.format("%.2f", DataElements.getSILT()));
+        }
+        else {
+            txtDebu.setText(Float.toString(0));
+        }
+        if (DataElements.getCLAY() > 0) {
+            txtLiat.setText(String.format("%.2f", DataElements.getCLAY()));
+        }
+        else {
+            txtLiat.setText(Float.toString(0));
+        }
     }
 
     @Override
