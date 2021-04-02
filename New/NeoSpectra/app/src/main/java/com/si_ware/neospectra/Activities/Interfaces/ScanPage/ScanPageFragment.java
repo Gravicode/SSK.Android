@@ -66,6 +66,7 @@ import com.si_ware.neospectra.DataElements;
 import com.si_ware.neospectra.Global.GlobalVariables;
 import com.si_ware.neospectra.Models.dbReading;
 import com.si_ware.neospectra.OutputData;
+import com.si_ware.neospectra.PredictionEngine;
 import com.si_ware.neospectra.R;
 import com.si_ware.neospectra.ResultPrediction;
 import com.si_ware.neospectra.Scan.Presenter.ScanPresenter;
@@ -967,7 +968,7 @@ public class ScanPageFragment extends Fragment {
             Toast.makeText(getActivity(), "Sorry can't connect to device", Toast.LENGTH_LONG).show();
             return;
         }
-
+        /*
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         try {
@@ -982,7 +983,7 @@ public class ScanPageFragment extends Fragment {
         }
         final String mRequestBody = jsonObject.toString();
         String URL = ConfigurableProperties.apiService;
-
+        */
         Wave rotatingCircle = new Wave();
         progressBar.setVisibility(View.VISIBLE);
         progressBar.setIndeterminateDrawable(rotatingCircle);
@@ -990,8 +991,28 @@ public class ScanPageFragment extends Fragment {
         lProgress.setVisibility(View.VISIBLE);
         getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        try {
+            ResultPrediction[] predicts = PredictionEngine.DoInference(reflectance, this.getActivity());
+            // set static DataElements
+            setDataElement(predicts);
+            saveDatatoSQLITE();
+            Calculator();
+            Toast.makeText(getActivity(), "Process success", Toast.LENGTH_LONG).show();
 
+
+            lUtama.setVisibility(View.VISIBLE);
+            lProgress.setVisibility(View.GONE);
+            progressBar.setVisibility(View.GONE);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(), "Sorry we got some error :" + e.getMessage(), Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        /*
         queue = Volley.newRequestQueue(getActivity());
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                 new Response.Listener<String>() {
                     @Override
@@ -1051,6 +1072,7 @@ public class ScanPageFragment extends Fragment {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
+        */
     }
 
     public void setDataElement(ResultPrediction[] datas) {
@@ -1226,7 +1248,10 @@ public class ScanPageFragment extends Fragment {
             dbReading sensorReading = gAllSpectra.get(i);
             if (sensorReading != null) {
                 if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
+                    double[] xVals = sensorReading.getXReading();
                     double[] yVals = sensorReading.getYReading();
+                    //to do: apply spectral trimming here...
+                    // wave range: value > 1350 and value < 2510
                     return convertDataToT(yVals);
                 }
             }
