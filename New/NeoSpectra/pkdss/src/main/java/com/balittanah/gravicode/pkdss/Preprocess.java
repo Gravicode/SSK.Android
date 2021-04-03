@@ -34,7 +34,7 @@ public class Preprocess {
             //2. convert to absorbance
             for (int col = 0; col < DataReflectance.length; col++)
             {
-                DataReflectance[col] = (float)Math.log(1 / DataReflectance[col]);
+                DataReflectance[col] = Math.log(1D / DataReflectance[col]);
             }
 
             //3.savitzky golay treatment

@@ -78,7 +78,7 @@ public class IntroActivity extends AppCompatActivity {
         });
     }
 
-    /*
+
     //for testing purpose
     public void send() {
         // sample static data
@@ -100,7 +100,7 @@ public class IntroActivity extends AppCompatActivity {
         }
 
 
-    }*/
+    }
 
     private boolean checkStoragePermission() {
         //check if storage permission is enabled or not and return true/false
