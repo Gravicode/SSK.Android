@@ -2,6 +2,7 @@ package com.balittanah.gravicode.pkdss;
 import com.balittanah.gravicode.pkdss.sgfilter.*;
 import java.util.ArrayList;
 import java.util.List;
+
 public class Preprocess {
     public static double calculateMean(Double[] m) {
         double sum = 0;
