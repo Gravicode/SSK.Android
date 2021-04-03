@@ -48,7 +48,7 @@ public class Preprocess {
             {
                 rowDatas.add(DataReflectance[col]);
             }
-            Double[] xx = rowDatas.toArray(new Double[0]);
+            Double[] xx = rowDatas.toArray(new Double[rowDatas.size()]);
             double mean = calculateMean(xx);
             double stdDev = calculateSD(xx);
             for (int col = 0; col < DataReflectance.length; col++)

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,6 +38,8 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -85,11 +88,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.io.IOException;
 import java.net.URI;
 import java.util.TimeZone;
 import java.util.prefs.Preferences;
+import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 import com.balittanah.gravicode.pkdss.FertilizerCalculator;
@@ -1243,7 +1248,9 @@ public class ScanPageFragment extends Fragment {
 
     /* modified code */
     /* call this process after doing scan*/
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public double[] getReflectance() {
+        /*
         for (int i = 0; i < gAllSpectra.size(); i++) {
             dbReading sensorReading = gAllSpectra.get(i);
             if (sensorReading != null) {
@@ -1255,7 +1262,41 @@ public class ScanPageFragment extends Fragment {
                     return convertDataToT(yVals);
                 }
             }
+        }*/
+        for (int i = 0; i < gAllSpectra.size(); ++i) {
+            dbReading sensorReading = gAllSpectra.get(i);
+            ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
+            List<Double> dataY = new ArrayList<Double>();
+            if (sensorReading != null) {
+                if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
+                    double[] xVals = sensorReading.getXReading();
+                    double[] yVals = sensorReading.getYReading();
+
+                    for (int j = xVals.length - 1; j >= 0; --j) {
+                        double ax = 1e7 / xVals[j];
+                        double ay = yVals[j] * 100;
+                        if(ax>1350 && ax<2510) {
+                            dataPoints.add(new DataPoint(ax, ay));
+                            dataY.add(ay);
+                            /*
+                            if (maxValue < yVals[j] * 100)
+                                maxValue = yVals[j] * 100;*/
+                        }
+                    }
+
+                    //DataPoint dataPointsArray[] = dataPoints.toArray(new DataPoint[dataPoints.size()]);
+                    //Log.e("debugger", Arrays.toString(dataPointsArray));
+
+                    Double[] dataArrY = dataY.toArray(new Double[dataY.size()]);
+                    double[] d = Stream.of(dataArrY).mapToDouble(Double::doubleValue).toArray();
+
+
+                    return d;
+
+                }
+            }
         }
+
         return null;
     }
 
