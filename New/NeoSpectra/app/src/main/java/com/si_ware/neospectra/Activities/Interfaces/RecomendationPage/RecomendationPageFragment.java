@@ -1,11 +1,9 @@
 package com.si_ware.neospectra.Activities.Interfaces.RecomendationPage;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -14,14 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,16 +24,13 @@ import android.widget.Toast;
 
 import com.balittanah.gravicode.pkdss.FertilizerCalculator;
 import com.balittanah.gravicode.pkdss.FertilizerInfo;
-import com.si_ware.neospectra.Activities.Interfaces.ScanPage.ScanPageFragment;
 import com.si_ware.neospectra.Activities.IntroActivity;
-import com.si_ware.neospectra.Activities.SettingsActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
-import com.si_ware.neospectra.DataElements;
+import com.si_ware.neospectra.Data.DataElements;
 import com.si_ware.neospectra.R;
 
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;

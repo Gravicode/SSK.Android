@@ -15,7 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
@@ -47,31 +46,25 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.balittanah.gravicode.pkdss.FertilizerInfo;
 import com.github.ybq.android.spinkit.style.Wave;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.si_ware.neospectra.Activities.ConfigureActivity;
-import com.si_ware.neospectra.Activities.ConnectActivity;
-import com.si_ware.neospectra.Activities.HomeActivity;
 import com.si_ware.neospectra.Activities.Interfaces.MyObj;
 import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
-import com.si_ware.neospectra.ConfigurableProperties;
-import com.si_ware.neospectra.DataElements;
+import com.si_ware.neospectra.Data.ConfigurableProperties;
+import com.si_ware.neospectra.Data.DataElements;
 import com.si_ware.neospectra.Global.GlobalVariables;
 import com.si_ware.neospectra.Models.dbReading;
-import com.si_ware.neospectra.OutputData;
 import com.si_ware.neospectra.PredictionEngine;
+import com.si_ware.neospectra.Data.OutputData;
 import com.si_ware.neospectra.R;
-import com.si_ware.neospectra.ResultPrediction;
+import com.si_ware.neospectra.Data.ResultPrediction;
 import com.si_ware.neospectra.Scan.Presenter.ScanPresenter;
 
 import org.ini4j.Ini;
@@ -80,10 +73,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -91,16 +82,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.IOException;
-import java.net.URI;
 import java.util.TimeZone;
 import java.util.prefs.Preferences;
 import java.util.stream.Stream;
 
 import com.google.gson.Gson;
 import com.balittanah.gravicode.pkdss.FertilizerCalculator;
-import com.balittanah.gravicode.pkdss.ModelRunner;
-import com.balittanah.gravicode.pkdss.Resources;
-import com.balittanah.gravicode.pkdss.model.InferenceResult;
 import com.si_ware.neospectra.dbtable.DBHelper;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.MAX_SCANNER_MEMORY;
@@ -120,7 +107,6 @@ import static com.si_ware.neospectra.Global.GlobalVariables.gIsInterpolationEnab
 import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainSettings;
 import static com.si_ware.neospectra.Global.GlobalVariables.gOpticalGainValue;
 import static com.si_ware.neospectra.Global.GlobalVariables.gRunMode;
-import static com.si_ware.neospectra.Global.MethodsFactory.switch_NM_CM;
 
 public class ScanPageFragment extends Fragment {
 

@@ -21,7 +21,7 @@ import com.github.ybq.android.spinkit.style.Wave;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.PredictionEngine;
 import com.si_ware.neospectra.R;
-import com.si_ware.neospectra.ResultPrediction;
+import com.si_ware.neospectra.Data.ResultPrediction;
 
 import static com.si_ware.neospectra.Activities.ConnectActivity.hasPermissions;
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;

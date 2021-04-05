@@ -1,4 +1,4 @@
-package com.si_ware.neospectra;
+package com.si_ware.neospectra.Data;
 
 public class ResultPrediction {
     public String elementName;

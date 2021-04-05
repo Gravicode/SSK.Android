@@ -1,4 +1,4 @@
-package com.si_ware.neospectra;
+package com.si_ware.neospectra.Data;
 
 public class DataElements {
     private static float Bray1_P2O5 = 0.00F;

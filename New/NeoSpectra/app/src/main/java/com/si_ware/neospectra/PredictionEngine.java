@@ -1,5 +1,6 @@
 package com.si_ware.neospectra;
 
+import com.si_ware.neospectra.Data.ResultPrediction;
 import com.si_ware.neospectra.ml.WBC;
 import com.si_ware.neospectra.ml.SAND;
 import com.si_ware.neospectra.ml.SILT;
