@@ -49,6 +49,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.balittanah.gravicode.pkdss.FertilizerInfo;
+import com.balittanah.gravicode.pkdss.SplineInterpolator;
 import com.github.ybq.android.spinkit.style.Wave;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -1232,23 +1233,24 @@ public class ScanPageFragment extends Fragment {
         return TArray;
     }
 
+
     /* modified code */
     /* call this process after doing scan*/
     @RequiresApi(api = Build.VERSION_CODES.N)
     public double[] getReflectance() {
-        /*
-        for (int i = 0; i < gAllSpectra.size(); i++) {
-            dbReading sensorReading = gAllSpectra.get(i);
-            if (sensorReading != null) {
-                if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
-                    double[] xVals = sensorReading.getXReading();
-                    double[] yVals = sensorReading.getYReading();
-                    //to do: apply spectral trimming here...
-                    // wave range: value > 1350 and value < 2510
-                    return convertDataToT(yVals);
-                }
+    /*
+    for (int i = 0; i < gAllSpectra.size(); i++) {
+        dbReading sensorReading = gAllSpectra.get(i);
+        if (sensorReading != null) {
+            if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
+                double[] xVals = sensorReading.getXReading();
+                double[] yVals = sensorReading.getYReading();
+                //to do: apply spectral trimming here...
+                // wave range: value > 1350 and value < 2510
+                return convertDataToT(yVals);
             }
-        }*/
+        }
+    }*/
         for (int i = 0; i < gAllSpectra.size(); ++i) {
             dbReading sensorReading = gAllSpectra.get(i);
             ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
@@ -1257,18 +1259,28 @@ public class ScanPageFragment extends Fragment {
                 if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
                     double[] xVals = sensorReading.getXReading();
                     double[] yVals = sensorReading.getYReading();
-
-                    for (int j = xVals.length - 1; j >= 0; --j) {
-                        double ax = 1e7 / xVals[j];
-                        double ay = yVals[j] * 100;
-                        if(ax>1350 && ax<2510) {
-                            dataPoints.add(new DataPoint(ax, ay));
-                            dataY.add(ay);
-                            /*
-                            if (maxValue < yVals[j] * 100)
-                                maxValue = yVals[j] * 100;*/
-                        }
+                    Map<Double,Double> Waves = new HashMap<>();
+                    //create interpolation for current scan
+                    for(int ax=0;ax<xVals.length;ax++){
+                        double xx = 1e7 / xVals[ax];
+                        double yy = yVals[ax] * 100;
+                        //if(xx>1350 && xx < 2510){
+                        Waves.put(xx,yy);
+                        //}
                     }
+                    SplineInterpolator scaler = new SplineInterpolator(Waves);
+
+                    //adjust to model input
+                    for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax+=1)
+                    {
+                        double x = PredictionEngine.InputWaves[ax];
+                        double y = scaler.GetValue(x);
+                        System.out.println(x +","+ y);
+                        dataPoints.add(new DataPoint(x, y));
+                        dataY.add(y);
+                    }
+
+
 
                     //DataPoint dataPointsArray[] = dataPoints.toArray(new DataPoint[dataPoints.size()]);
                     //Log.e("debugger", Arrays.toString(dataPointsArray));
@@ -1285,6 +1297,7 @@ public class ScanPageFragment extends Fragment {
 
         return null;
     }
+
 
     public void Calculator() {
 
