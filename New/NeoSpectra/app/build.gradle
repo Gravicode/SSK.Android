@@ -103,7 +103,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
     implementation 'com.googlecode.json-simple:json-simple:1.1'
     implementation files('libs/libsvm-3.1.jar')
-    implementation files('libs/jama-1.0.3.jar')
 
     implementation 'com.android.support:cardview-v7:27.1.1'
     //    implementation 'com.karumi:dexter:5.0.0'
@@ -117,6 +116,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation project(':pkdss-release')
     implementation 'androidx.annotation:annotation:1.1.0'
+    // https://mvnrepository.com/artifact/gov.nist.math/jama
+    implementation group: 'gov.nist.math', name: 'jama', version: '1.0.3'
 
 
 

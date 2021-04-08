@@ -269,6 +269,8 @@ public class ScanPageFragment extends Fragment {
                 R.array.BLE_Services, android.R.layout.simple_spinner_item);
         bluetoothSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        enableButtonAndView(PredictionEngine.HasBackgroundScan);
+
         // Adjust progress value if scan time changed from its default value
         if (scanTime != 2) {
             tv_progressValue.setX(progressBarPosition / 2);
@@ -689,6 +691,7 @@ public class ScanPageFragment extends Fragment {
                 btnBackground.setCardBackgroundColor(Color.parseColor("#0A376A"));
                 btnBackground.setEnabled(true);
             }
+            PredictionEngine.HasBackgroundScan=true;
             return;
         }
 
@@ -720,7 +723,7 @@ public class ScanPageFragment extends Fragment {
             newReading.setReading(y_reading, x_reading);
             // Add the taken read to global ArrayList which holds all the taken readings
             gAllSpectra.add(newReading);
-            enableButtonAndView(true);
+            enableButtonAndView(isScanBG);
             isWaitingForSensorReading = false;
 
 
@@ -1251,7 +1254,8 @@ public class ScanPageFragment extends Fragment {
             }
         }
     }*/
-        for (int i = 0; i < gAllSpectra.size(); ++i) {
+        int gsize = gAllSpectra.size();
+        for (int i = gsize-1; i >= 0; i--) {
             dbReading sensorReading = gAllSpectra.get(i);
             ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
             List<Double> dataY = new ArrayList<Double>();

@@ -1,5 +1,5 @@
 package com.balittanah.gravicode.pkdss;
-import com.balittanah.gravicode.pkdss.sgfilter.*;
+//import com.balittanah.gravicode.pkdss.sgfilter.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +38,11 @@ public class Preprocess {
             }
 
             //3.savitzky golay treatment
-            double[] coef = SGFilter.computeSGCoefficients(5,5,2);
-            SGFilter filter = new SGFilter(5,5);
-            DataReflectance = filter.smooth(DataReflectance,coef);
+            SavitzkyGolayFilter savgol = new SavitzkyGolayFilter (5,5,2,0);
+            DataReflectance = savgol.filterData(DataReflectance);
+            //double[] coef = SGFilter.computeSGCoefficients(5,5,2);
+            //SGFilter filter = new SGFilter(5,5);
+            //DataReflectance = filter.smooth(DataReflectance,coef);
 
             //4.snv treatment
             List<Double> rowDatas = new ArrayList<Double>();
