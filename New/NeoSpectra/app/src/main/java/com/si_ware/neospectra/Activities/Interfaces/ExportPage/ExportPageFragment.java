@@ -73,17 +73,12 @@ import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 import static java.util.Calendar.YEAR;
 
 public class ExportPageFragment extends Fragment {
-
     private Context mContext;
-
     SearchView edtDate, edtTanggal;
     Calendar myCalendar, myCalendar2;
     DatePickerDialog.OnDateSetListener date, date2;
-
     public String tanggal1;
     public String tanggal2;
-
-
     private FloatingActionButton addRecordBtn;
     private RecyclerView recordsRv;
     private DBHelper dbHelper;
@@ -94,8 +89,8 @@ public class ExportPageFragment extends Fragment {
     private AdapterRecord adapter = null;
 
     //sort option
-    String orderByNewest = Constants.C_ID + " DESC";
-    String orderByOldest = Constants.C_ADDED_TIME_STAMP + " ASC";
+    String orderByNewest = Constants.TABLE_NAME + "." + Constants.C_ID + " DESC";
+    String orderByOldest = Constants.TABLE_NAME + "." + Constants.C_ADDED_TIME_STAMP + " ASC";
 
     //for refresh records, refresh with last choosen sort option
     String currentOrderByStatus = orderByNewest;
@@ -356,16 +351,11 @@ public class ExportPageFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
         int id = item.getItemId();
-
         if (id == R.id.action_export) {
-
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
             bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
-
             bottomSheetDialog.setCanceledOnTouchOutside(false);
-
             LinearLayout bottom_sheet_refresh = bottomSheetDialog.findViewById(R.id.bottom_sheet_refresh);
             CardView btn_yes = bottomSheetDialog.findViewById(R.id.btn_yes);
             CardView btn_cancel = bottomSheetDialog.findViewById(R.id.btn_cancel);
@@ -374,7 +364,7 @@ public class ExportPageFragment extends Fragment {
             btn_yes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        fungsi yes pada bottom sheet
+                    //fungsi yes pada bottom sheet
                     //sql to csv file
                     if (!checkStoragePermission()) {
                         checkStoragePermission();
@@ -392,7 +382,7 @@ public class ExportPageFragment extends Fragment {
             btn_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        fungsi cancel bottom sheet
+                    //fungsi cancel bottom sheet
                     bottomSheetDialog.hide();
                 }
             });
@@ -400,13 +390,12 @@ public class ExportPageFragment extends Fragment {
 
 
         }
+
         if (id == R.id.action_exportXls) {
 
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
             bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
-
             bottomSheetDialog.setCanceledOnTouchOutside(false);
-
             LinearLayout bottom_sheet_refresh = bottomSheetDialog.findViewById(R.id.bottom_sheet_refresh);
             CardView btn_yes = bottomSheetDialog.findViewById(R.id.btn_yes);
             CardView btn_cancel = bottomSheetDialog.findViewById(R.id.btn_cancel);
@@ -415,7 +404,7 @@ public class ExportPageFragment extends Fragment {
             btn_yes.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        fungsi yes pada bottom sheet
+                    //fungsi yes pada bottom sheet
                     //sql to csv file
                     if (!checkStoragePermission()) {
                         checkStoragePermission();
@@ -433,7 +422,7 @@ public class ExportPageFragment extends Fragment {
             btn_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                        fungsi cancel bottom sheet
+                    //fungsi cancel bottom sheet
                     bottomSheetDialog.hide();
                 }
             });
@@ -815,7 +804,6 @@ public class ExportPageFragment extends Fragment {
 
     private void exportCSV() {
         //path of csv file
-
         File folder = new File(Environment.getExternalStorageDirectory() + "/" + "Neospectra"); // Neospectra is folder name
 
         boolean isFolderCreated = false;
@@ -828,10 +816,8 @@ public class ExportPageFragment extends Fragment {
         //file name
         String csvFileName = "Neospectra.csv";
 
-
         //complate path and name
         String filePathAndName = folder.toString() + "/" + csvFileName;
-
 
         //get records
         ArrayList<ModelRecord> recordsList = new ArrayList<>();
@@ -888,10 +874,10 @@ public class ExportPageFragment extends Fragment {
                 fw.append(",");
                 fw.append("" + recordsList.get(i).getWbc()); //wbc
                 fw.append(",");
+                fw.append("" + recordsList.get(i).getRawdata()); //raw data
+                fw.append(",");
                 fw.append("" + recordsList.get(i).getAddedTime()); //addtime
                 fw.append("\n");
-
-
             }
             fw.flush();
             fw.close();

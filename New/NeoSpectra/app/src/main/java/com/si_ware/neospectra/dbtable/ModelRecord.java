@@ -1,21 +1,15 @@
 package com.si_ware.neospectra.dbtable;
 
-
 import java.io.Serializable;
 
 public class ModelRecord {
-
-
-
-
     //Variables
-    String id, bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjeldahl, ktk,mg, morgan, na, olsen, phh2o, phkcl, retensip, sand ,silt,wbc,  addedTime;
+    String id, bray, ca, clay, cn, hclk2o, hclp2o5, jumlah, k, kbadj, kjeldahl, ktk, mg, morgan, na, olsen, phh2o, phkcl, retensip, sand, silt, wbc, rawdata, addedTime;
     boolean isSelect;
 
+    //constructor
 
-//constructor
-
-    public ModelRecord(String id, String bray, String ca, String clay, String cn, String hclk2o, String hclp2o5, String jumlah, String k, String kbadj, String kjeldahl, String ktk, String mg, String morgan, String na, String olsen, String phh2o, String phkcl, String retensip, String sand, String silt, String wbc, String addedTime) {
+    public ModelRecord(String id, String bray, String ca, String clay, String cn, String hclk2o, String hclp2o5, String jumlah, String k, String kbadj, String kjeldahl, String ktk, String mg, String morgan, String na, String olsen, String phh2o, String phkcl, String retensip, String sand, String silt, String wbc, String rawdata, String addedTime) {
         this.id = id;
         this.bray = bray;
         this.ca = ca;
@@ -39,6 +33,7 @@ public class ModelRecord {
         this.silt = silt;
         this.wbc = wbc;
         this.addedTime = addedTime;
+        this.rawdata = rawdata;
     }
 
 
@@ -228,13 +223,19 @@ public class ModelRecord {
         this.addedTime = addedTime;
     }
 
-
-
     public boolean isSelect() {
         return isSelect;
     }
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public void setRawdata(String rawdata) {
+        this.rawdata = rawdata;
+    }
+
+    public String getRawdata() {
+        return this.rawdata;
     }
 }

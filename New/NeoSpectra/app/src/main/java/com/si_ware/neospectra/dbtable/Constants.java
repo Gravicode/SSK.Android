@@ -2,14 +2,10 @@ package com.si_ware.neospectra.dbtable;
 
 
 public class Constants {
-
     //db name
-
-    public static final String  DB_NAME="NEO_DB";
-
-    public static final int  DB_VERSION = 1 ;
-
-    public static final String  TABLE_NAME="NEO_TB";
+    public static final String DB_NAME="sskdb.db";
+    public static final int DB_VERSION = 1;
+    public static final String TABLE_NAME="NEO_TB";
 
     public static final String C_ID = "ID";
     public static final String C_BRAY = "BRAY";
@@ -35,9 +31,7 @@ public class Constants {
     public static final String C_WBC= "WBC";
     public static final String C_ADDED_TIME_STAMP = "ADDED_TIME_STAMP";
 
-
     //create table query
-
     public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "("
             + C_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + C_BRAY + " TEXT,"
@@ -62,6 +56,5 @@ public class Constants {
             + C_SILT + " TEXT,"
             + C_WBC + " TEXT,"
             + C_ADDED_TIME_STAMP+ " TEXT"
-
             + ")";
 }

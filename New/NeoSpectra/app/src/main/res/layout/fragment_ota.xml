@@ -35,7 +35,6 @@
             android:text="@string/module_name"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/module_icon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

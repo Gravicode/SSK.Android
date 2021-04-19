@@ -32,21 +32,14 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
     public AdapterRecord(Context context, ArrayList<ModelRecord> recordList) {
         this.context = context ;
         this.recordList = recordList;
-
         dbHelper = new DBHelper(context);
     }
-
-
-
-
 
     @NonNull
     @Override
     public HolderRecord onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         //infate Layout
         View view = LayoutInflater.from(context).inflate(R.layout.row_record, parent, false);
-
         return new HolderRecord(view);
     }
 
@@ -78,9 +71,8 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
         String sand = model.getSand();
         String silt = model.getSilt();
         String wbc = model.getWbc();
-
+        String rawData = model.getRawdata();
         String addedTime = model.getAddedTime();
-
 
         //set data to view
         holder.txtId.setText(id);
@@ -105,6 +97,14 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
         holder.txtSand.setText(sand);
         holder.txtSilt.setText(silt);
         holder.txtWbc.setText(wbc);
+        try {
+            holder.txtRawData.setText(rawData);
+        } catch (Exception ex)
+        {
+            String data = ex.getMessage();
+            System.out.println(ex.getMessage());
+        }
+
 
         //handle item click (delete
         // )
@@ -115,11 +115,10 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
                 alert.setTitle("Delete entry");
                 alert.setMessage("Are you sure you want to delete data with id = " + id + " ? ");
                 alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
                         dbHelper.deleteData(id);
-//                        ((ExportPageFragment)context).onResume(); //error code saat recode dari activity ke android
+                        //((ExportPageFragment)context).onResume(); //error code saat recode dari activity ke android
                     }
                 });
                 alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -130,12 +129,7 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
                 });
                 alert.show();
             }
-
-
         });
-
-
-
     }
 
     @Override
@@ -143,19 +137,15 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
         return recordList.size(); //return size of list/number or records
     }
 
-
     class HolderRecord extends RecyclerView.ViewHolder {
-
         //views
         TextView txtId, txtBray, txtCa, txtClay, txtCn, txtHclK2o, txtHclP2o5, txtJumlah, txtK, txtKbAdj,
                 txtKjeldahl, txtKtk, txtMg, txtMorgan, txtNa, txtOlsen, txtPhh20, txtPhkcl, txtRetensip, txtSand,
-                txtSilt, txtWbc;
+                txtSilt, txtWbc, txtRawData;
         LinearLayout linear;
-
 
         public HolderRecord(@NonNull View itemView) {
             super(itemView);
-
 
             //init views
             txtId = itemView.findViewById(R.id.txtId);
@@ -180,6 +170,7 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
             txtSand = itemView.findViewById(R.id.txtSand);
             txtSilt = itemView.findViewById(R.id.txtSilt);
             txtWbc = itemView.findViewById(R.id.txtWbc);
+            txtRawData = itemView.findViewById(R.id.txtRawData);
         }
     }
 

@@ -1,6 +1,30 @@
 package com.si_ware.neospectra.Data;
 
 public class DataElements {
+    public static void ResetData(){
+        setBray1P2O5(0.00F);
+        setCa(0.00F);
+        setCLAY(0.00F);
+        setCN(0.00F);
+        setHCl25K2O(0.00F);
+        setHCl25P2O5(0.00F);
+        setJumlah(0.00F);
+        setK(0.00F);
+        setKBAdjusted(0.00F);
+        setKjeldahlN(0.00F);
+        setKTK(0.00F);
+        setMg(0.00F);
+        setMorganK2O(0.00F);
+        setNa(0.00F);
+        setOlsenP2O5(0.00F);
+        setPhH2o(0.00F);
+        setPhKcl(0.00F);
+        setRetensiP(0.00F);
+        setSAND(0.00F);
+        setSILT(0.00F);
+        setWBC(0.00F);
+    }
+
     private static float Bray1_P2O5 = 0.00F;
     public static final float getBray1P2O5()
     {

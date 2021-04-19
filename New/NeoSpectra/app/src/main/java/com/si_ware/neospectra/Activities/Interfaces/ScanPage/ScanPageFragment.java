@@ -60,6 +60,7 @@ import com.si_ware.neospectra.Activities.IntroActivity;
 import com.si_ware.neospectra.BluetoothSDK.SWS_P3API;
 import com.si_ware.neospectra.Data.ConfigurableProperties;
 import com.si_ware.neospectra.Data.DataElements;
+import com.si_ware.neospectra.Data.DataRaw;
 import com.si_ware.neospectra.Global.GlobalVariables;
 import com.si_ware.neospectra.Models.dbReading;
 import com.si_ware.neospectra.PredictionEngine;
@@ -691,7 +692,7 @@ public class ScanPageFragment extends Fragment {
                 btnBackground.setCardBackgroundColor(Color.parseColor("#0A376A"));
                 btnBackground.setEnabled(true);
             }
-            PredictionEngine.HasBackgroundScan=true;
+            PredictionEngine.HasBackgroundScan = true;
             return;
         }
 
@@ -1071,6 +1072,8 @@ public class ScanPageFragment extends Fragment {
     }
 
     public void setDataElement(ResultPrediction[] datas) {
+        // reset value of data element
+        DataElements.ResetData();
         for (int i = 0; i < datas.length; i++) {
             ResultPrediction rp = datas[i];
             if (rp.elementName.equals("PH_H2O")) {
@@ -1214,9 +1217,10 @@ public class ScanPageFragment extends Fragment {
                 "" + myObj.getSand(),
                 "" + myObj.getSilt(),
                 "" + myObj.getWbc(),
-
                 "" + timestamp
         );
+
+        long id2 = dbHelper.insertRawData(id, DataRaw.getValue());
     }
 
     public static String[] getStrings(double[] a) {
@@ -1255,7 +1259,7 @@ public class ScanPageFragment extends Fragment {
         }
     }*/
         int gsize = gAllSpectra.size();
-        for (int i = gsize-1; i >= 0; i--) {
+        for (int i = gsize - 1; i >= 0; i--) {
             dbReading sensorReading = gAllSpectra.get(i);
             ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
             List<Double> dataY = new ArrayList<Double>();
@@ -1263,27 +1267,30 @@ public class ScanPageFragment extends Fragment {
                 if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
                     double[] xVals = sensorReading.getXReading();
                     double[] yVals = sensorReading.getYReading();
-                    Map<Double,Double> Waves = new HashMap<>();
+                    Map<Double, Double> Waves = new HashMap<>();
                     //create interpolation for current scan
-                    for(int ax=0;ax<xVals.length;ax++){
+                    for (int ax = 0; ax < xVals.length; ax++) {
                         double xx = 1e7 / xVals[ax];
                         double yy = yVals[ax] * 100;
                         //if(xx>1350 && xx < 2510){
-                        Waves.put(xx,yy);
+                        Waves.put(xx, yy);
                         //}
                     }
                     SplineInterpolator scaler = new SplineInterpolator(Waves);
 
                     //adjust to model input
-                    for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax+=1)
-                    {
+                    for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax += 1) {
                         double x = PredictionEngine.InputWaves[ax];
                         double y = scaler.GetValue(x);
-                        System.out.println(x +","+ y);
+                        System.out.println(x + "," + y);
                         dataPoints.add(new DataPoint(x, y));
                         dataY.add(y);
                     }
 
+                    if (dataPoints != null)
+                    {
+                        DataRaw.setValue(dataPoints);
+                    }
 
 
                     //DataPoint dataPointsArray[] = dataPoints.toArray(new DataPoint[dataPoints.size()]);
