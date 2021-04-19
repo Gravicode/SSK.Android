@@ -13,6 +13,9 @@
                 android:title="Export to XLS"/>
         </menu>
     </item>
+    <item android:id="@+id/action_clear"
+        android:title="Clear Data">
+    </item>
 
 <!--short item menu-->
     <item android:id="@+id/action_sort"

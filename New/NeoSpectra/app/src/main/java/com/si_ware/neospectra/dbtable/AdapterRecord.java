@@ -1,9 +1,12 @@
 package com.si_ware.neospectra.dbtable;
 
 import android.app.AlertDialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,14 +100,9 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
         holder.txtSand.setText(sand);
         holder.txtSilt.setText(silt);
         holder.txtWbc.setText(wbc);
-        try {
-            holder.txtRawData.setText(rawData);
-        } catch (Exception ex)
-        {
-            String data = ex.getMessage();
-            System.out.println(ex.getMessage());
-        }
-
+/*
+        holder.txtRawData.setText(rawData);
+*/
 
         //handle item click (delete
         // )
@@ -141,7 +139,7 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
         //views
         TextView txtId, txtBray, txtCa, txtClay, txtCn, txtHclK2o, txtHclP2o5, txtJumlah, txtK, txtKbAdj,
                 txtKjeldahl, txtKtk, txtMg, txtMorgan, txtNa, txtOlsen, txtPhh20, txtPhkcl, txtRetensip, txtSand,
-                txtSilt, txtWbc, txtRawData;
+                txtSilt, txtWbc/*, txtRawData*/;
         LinearLayout linear;
 
         public HolderRecord(@NonNull View itemView) {
@@ -170,7 +168,7 @@ public class AdapterRecord extends RecyclerView.Adapter<AdapterRecord.HolderReco
             txtSand = itemView.findViewById(R.id.txtSand);
             txtSilt = itemView.findViewById(R.id.txtSilt);
             txtWbc = itemView.findViewById(R.id.txtWbc);
-            txtRawData = itemView.findViewById(R.id.txtRawData);
+            /*txtRawData = itemView.findViewById(R.id.txtRawData);*/
         }
     }
 

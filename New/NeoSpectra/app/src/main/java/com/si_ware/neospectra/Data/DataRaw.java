@@ -5,13 +5,13 @@ import com.jjoe64.graphview.series.DataPoint;
 import java.util.ArrayList;
 
 public class DataRaw {
-    private static ArrayList<DataPoint> value;
+    private static double[] value;
 
-    public static ArrayList<DataPoint> getValue() {
+    public static double[] getValue() {
         return value;
     }
 
-    public static void setValue(ArrayList<DataPoint> value) {
+    public static void setValue(double[] value) {
         DataRaw.value = value;
     }
 }

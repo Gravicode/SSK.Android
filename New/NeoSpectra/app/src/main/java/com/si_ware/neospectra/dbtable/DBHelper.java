@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import com.jjoe64.graphview.series.DataPoint;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -80,10 +81,14 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long insertRawData(long ElementID, ArrayList<DataPoint> Data) {
+    public long insertRawData(long ElementID, double[] Data) {
         JSONArray strData = new JSONArray();
-        for (int i = 0; i < Data.size(); i++) {
-            strData.put(Data.get(i));
+        for (int i = 0; i < Data.length; i++) {
+            try {
+                strData.put(Data[i]);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -173,7 +178,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         //return to list
         return recordsList;
-
     }
 
 
@@ -292,7 +296,10 @@ public class DBHelper extends SQLiteOpenHelper {
     //delete all data from table
     public void deleteAllData() {
         SQLiteDatabase db = getWritableDatabase();
-        db.equals("DELETE FROM " + Constants.TABLE_NAME);
+        db.execSQL("DELETE FROM " + Constants.TABLE_NAME);
+        db.execSQL("DELETE FROM " + RawData.TABLE_NAME);
+/*        db.equals("DELETE FROM " + Constants.TABLE_NAME);
+        db.equals("DELETE FROM " + RawData.TABLE_NAME);*/
         db.close();
     }
 

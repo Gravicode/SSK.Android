@@ -70,6 +70,7 @@ import java.util.Locale;
 
 import static android.content.Context.MODE_PRIVATE;
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
+import static com.si_ware.neospectra.R.id.action_exportXls;
 import static java.util.Calendar.YEAR;
 
 public class ExportPageFragment extends Fragment {
@@ -139,7 +140,10 @@ public class ExportPageFragment extends Fragment {
         addRecordBtn = view.findViewById(R.id.addRecordBtn);
         recordsRv = view.findViewById(R.id.recordsRV);
 
-        storagePermissions = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        storagePermissions = new String[] {
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        };
 
         //init db helper class
         dbHelper = new DBHelper(getActivity());
@@ -286,7 +290,6 @@ public class ExportPageFragment extends Fragment {
         edtDate.setQuery(date, true);
     }
 
-
     private void updateLabel2() {
         String myFormat = "yyyy-MM-d";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -387,11 +390,8 @@ public class ExportPageFragment extends Fragment {
                 }
             });
             bottomSheetDialog.show();
-
-
         }
-
-        if (id == R.id.action_exportXls) {
+        if (id == action_exportXls) {
 
             final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
             bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog);
@@ -427,6 +427,12 @@ public class ExportPageFragment extends Fragment {
                 }
             });
             bottomSheetDialog.show();
+        }
+
+        if (id == R.id.action_clear)
+        {
+            dbHelper.deleteAllData();
+            loadRecords(orderByNewest);
         }
 
         if (id == R.id.action_sort) {
@@ -498,7 +504,6 @@ public class ExportPageFragment extends Fragment {
         cellStyle.setBorderLeft(BorderStyle.THICK);
         cellStyle.setBorderRight(BorderStyle.THICK);
         cellStyle.setBorderTop(BorderStyle.THICK);
-
 
         CellStyle cellStyle1 = workbook.createCellStyle();
         cellStyle1.setFillBackgroundColor(HSSFColor.SEA_GREEN.index);
@@ -590,6 +595,8 @@ public class ExportPageFragment extends Fragment {
         cell = row.createCell(22);
         cell.setCellValue("Date");
         cell.setCellStyle(cellStyle);
+        cell.setCellValue("Raw Data");
+        cell.setCellStyle(cellStyle);
         for (int i = 0; i < recordsList.size(); i++) {
             if (i == 0) {
                 row = sheet.createRow(i + 1);
@@ -662,6 +669,8 @@ public class ExportPageFragment extends Fragment {
                 cell.setCellStyle(cellStyle1);
                 cell = row.createCell(i + 22);
                 cell.setCellValue("" + recordsList.get(i).getAddedTime());
+                cell.setCellStyle(cellStyle1);
+                cell.setCellValue("" + recordsList.get(i).getRawdata());
                 cell.setCellStyle(cellStyle1);
             }
             if (i > 0) {
@@ -737,6 +746,8 @@ public class ExportPageFragment extends Fragment {
                 cell = row.createCell(nextCell + 22);
                 cell.setCellValue("" + recordsList.get(i).getAddedTime());
                 cell.setCellStyle(cellStyle1);
+                cell.setCellValue("" + recordsList.get(i).getRawdata());
+                cell.setCellStyle(cellStyle1);
             }
         }
 
@@ -764,6 +775,7 @@ public class ExportPageFragment extends Fragment {
         sheet.setColumnWidth(20, (10 * 500));
         sheet.setColumnWidth(21, (10 * 500));
         sheet.setColumnWidth(22, (10 * 500));
+        sheet.setColumnWidth(23, (10 * 500));
         sheet.setColumnWidth(23, (10 * 500));
 
 
@@ -827,7 +839,7 @@ public class ExportPageFragment extends Fragment {
         try {
             //write csv file
             FileWriter fw = new FileWriter(filePathAndName);
-            fw.append("Id,Bray,Ca,CLAY,C_N,HCL25_K2O,HCL25_P2O5,Jumlah,K,KB_ADJUSTED,Kjeldahl_N,KTK,Mg,Morgan,Na,Olsen_P2O5,PH_H2O,PH_KCL,RetensiP,Sand,Silt,WBC,Time");
+            fw.append("Id,Bray,Ca,CLAY,C_N,HCL25_K2O,HCL25_P2O5,Jumlah,K,KB_ADJUSTED,Kjeldahl_N,KTK,Mg,Morgan,Na,Olsen_P2O5,PH_H2O,PH_KCL,RetensiP,Sand,Silt,WBC,Time,RawData");
             fw.append("\n");
             for (int i = 0; i < recordsList.size(); i++) {
                 fw.append("" + recordsList.get(i).getId()); //id
@@ -874,9 +886,9 @@ public class ExportPageFragment extends Fragment {
                 fw.append(",");
                 fw.append("" + recordsList.get(i).getWbc()); //wbc
                 fw.append(",");
-                fw.append("" + recordsList.get(i).getRawdata()); //raw data
-                fw.append(",");
                 fw.append("" + recordsList.get(i).getAddedTime()); //addtime
+                fw.append(",");
+                fw.append("" + recordsList.get(i).getRawdata()); //raw data
                 fw.append("\n");
             }
             fw.flush();

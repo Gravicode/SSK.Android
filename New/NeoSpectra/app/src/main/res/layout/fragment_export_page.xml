@@ -407,9 +407,9 @@
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
-                    <TextView
+<!--                    <TextView
                         android:id="@+id/txtRawData"
-                        android:layout_width="500dp"
+                        android:layout_width="2500dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
                         android:layout_margin="1dp"
@@ -417,7 +417,7 @@
                         android:textAlignment="center"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold" />-->
 
 
                 </LinearLayout>

@@ -960,7 +960,11 @@ public class ScanPageFragment extends Fragment {
         // data from device
         double[] reflectance = getReflectance();
 
-        if (reflectance == null) {
+        if (reflectance != null)
+        {
+            DataRaw.setValue(reflectance);
+        }
+        else {
             Toast.makeText(getActivity(), "Sorry can't connect to device", Toast.LENGTH_LONG).show();
             return;
         }
@@ -1287,18 +1291,11 @@ public class ScanPageFragment extends Fragment {
                         dataY.add(y);
                     }
 
-                    if (dataPoints != null)
-                    {
-                        DataRaw.setValue(dataPoints);
-                    }
-
-
                     //DataPoint dataPointsArray[] = dataPoints.toArray(new DataPoint[dataPoints.size()]);
                     //Log.e("debugger", Arrays.toString(dataPointsArray));
 
                     Double[] dataArrY = dataY.toArray(new Double[dataY.size()]);
                     double[] d = Stream.of(dataArrY).mapToDouble(Double::doubleValue).toArray();
-
 
                     return d;
 

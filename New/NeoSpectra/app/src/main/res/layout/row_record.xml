@@ -241,15 +241,15 @@
             android:textColor="#000000"
             android:textSize="16sp" />
 
-        <TextView
+<!--        <TextView
             android:id="@+id/txtRawData"
-            android:layout_width="550dp"
+            android:layout_width="2500dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_medium"
             android:text="Raw Data"
             android:textAlignment="center"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
 
     </LinearLayout>
