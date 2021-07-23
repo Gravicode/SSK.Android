@@ -71,7 +71,7 @@ public class SplineInterpolator2 {
                 double a = m[i] / d[i];
                 double b = m[i + 1] / d[i];
                 double h = (double) Math.hypot(a, b);
-                if (h > 9f) {
+                if (h > 3f) {
                     double t = 3f / h;
                     m[i] = t * a * d[i];
                     m[i + 1] = t * b * d[i];
