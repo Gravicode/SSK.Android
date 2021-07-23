@@ -1281,7 +1281,11 @@ public class ScanPageFragment extends Fragment {
 
                     //Map<Double, Double> Waves = new HashMap<>();
                     //create interpolation for current scan
-                    for (int ax = 0; ax < xVals.length; ax++) {
+
+
+                    //for (int ax = 0; ax < xVals.length; ax++) {
+                    for (int ax = xVals.length - 1; ax >= 0; --ax) {
+
                         double xx = 1e7 / xVals[ax];
                         double yy = yVals[ax] * 100;
                         //if(xx>1350 && xx < 2510){
