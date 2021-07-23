@@ -57,7 +57,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             WBC.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setWBC(outputFeature0.getFloatValue(0));
+            result.setWBC(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+
+
             hasil.add(new ResultPrediction("WBC",result.getWBC()));
             // Releases model resources if no longer used.
             model.close();
@@ -78,7 +80,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             SILT.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setSILT(outputFeature0.getFloatValue(0));
+            result.setSILT(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("SILT",result.getSILT()));
             // Releases model resources if no longer used.
             model.close();
@@ -99,7 +101,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             SAND.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setSAND(outputFeature0.getFloatValue(0));
+            result.setSAND(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("SAND",result.getSAND()));
             // Releases model resources if no longer used.
             model.close();
@@ -120,7 +122,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             RetensiP.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setRetensiP(outputFeature0.getFloatValue(0));
+            result.setRetensiP(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("RetensiP",result.getRetensiP()));
             // Releases model resources if no longer used.
             model.close();
@@ -141,7 +143,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             PhKcl.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setPhKcl(outputFeature0.getFloatValue(0));
+            result.setPhKcl(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("PH_KCL",result.getPhKcl()));
             // Releases model resources if no longer used.
             model.close();
@@ -162,7 +164,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             PhH2o.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setPhH2o(outputFeature0.getFloatValue(0));
+            result.setPhH2o(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("PH_H2O",result.getPhH2o()));
             // Releases model resources if no longer used.
             model.close();
@@ -183,7 +185,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             OlsenP2o5.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setOlsenP2O5(outputFeature0.getFloatValue(0));
+            result.setOlsenP2O5(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Olsen_P2O5",result.getOlsenP2O5()));
             // Releases model resources if no longer used.
             model.close();
@@ -204,7 +206,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Na.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setNa(outputFeature0.getFloatValue(0));
+            result.setNa(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Na",result.getNa()));
             // Releases model resources if no longer used.
             model.close();
@@ -225,7 +227,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             MorganK2o.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setMorganK2O(outputFeature0.getFloatValue(0));
+            result.setMorganK2O(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Morgan_K2O",result.getMorganK2O()));
             // Releases model resources if no longer used.
             model.close();
@@ -246,7 +248,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Mg.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setMg(outputFeature0.getFloatValue(0));
+            result.setMg(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Mg",result.getMg()));
             // Releases model resources if no longer used.
             model.close();
@@ -267,7 +269,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             KTK.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setKTK(outputFeature0.getFloatValue(0));
+            result.setKTK(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("KTK",result.getKTK()));
             // Releases model resources if no longer used.
             model.close();
@@ -288,7 +290,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             KjeldahlN.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setKjeldahlN(outputFeature0.getFloatValue(0));
+            result.setKjeldahlN(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("KJELDAHL_N",result.getKjeldahlN()));
             // Releases model resources if no longer used.
             model.close();
@@ -309,7 +311,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             KbAdjusted.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setKBAdjusted(outputFeature0.getFloatValue(0));
+            result.setKBAdjusted(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("KB_adjusted",result.getKBAdjusted()));
             // Releases model resources if no longer used.
             model.close();
@@ -330,7 +332,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             K.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setK(outputFeature0.getFloatValue(0));
+            result.setK(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("K",result.getK()));
             // Releases model resources if no longer used.
             model.close();
@@ -351,7 +353,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Jumlah.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setJumlah(outputFeature0.getFloatValue(0));
+            result.setJumlah(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Jumlah",result.getJumlah()));
             // Releases model resources if no longer used.
             model.close();
@@ -372,7 +374,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Hcl25P2o5.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setHCl25P2O5(outputFeature0.getFloatValue(0));
+            result.setHCl25P2O5(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("HCl25_P2O5",result.getHCl25P2O5()));
             // Releases model resources if no longer used.
             model.close();
@@ -393,7 +395,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Hcl25K2o.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setHCl25K2O(outputFeature0.getFloatValue(0));
+            result.setHCl25K2O(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("HCl25_K2O",result.getHCl25K2O()));
             // Releases model resources if no longer used.
             model.close();
@@ -414,7 +416,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Ca.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setCa(outputFeature0.getFloatValue(0));
+            result.setCa(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Ca",result.getCa()));
             // Releases model resources if no longer used.
             model.close();
@@ -435,7 +437,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             CN.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setCN(outputFeature0.getFloatValue(0));
+            result.setCN(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("C_N",result.getCN()));
             // Releases model resources if no longer used.
             model.close();
@@ -456,7 +458,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             CLAY.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setCLAY(outputFeature0.getFloatValue(0));
+            result.setCLAY(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("CLAY",result.getCLAY()));
             // Releases model resources if no longer used.
             model.close();
@@ -477,7 +479,7 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             Bray1P2o5.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setBray1P2O5(outputFeature0.getFloatValue(0));
+            result.setBray1P2O5(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
             hasil.add(new ResultPrediction("Bray1_P2O5",result.getBray1P2O5()));
             // Releases model resources if no longer used.
             model.close();

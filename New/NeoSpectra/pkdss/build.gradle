@@ -26,6 +26,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.android.support:appcompat-v7:27.0.0'
     implementation project(path: ':pkdss-release')
+    implementation project(path: ':pkdss-release')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -37,7 +38,8 @@ dependencies {
     // https://mvnrepository.com/artifact/gov.nist.math/jama
     implementation group: 'gov.nist.math', name: 'jama', version: '1.0.3'
 
-
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-math3
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
 
     //Thanks for using https://jar-download.com
 

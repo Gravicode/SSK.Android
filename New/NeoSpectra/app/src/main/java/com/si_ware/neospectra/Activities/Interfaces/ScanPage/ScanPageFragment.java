@@ -48,6 +48,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.balittanah.gravicode.pkdss.AkimaInterpolator;
 import com.balittanah.gravicode.pkdss.FertilizerInfo;
 import com.balittanah.gravicode.pkdss.SplineInterpolator;
 import com.github.ybq.android.spinkit.style.Wave;
@@ -69,6 +70,7 @@ import com.si_ware.neospectra.R;
 import com.si_ware.neospectra.Data.ResultPrediction;
 import com.si_ware.neospectra.Scan.Presenter.ScanPresenter;
 
+import org.apache.commons.math3.analysis.interpolation.AkimaSplineInterpolator;
 import org.ini4j.Ini;
 import org.ini4j.IniPreferences;
 import org.json.JSONArray;
@@ -1271,21 +1273,25 @@ public class ScanPageFragment extends Fragment {
                 if ((sensorReading.getXReading().length != 0) && (sensorReading.getYReading().length != 0)) {
                     double[] xVals = sensorReading.getXReading();
                     double[] yVals = sensorReading.getYReading();
-                    Map<Double, Double> Waves = new HashMap<>();
+                    double[] xData = new double[xVals.length];
+                    double[] yData = new double[yVals.length];
+                    //Map<Double, Double> Waves = new HashMap<>();
                     //create interpolation for current scan
                     for (int ax = 0; ax < xVals.length; ax++) {
                         double xx = 1e7 / xVals[ax];
                         double yy = yVals[ax] * 100;
                         //if(xx>1350 && xx < 2510){
-                        Waves.put(xx, yy);
+                        //Waves.put(xx, yy);
+                        xData[ax] = xx;
+                        yData[ax] = yy;
                         //}
                     }
-                    SplineInterpolator scaler = new SplineInterpolator(Waves);
-
+                    //SplineInterpolator scaler = new SplineInterpolator(Waves);
+                    AkimaInterpolator scaler = new AkimaInterpolator(xData,yData);
                     //adjust to model input
                     for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax += 1) {
                         double x = PredictionEngine.InputWaves[ax];
-                        double y = scaler.GetValue(x);
+                        double y = scaler.getY(x);
                         System.out.println(x + "," + y);
                         dataPoints.add(new DataPoint(x, y));
                         dataY.add(y);
