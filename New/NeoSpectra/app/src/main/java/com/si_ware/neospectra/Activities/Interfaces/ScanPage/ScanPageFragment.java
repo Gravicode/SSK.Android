@@ -118,7 +118,7 @@ public class ScanPageFragment extends Fragment {
     @NonNull
     private String TAG = "Main Activity";
     private Context mContext;
-
+    DataRaw dataRaw;
     GraphView mGraphView;
     CardView btnRefresh, btnBackground, btnScan, btnProcess, btnClearRecord;
     Spinner edtResolution, edtOptical;
@@ -165,6 +165,7 @@ public class ScanPageFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        if(dataRaw==null)dataRaw = new DataRaw();
         super.onViewCreated(view, savedInstanceState);
         final Drawable upArrow = getResources().getDrawable(R.drawable.ic_keyboard_arrow_left);
 
@@ -965,7 +966,7 @@ public class ScanPageFragment extends Fragment {
 
         if (reflectance != null)
         {
-            DataRaw.setValue(reflectance);
+            dataRaw.setValue(reflectance);
         }
         else {
             Toast.makeText(getActivity(), "Sorry can't connect to device", Toast.LENGTH_LONG).show();
@@ -1227,7 +1228,7 @@ public class ScanPageFragment extends Fragment {
                 "" + timestamp
         );
 
-        long id2 = dbHelper.insertRawData(id, DataRaw.getValue());
+        long id2 = dbHelper.insertRawData(id, dataRaw.getValueString());
     }
 
     public static String[] getStrings(double[] a) {

@@ -81,7 +81,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long insertRawData(long ElementID, double[] Data) {
+    //public long insertRawData(long ElementID, double[] Data) {
+    public long insertRawData(long ElementID, String strData) {
+        /*
         JSONArray strData = new JSONArray();
         for (int i = 0; i < Data.length; i++) {
             try {
@@ -89,12 +91,12 @@ public class DBHelper extends SQLiteOpenHelper {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         //insert data
         values.put(RawData.C_ELEMENT_ID, ElementID);
-        values.put(RawData.C_RAWDATA, strData.toString());
+        values.put(RawData.C_RAWDATA, strData);
         //insert row
         long id = db.insert(RawData.TABLE_NAME, null, values);
         //close db connection
