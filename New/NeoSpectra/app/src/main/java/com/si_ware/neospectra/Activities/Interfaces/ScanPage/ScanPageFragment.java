@@ -689,7 +689,8 @@ public class ScanPageFragment extends Fragment {
         notifications_count++;
 
         if (isScanBG) {
-            if ((notifications_count % 3) == 0) {
+            //tunggu lebih lama untuk data point lebih banyak
+            if ((notifications_count % 6) == 0) {
                 enableButtonAndView(true);
                 isWaitingForBackGroundReading = false;
                 textScan.setText("Scan");

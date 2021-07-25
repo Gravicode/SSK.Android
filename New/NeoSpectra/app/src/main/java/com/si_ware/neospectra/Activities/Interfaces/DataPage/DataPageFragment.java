@@ -47,6 +47,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -330,88 +331,88 @@ public class DataPageFragment extends Fragment {
     public void setTextView() {
         /* set value textview */
         if (DataElements.getPhH2o() > 0) {
-            txtPhh20.setText(String.format("%.2f", DataElements.getPhH2o()));
+            txtPhh20.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getPhH2o()));
         } else {
             txtPhh20.setText(Float.toString(0));
         }
         if (DataElements.getPhKcl() > 0) {
-            txtPhkcl.setText(String.format("%.2f", DataElements.getPhKcl()));
+            txtPhkcl.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getPhKcl()));
         } else {
             txtPhkcl.setText(Float.toString(0));
         }
         if (DataElements.getCN() > 0) {
-            txtCorg.setText(String.format("%.2f", DataElements.getCN()));
+            txtCorg.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getCN()));
         } else {
             txtCorg.setText(Float.toString(0));
         }
         if (DataElements.getKjeldahlN() > 0) {
-            txtNtotal.setText(String.format("%.2f", DataElements.getKjeldahlN()));
+            txtNtotal.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getKjeldahlN()));
         } else {
             txtNtotal.setText(Float.toString(0));
         }
         if (DataElements.getHCl25P2O5() > 0) {
-            txtp20sHcl.setText(String.format("%.2f", DataElements.getHCl25P2O5()));
+            txtp20sHcl.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getHCl25P2O5()));
         } else {
             txtp20sHcl.setText(Float.toString(0));
         }
         if (DataElements.getHCl25K2O() > 0) {
-            txtk20Hcl.setText(String.format("%.2f", DataElements.getHCl25K2O()));
+            txtk20Hcl.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getHCl25K2O()));
         } else {
             txtk20Hcl.setText(Float.toString(0));
         }
         //String data1 = Float.toString(DataElements.getBray1P2O5());
         if (DataElements.getBray1P2O5() > 0) {
-            txtp20sBray.setText(String.format("%.2f", DataElements.getBray1P2O5()));
+            txtp20sBray.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getBray1P2O5()));
         } else {
             txtp20sBray.setText(Float.toString(0));
         }
         if (DataElements.getOlsenP2O5() > 0) {
-            txtP20Olsen.setText(String.format("%.2f", DataElements.getOlsenP2O5()));
+            txtP20Olsen.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getOlsenP2O5()));
         } else {
             txtP20Olsen.setText(Float.toString(0));
         }
         if (DataElements.getCa() > 0) {
-            txtCa.setText(String.format("%.2f", DataElements.getCa()));
+            txtCa.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getCa()));
         } else {
             txtCa.setText(Float.toString(0));
         }
         if (DataElements.getMg() > 0) {
-            txtMg.setText(String.format("%.2f", DataElements.getMg()));
+            txtMg.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getMg()));
         } else {
             txtMg.setText(Float.toString(0));
         }
         if (DataElements.getK() > 0) {
-            txtK.setText(String.format("%.2f", DataElements.getK()));
+            txtK.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getK()));
         } else {
             txtK.setText(Float.toString(0));
         }
         if (DataElements.getNa() > 0) {
-            txtNa.setText(String.format("%.2f", DataElements.getNa()));
+            txtNa.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getNa()));
         } else {
             txtNa.setText(Float.toString(0));
         }
         if (DataElements.getKBAdjusted() > 0) {
-            txtKb.setText(String.format("%.2f", DataElements.getKBAdjusted()));
+            txtKb.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getKBAdjusted()));
         } else {
             txtKb.setText(Float.toString(0));
         }
         if (DataElements.getKTK() > 0) {
-            txtKTK.setText(String.format("%.2f", DataElements.getKTK()));
+            txtKTK.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getKTK()));
         } else {
             txtKTK.setText(Float.toString(0));
         }
         if (DataElements.getSAND() > 0) {
-            txtPasir.setText(String.format("%.2f", DataElements.getSAND()));
+            txtPasir.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getSAND()));
         } else {
             txtPasir.setText(Float.toString(0));
         }
         if (DataElements.getSILT() > 0) {
-            txtDebu.setText(String.format("%.2f", DataElements.getSILT()));
+            txtDebu.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getSILT()));
         } else {
             txtDebu.setText(Float.toString(0));
         }
         if (DataElements.getCLAY() > 0) {
-            txtLiat.setText(String.format("%.2f", DataElements.getCLAY()));
+            txtLiat.setText(String.format(Locale.ENGLISH,"%.2f", DataElements.getCLAY()));
         } else {
             txtLiat.setText(Float.toString(0));
         }

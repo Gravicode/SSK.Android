@@ -205,8 +205,8 @@ public class FertilizerCalculator
 
 		for (DataMappingNPK item : conditionList)
 		{
-			String conditionA = item.getP205().replace("$A", String.format("%.2f", P2O5));
-			String conditionB = item.getK2O().replace("$B", String.format("%.2f", K2O));
+			String conditionA = item.getP205().replace("$A", String.format(Locale.ENGLISH, "%.2f", P2O5));
+			String conditionB = item.getK2O().replace("$B", String.format(Locale.ENGLISH,"%.2f", K2O));
 			boolean a = LogicEvaluator.EvaluateLogicalExpression(conditionA);
 			boolean b = LogicEvaluator.EvaluateLogicalExpression(conditionB);
 			if (a && b)

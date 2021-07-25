@@ -80,7 +80,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             SILT.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setSILT(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setSILT(temp);
             hasil.add(new ResultPrediction("SILT",result.getSILT()));
             // Releases model resources if no longer used.
             model.close();
@@ -101,7 +103,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             SAND.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setSAND(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setSAND(temp);
             hasil.add(new ResultPrediction("SAND",result.getSAND()));
             // Releases model resources if no longer used.
             model.close();
@@ -290,7 +294,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             KjeldahlN.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setKjeldahlN(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setKjeldahlN(temp);
             hasil.add(new ResultPrediction("KJELDAHL_N",result.getKjeldahlN()));
             // Releases model resources if no longer used.
             model.close();
@@ -311,7 +317,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             KbAdjusted.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setKBAdjusted(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setKBAdjusted(temp);
             hasil.add(new ResultPrediction("KB_adjusted",result.getKBAdjusted()));
             // Releases model resources if no longer used.
             model.close();
@@ -437,7 +445,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             CN.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setCN(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setCN(temp);
             hasil.add(new ResultPrediction("C_N",result.getCN()));
             // Releases model resources if no longer used.
             model.close();
@@ -458,7 +468,9 @@ public class PredictionEngine {
             // Runs model inference and gets result.
             CLAY.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-            result.setCLAY(outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0));
+            float temp = outputFeature0.getFloatValue(0)<0?0:outputFeature0.getFloatValue(0);
+            if(temp>100)temp=100;
+            result.setCLAY(temp);
             hasil.add(new ResultPrediction("CLAY",result.getCLAY()));
             // Releases model resources if no longer used.
             model.close();

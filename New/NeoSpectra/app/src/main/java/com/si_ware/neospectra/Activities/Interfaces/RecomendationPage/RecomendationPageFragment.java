@@ -34,6 +34,7 @@ import org.ini4j.IniPreferences;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Locale;
 
 import static com.si_ware.neospectra.Global.GlobalVariables.bluetoothAPI;
 
@@ -224,9 +225,9 @@ public class RecomendationPageFragment extends Fragment {
                 sp36Val = sp36Val < SP36Min ? SP36Min : sp36Val;
                 kclVal = kclVal < KCLMin ? KCLMin : kclVal;
 
-                String TxtUrea = String.format("%.2f", ureaVal);
-                String TxtSP36 = String.format("%.2f", sp36Val);
-                String TxtKCL = String.format("%.2f", kclVal);
+                String TxtUrea = String.format(Locale.ENGLISH, "%.2f", ureaVal);
+                String TxtSP36 = String.format(Locale.ENGLISH,"%.2f", sp36Val);
+                String TxtKCL = String.format(Locale.ENGLISH,"%.2f", kclVal);
                 System.out.println(String.format("Rekomendasi KCL : %1$s, SP36 : %2$s, Urea : %3$s", TxtKCL, TxtSP36, TxtUrea));
 
                 FertilizerInfo x = calc.GetNPKDoze(DataElements.getHCl25P2O5(), DataElements.getHCl25K2O(), DataElements.getKomoditas());
