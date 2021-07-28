@@ -28,7 +28,7 @@ public class Preprocess {
 
     public static double[] TreatSpec(double DataReflectance[]){
         //1. check length (spectral trimming)
-        if (DataReflectance == null || DataReflectance.length != 154) return null;
+        if (DataReflectance == null || DataReflectance.length<=0) return null;
         try {
 
             //2. convert to absorbance
@@ -38,7 +38,7 @@ public class Preprocess {
             }
 
             //3.savitzky golay treatment
-            SavitzkyGolayFilter savgol = new SavitzkyGolayFilter (5,5,2,0);
+            SavitzkyGolayFilter savgol = new SavitzkyGolayFilter (5,5,2,1);
             DataReflectance = savgol.filterData(DataReflectance);
             //double[] coef = SGFilter.computeSGCoefficients(5,5,2);
             //SGFilter filter = new SGFilter(5,5);

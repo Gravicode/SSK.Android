@@ -50,7 +50,7 @@ public class PredictionEngine {
             WBC model = WBC.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
             }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -73,7 +73,7 @@ public class PredictionEngine {
             SILT model = SILT.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -96,7 +96,7 @@ public class PredictionEngine {
             SAND model = SAND.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -119,7 +119,7 @@ public class PredictionEngine {
             RetensiP model = RetensiP.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -140,7 +140,7 @@ public class PredictionEngine {
             PhKcl model = PhKcl.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -161,7 +161,7 @@ public class PredictionEngine {
             PhH2o model = PhH2o.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -182,7 +182,7 @@ public class PredictionEngine {
             OlsenP2o5 model = OlsenP2o5.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -203,7 +203,7 @@ public class PredictionEngine {
             Na model = Na.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -224,7 +224,7 @@ public class PredictionEngine {
             MorganK2o model = MorganK2o.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -245,7 +245,7 @@ public class PredictionEngine {
             Mg model = Mg.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -266,7 +266,7 @@ public class PredictionEngine {
             KTK model = KTK.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -287,7 +287,7 @@ public class PredictionEngine {
             KjeldahlN model = KjeldahlN.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -310,7 +310,7 @@ public class PredictionEngine {
             KbAdjusted model = KbAdjusted.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -333,7 +333,7 @@ public class PredictionEngine {
             K model = K.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -354,7 +354,7 @@ public class PredictionEngine {
             Jumlah model = Jumlah.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -375,7 +375,7 @@ public class PredictionEngine {
             Hcl25P2o5 model = Hcl25P2o5.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -396,7 +396,7 @@ public class PredictionEngine {
             Hcl25K2o model = Hcl25K2o.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -417,7 +417,7 @@ public class PredictionEngine {
             Ca model = Ca.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -438,7 +438,7 @@ public class PredictionEngine {
             CN model = CN.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -461,7 +461,7 @@ public class PredictionEngine {
             CLAY model = CLAY.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 
@@ -484,7 +484,7 @@ public class PredictionEngine {
             Bray1P2o5 model = Bray1P2o5.newInstance(context);
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 154
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 230
 }, DataType.FLOAT32);
             inputFeature0.loadArray(dataF);
 

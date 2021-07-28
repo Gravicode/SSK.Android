@@ -1300,8 +1300,9 @@ public class ScanPageFragment extends Fragment {
                     SplineInterpolator2 scaler = SplineInterpolator2.createMonotoneCubicSpline(xData,yData);
                     //AkimaInterpolator scaler = new AkimaInterpolator(xData,yData);
                     //adjust to model input
-                    for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax += 1) {
-                        double x = PredictionEngine.InputWaves[ax];
+                    //for (int ax = 0; ax < PredictionEngine.InputWaves.length; ax += 1) {
+                    for (int ax = 2500; ax > 1350; ax -= 5) {
+                        double x = ax;//PredictionEngine.InputWaves[ax];
                         double y = scaler.interpolate(x);
                         System.out.println(x + "," + y);
                         dataPoints.add(new DataPoint(x, y));
