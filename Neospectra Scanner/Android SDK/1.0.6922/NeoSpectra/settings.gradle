@@ -1,2 +1,1 @@
 include ':app', ':androidlibsvm-release'
-include ':neospectralib'

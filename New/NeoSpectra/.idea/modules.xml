@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/NeoSpectra.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/NeoSpectra.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/neospectralib/NeoSpectra.neospectralib.iml" filepath="$PROJECT_DIR$/.idea/modules/neospectralib/NeoSpectra.neospectralib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/pkdss/NeoSpectra.pkdss.iml" filepath="$PROJECT_DIR$/.idea/modules/pkdss/NeoSpectra.pkdss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/pkdss-release/NeoSpectra.pkdss-release.iml" filepath="$PROJECT_DIR$/.idea/modules/pkdss-release/NeoSpectra.pkdss-release.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/NeoSpectra.poi-ooxml-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-3.15/NeoSpectra.poi-ooxml-3.15.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/NeoSpectra.poi-ooxml-schemas-3.15.iml" filepath="$PROJECT_DIR$/.idea/modules/poi-ooxml-schemas-3.15/NeoSpectra.poi-ooxml-schemas-3.15.iml" />
     </modules>
